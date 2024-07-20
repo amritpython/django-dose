@@ -1,0 +1,1502 @@
+/*-----   GT America Trial ----*/
+/*-----------------------------*/
+
+@font-face {
+  font-family: "GT America Trial";
+  src: url("../fonts/GTAmericaTrial-Lt.eot"); /* IE9+ Compat Modes */
+  src: url("../fonts/GTAmericaTrial-Lt.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("../fonts/GTAmericaTrial-Lt.woff2") format("woff2"),
+    /* Super modern browsers */ url("../fonts/GTAmericaTrial-Lt.woff")
+      format("woff"),
+    /* Modern browsers */ url("../fonts/GTAmericaTrial-Lt.ttf")
+      format("truetype"),
+    /* Safari, Android, iOS */ url("../fonts/GTAmericaTrial-Lt.svg#FontName")
+      format("svg"); /* Legacy iOS */
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT America Trial";
+  src: url("../fonts/GTAmericaTrial-Rg.eot");
+  src: url("../fonts/GTAmericaTrial-Rg.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/GTAmericaTrial-Rg.woff2") format("woff2"),
+    url("../fonts/GTAmericaTrial-Rg.woff") format("woff"),
+    url("../fonts/GTAmericaTrial-Rg.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT America Trial";
+  src: url("../fonts/GTAmericaTrial-Md.eot");
+  src: url("../fonts/GTAmericaTrial-Md.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/GTAmericaTrial-Md.woff2") format("woff2"),
+    url("../fonts/GTAmericaTrial-Md.woff") format("woff"),
+    url("../fonts/GTAmericaTrial-Md.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT America Trial";
+  src: url("../fonts/GTAmericaTrial-Bd.eot");
+  src: url("../fonts/GTAmericaTrial-Bd.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/GTAmericaTrial-Bd.woff2") format("woff2"),
+    url("../fonts/GTAmericaTrial-Bd.woff") format("woff"),
+    url("../fonts/GTAmericaTrial-Bd.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/*-----   GT America Trial Cm ----*/
+/*-----------------------------*/
+
+@font-face {
+  font-family: "GT America Trial Cm";
+  src: url("../fonts/GTAmericaTrial-CmBd.eot");
+  src: url("../fonts/GTAmericaTrial-CmBd.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/GTAmericaTrial-CmBd.woff2") format("woff2"),
+    url("../fonts/GTAmericaTrial-CmBd.woff") format("woff"),
+    url("../fonts/GTAmericaTrial-CmBd.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/*-----   GT America Trial Cn ----*/
+/*-----------------------------*/
+
+@font-face {
+  font-family: "GT America Trial Cn";
+  src: url("../fonts/GTAmericaTrial-CnBd.eot");
+  src: url("../fonts/GTAmericaTrial-CnBd.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/GTAmericaTrial-CnBd.woff2") format("woff2"),
+    url("../fonts/GTAmericaTrial-CnBd.woff") format("woff"),
+    url("../fonts/GTAmericaTrial-CnBd.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT America Trial Cn";
+  src: url("../fonts/GTAmericaTrial-CnLt.eot");
+  src: url("../fonts/GTAmericaTrial-CnLt.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/GTAmericaTrial-CnLt.woff2") format("woff2"),
+    url("../fonts/GTAmericaTrial-CnLt.woff") format("woff"),
+    url("../fonts/GTAmericaTrial-CnLt.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT America Trial Cn";
+  src: url("../fonts/GTAmericaTrial-CnMd.eot");
+  src: url("../fonts/GTAmericaTrial-CnMd.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/GTAmericaTrial-CnMd.woff2") format("woff2"),
+    url("../fonts/GTAmericaTrial-CnMd.woff") format("woff"),
+    url("../fonts/GTAmericaTrial-CnMd.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT America Trial Cn";
+  src: url("../fonts/GTAmericaTrial-CnRg.eot");
+  src: url("../fonts/GTAmericaTrial-CnRg.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/GTAmericaTrial-CnRg.woff2") format("woff2"),
+    url("../fonts/GTAmericaTrial-CnRg.woff") format("woff"),
+    url("../fonts/GTAmericaTrial-CnRg.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT America Trial Cn";
+  src: url("../fonts/GTAmericaTrial-CnTh.eot");
+  src: url("../fonts/GTAmericaTrial-CnTh.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/GTAmericaTrial-CnTh.woff2") format("woff2"),
+    url("../fonts/GTAmericaTrial-CnTh.woff") format("woff"),
+    url("../fonts/GTAmericaTrial-CnTh.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+/*----- Fonts -----*/
+
+h1 {
+  font-family: "GT America Trial";
+  font-weight: bold;
+  color: #151515;
+}
+.container {
+  max-width: 1380px;
+}
+section#type-loss .each-condition {
+  text-align: center;
+  padding: 30px;
+  background-color: #fffdfb;
+  border-radius: 20px;
+  border: 1px solid #fff;
+  margin-bottom: 4px;
+  transition: all 0.2s ease-in-out;
+  height: 100%;
+  cursor: pointer;
+}
+
+section#type-loss .each-condition:hover {
+  border: 1px solid #000;
+}
+
+section#type-loss {
+  margin: 110px 0;
+}
+
+section#type-loss .each-condition img {
+  height: 177px;
+  width: auto;
+}
+
+section#type-loss .each-condition h4 {
+  font-family: "GT America Trial Cn";
+  font-size: 18px;
+  font-weight: 300;
+  color: #000000;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 34px auto 0;
+  max-width: 195px;
+}
+
+section#type-loss h1 {
+  text-align: center;
+  margin-bottom: 47px;
+  font-size: 50px;
+}
+
+section#hair_step_form .box {
+  margin: auto;
+  max-width: 690px;
+  padding: 0 12px;
+  min-height: 500px;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+section#hair_step_form .width {
+  margin: auto;
+  max-width: 690px;
+  padding: 0 12px;
+}
+
+section#hair_step_form {
+  margin: 70px 0 40px;
+  position: relative;
+}
+
+section#hair_step_form input.invalid {
+  background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+section#hair_step_form .tab {
+  display: none;
+}
+
+section#hair_step_form .step {
+  height: 8px;
+  width: 100%;
+  background-color: #e4e4e4;
+  border: none;
+  display: inline-block;
+}
+
+section#hair_step_form .progress_bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  margin-bottom: 70px;
+}
+
+section#hair_step_form .step.active {
+  background-color: #000;
+  border-radius: 10px;
+  position: relative;
+}
+
+section#hair_step_form .step.active:after {
+  position: absolute;
+  background: #000000;
+  content: "";
+  height: 8px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  border-radius: 0px 10px 10px 0px;
+}
+
+section#hair_step_form .step.active:first-child:after {
+  border-radius: 10px;
+}
+
+/* section#hair_step_form span.step.finish.active {
+  border-radius: 10px !important;
+} */
+
+section#hair_step_form .step.finish:first-child {
+  border-radius: 10px 0px 0px 10px;
+}
+
+section#hair_step_form .step.finish {
+  background-color: #000;
+  border-radius: 0;
+}
+
+section#hair_step_form .step:last-child {
+  border-radius: 0px 10px 10px 0px;
+}
+
+section#hair_step_form h2 {
+  font-size: 14px;
+  font-family: "GT America Trial Cn";
+  text-transform: uppercase;
+  font-weight: 400;
+  margin-bottom: 14px;
+}
+
+section#hair_step_form h2 span {
+  font-size: 15px;
+  font-weight: 500;
+  font-family: "GT America Trial";
+}
+
+section#hair_step_form .box h3 {
+  font-size: 16px;
+  font-family: "GT America Trial Cn";
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-bottom: 25px;
+}
+
+section#hair_step_form .box h4 {
+  font-size: 40px;
+  font-family: "GT America Trial";
+  font-weight: bold;
+  margin-bottom: 48px;
+}
+
+section#hair_step_form .box .form-check {
+  margin-bottom: 13px;
+  padding-left: 0;
+  position: relative;
+}
+
+section#hair_step_form .box label.form-check-label {
+  background: #fff;
+  height: 70px;
+  border-radius: 14px;
+  border: 1px solid #d0d0d0;
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  padding-left: 61px;
+  /* line-height: 62px; */
+  font-size: 16px;
+  font-family: "GT America Trial";
+  text-transform: math-auto;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+section#hair_step_form .box label.form-check-label:hover {
+  background: black;
+  color: #fff;
+}
+
+section#hair_step_form .box .form-check input {
+  position: absolute;
+  left: 50px;
+  top: 21px;
+  width: 21px;
+  height: 21px;
+  background: #f3f3f3;
+  border: 1px solid #d0d0d0;
+}
+
+section#hair_step_form .box .form-check input:checked + label {
+  background: black;
+  color: #fff;
+}
+
+section#hair_step_form .box .form-check-input:checked {
+  background-color: #000000;
+  border: 5px solid #fff;
+}
+
+section#hair_step_form .next_btn button {
+  background: #000;
+  color: #fff;
+  width: 50%;
+  height: 46px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-family: "GT America Trial Cn";
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+section#hair_step_form .next_btn button:hover {
+  background: #fff;
+  color: #000;
+}
+
+section#hair_step_form .next_btn button#prevBtn:hover {
+  background: #000;
+  color: #fff;
+}
+
+section#hair_step_form .next_btn {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  max-width: 673px;
+  margin: 40px auto 0;
+}
+
+section#hair_step_form .border_bottom {
+  border-top: 1px solid #d0d0d0;
+  margin-top: 40px;
+}
+
+section#hair_step_form .box {
+  margin-bottom: 40px;
+}
+
+section#hair_step_form .next_btn button#prevBtn {
+  background: transparent;
+  color: #000;
+}
+
+section#hair_step_form .box .tick_all {
+  background: #c4d7e7;
+  border: 1px solid #77a3c9;
+  border-radius: 10px;
+  padding: 11px;
+  margin-bottom: 13px;
+}
+
+section#hair_step_form .box .tick_all i {
+  font-size: 16px;
+  position: absolute;
+  left: 0;
+  top: -1px;
+}
+
+section#hair_step_form .box .tick_all p {
+  margin-bottom: 0;
+  position: relative;
+  padding-left: 22px;
+  font-size: 14px;
+  font-family: "GT America Trial";
+}
+
+section#hair_step_form .box .form-check-input:checked[type="checkbox"] {
+  background-image: url(../images/checked.png);
+  background-color: #ffffff;
+  background-size: 13px;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+}
+
+section#hair_step_form .box.change_width {
+  max-width: 910px;
+  margin-bottom: 80px;
+}
+
+section#thanku_sec h1 {
+  font-family: "GT America Trial Cn";
+  font-size: 34px;
+  font-weight: bold;
+  max-width: 515px;
+}
+
+section#thanku_sec .img {
+  width: 48%;
+}
+
+section#thanku_sec .set {
+  width: 52%;
+  max-width: 600px;
+}
+
+section#thanku_sec .img img {
+  width: 100%;
+  height: 100%;
+}
+
+section#thanku_sec .d-flex {
+  gap: 87px;
+}
+
+section#thanku_sec .hair_box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 32px 0 40px;
+  flex-wrap: wrap;
+}
+
+section#thanku_sec .hair_box .form-check {
+  padding: 0;
+  position: relative;
+}
+
+section#thanku_sec .hair_box .form-check input:checked + label {
+  border: 2px solid #000;
+}
+
+section#thanku_sec .hair_box.male_hair label {
+  background: #f3f3f3;
+  padding: 18px 10px !important;
+  width: 130px !important;
+}
+
+section#thanku_sec .hair_box .form-check input {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  right: 0;
+  margin: auto;
+  top: 0;
+  border-radius: 0px;
+  opacity: 0;
+  cursor: pointer;
+}
+
+section#thanku_sec .hair_box .form-check label {
+  border-radius: 10px;
+  border: 2px solid #fff;
+  display: block;
+  text-align: center;
+  font-family: "GT America Trial cn";
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 1px;
+  padding: 12px 10px;
+  width: 110px;
+}
+
+section#thanku_sec .hair_box .form-check label img {
+  width: auto;
+  height: 92px;
+  display: block;
+  margin: 0 auto 8px;
+}
+
+section#thanku_sec h2 {
+  font-size: 22px;
+  font-family: "GT America Trial Cn";
+  font-weight: 400;
+  line-height: 34px;
+}
+
+section#thanku_sec a.btn {
+  background: #151515;
+  width: 100%;
+  color: #fff;
+  height: 46px;
+  border-radius: 12px;
+  margin-top: 32px;
+  font-family: "GT America Trial";
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: bold;
+  line-height: 32px;
+}
+
+section#thanku_sec a.btn:hover {
+  border: 1px solid #151515;
+  background: #fff;
+  color: #151515;
+}
+
+section#recomendad_products .set {
+  background: #fff;
+  padding: 20px;
+  border-radius: 14px;
+  margin-top: 20px;
+}
+
+section#recomendad_products {
+  margin: 80px 0;
+}
+
+section#recomendad_products h1 {
+  font-family: "GT America Trial";
+  font-size: 40px;
+}
+
+section#recomendad_products .img img {
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+}
+
+section#recomendad_products .title span.tag {
+  background: #c4d7e7;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 12px;
+  font-family: "GT America Trial Cn";
+}
+
+section#recomendad_products .title h3 {
+  font-size: 28px;
+  font-family: "GT America Trial Cn";
+  font-weight: 400;
+  margin-top: 23px;
+  margin-bottom: 0;
+}
+
+section#recomendad_products .title .star {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "GT America Trial Cn";
+  margin-top: 21px;
+}
+
+section#recomendad_products .title p {
+  font-size: 14px;
+  color: #4a4a4a;
+  font-family: "GT America Trial";
+  margin-top: 26px;
+  margin-bottom: 0;
+  max-width: 462px;
+}
+
+section#recomendad_products .title h4 {
+  font-size: 16px;
+  font-family: "GT America Trial Cn";
+  font-weight: 400;
+  margin-bottom: 0;
+  margin-top: 32px;
+}
+
+section#recomendad_products .title a.btn {
+  background: #151515;
+  width: 100%;
+  color: #fff;
+  height: 46px;
+  border-radius: 12px;
+  margin-top: 35px;
+  font-family: "GT America Trial";
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: bold;
+  line-height: 32px;
+}
+
+section#recomendad_products .title a.btn:hover {
+  border: 1px solid #151515;
+  background: #fff;
+  color: #151515;
+}
+
+section#recomendad_products .alert_box {
+  background: #c4d7e7;
+  border: 1px solid #77a3c9;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+section#recomendad_products .alert_box p {
+  font-size: 16px;
+  font-family: "GT America Trial";
+  margin-bottom: 0;
+  position: relative;
+  padding-left: 30px;
+}
+
+section#recomendad_products .alert_box p i {
+  position: absolute;
+  left: 0;
+  font-size: 20px;
+}
+
+section#recomendad_products .alert_box p span {
+  font-weight: 500;
+}
+
+section#recomendad_products .set .video .video_btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  width: 64px;
+  height: 64px;
+}
+
+section#recomendad_products .set .video {
+  position: relative;
+}
+
+section#recomendad_products .set .video:hover .video_btn svg path {
+  fill: white;
+}
+
+section#recomendad_products .set .video:hover .video_btn svg circle {
+  fill: black;
+}
+
+section#recomendad_products .set .video img {
+  width: 100%;
+  height: 100%;
+}
+
+section#thanku_sec .hair_box.male_hair .form-check label {
+  border-radius: 20px;
+}
+
+section#thanku_sec .hair_box.male_hair {
+  gap: 19px 12px;
+}
+
+.type_hair_popup .modal-content {
+  padding: 50px;
+  border-radius: 20px;
+}
+
+.type_hair_popup .modal-dialog {
+  max-width: 704px;
+}
+
+.type_hair_popup .modal-header {
+  padding: 0;
+  border: none;
+}
+
+.type_hair_popup .modal-header h5 {
+  font-size: 29px;
+  font-family: "GT America Trial";
+  width: 100%;
+  line-height: 36px;
+}
+
+.type_hair_popup .modal-header button.btn-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  opacity: 1;
+}
+
+.type_hair_popup .form-check-input:checked[type="checkbox"] {
+  background-image: url(../images/checked-white.png);
+  background-color: #000;
+  background-size: 11px;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+}
+
+.form-check-input:focus {
+  box-shadow: none;
+}
+
+.type_hair_popup .modal-body {
+  padding: 0;
+}
+
+.type_hair_popup .set .form-check {
+  margin-top: 30px;
+  margin-bottom: 0;
+}
+
+.type_hair_popup .set .form-check input {
+  width: 17px;
+  height: 17px;
+  border: 1px solid #c9c9c9;
+}
+
+.type_hair_popup .set .form-check label {
+  font-size: 16px;
+  color: #373737;
+  font-family: "GT America Trial Cn";
+  margin-left: 3px;
+  cursor: pointer;
+}
+
+.type_hair_popup .set a.btn {
+  width: 100%;
+  height: 46px;
+  background: #151515;
+  color: #fff;
+  border-radius: 12px;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-family: "GT America Trial Cn";
+  font-weight: bold;
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.type_hair_popup .set button:hover {
+  background: #fff;
+  color: #151515;
+}
+
+section#hair_step_form .box ul.listing {
+  list-style: none;
+  padding-left: 0;
+  margin: 13px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  justify-content: space-between;
+}
+
+section#hair_step_form .box ul.listing li a {
+  background: #fff;
+  text-decoration: none;
+  height: 53px;
+  width: 53px;
+  display: inline-flex;
+  border-radius: 10px;
+  border: 1px solid #d0d0d0;
+  color: #000;
+  align-items: center;
+  justify-content: center;
+  font-family: "GT America Trial";
+}
+
+section#hair_step_form .box ul.listing li a:hover {
+  background: #000;
+  color: #fff;
+}
+
+.minoxidil_popup .modal-dialog {
+  max-width: 803px;
+}
+
+.minoxidil_popup .modal-body {
+  padding: 0;
+}
+
+.minoxidil_popup .modal-content {
+  border-radius: 20px;
+  border: none;
+}
+
+.minoxidil_popup .img img {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px 0px 0px 20px;
+}
+
+.minoxidil_popup .set p {
+  font-size: 18px;
+  text-align: center;
+  color: #373737;
+  line-height: 32px;
+  font-family: "GT America Trial cn";
+  margin-bottom: 12px;
+}
+
+.minoxidil_popup .set {
+  max-width: 443px;
+  margin: auto;
+  position: relative;
+  padding: 40px 0 0;
+}
+
+.minoxidil_popup .set a.btn {
+  width: 100%;
+  height: 46px;
+  background: #151515;
+  color: #fff;
+  border-radius: 12px;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-family: "GT America Trial Cn";
+  font-weight: bold;
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid;
+}
+
+.minoxidil_popup .set a.btn:hover {
+  background: #fff;
+  color: #000;
+}
+
+.minoxidil_popup button.btn-close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  opacity: 1;
+  z-index: 9;
+}
+
+.minoxidil_popup button.btn-close:focus {
+  box-shadow: none;
+}
+
+.minoxidil_popup .set p span {
+  border-bottom: 1px solid;
+}
+
+section#hair_step_form .box .tick_all.size p {
+  font-size: 16px;
+  padding-left: 30px;
+}
+
+section#hair_step_form .box .tick_all.size {
+  padding: 20px;
+}
+
+section#hair_step_form .box .tick_all.size i {
+  font-size: 20px;
+}
+
+section#hair_step_form .male_pattern .form_stage label img {
+  width: auto;
+  height: 200px;
+  display: block;
+  margin: auto;
+}
+section#hair_step_form .male_pattern .form_stage label {
+  border: 2px solid #fff;
+  display: grid;
+  text-align: center;
+  font-family: "GT America Trial cn";
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 1px;
+  padding: 12px 10px 22px;
+  width: 204px;
+  height: 264px;
+  border-radius: 20px;
+  background: #fff;
+  align-items: center;
+  justify-content: center;
+}
+section#hair_step_form .male_pattern .form_stage input {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  right: 0;
+  margin: auto;
+  top: 0;
+  border-radius: 0px;
+  opacity: 0;
+  cursor: pointer;
+}
+section#hair_step_form .male_pattern .form_stage {
+  padding: 0;
+  position: relative;
+}
+
+section#hair_step_form .male_pattern .form_stage:hover label {
+  border: 2px solid #000;
+}
+
+section#hair_step_form .box.change_width.female_width {
+  max-width: 1110px;
+}
+
+section#hair_step_form .male_pattern .form_stage input:checked + label {
+  border: 2px solid #000;
+}
+
+section#hair_step_form .male_pattern {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px 15px;
+}
+
+section#hair_step_form .male_pattern.shedding .form_stage label img {
+  height: 174px;
+}
+
+section#hair_step_form .male_pattern.shedding .form_stage label span {
+  margin-top: -5px;
+}
+
+/* // X-Large devices (large desktops, less than 1400px) */
+@media (max-width: 1399.98px) {
+  section#type-loss {
+    margin: 50px 0;
+  }
+
+  section#type-loss h1 {
+    margin-bottom: 34px;
+    font-size: 38px;
+  }
+
+  section#type-loss .each-condition {
+    padding: 20px;
+  }
+
+  section#type-loss .each-condition img {
+    height: 140px;
+  }
+
+  section#thanku_sec .hair_box.male_hair {
+    gap: 12px 8px;
+  }
+  section#recomendad_products .title a.btn {
+    margin-top: 26px;
+  }
+
+  section#recomendad_products .title h4 {
+    margin-top: 14px;
+  }
+
+  section#recomendad_products .title p {
+    margin-top: 16px;
+  }
+
+  section#recomendad_products .title .star {
+    margin-top: 8px;
+  }
+
+  section#recomendad_products .title h3 {
+    font-size: 26px;
+    margin-top: 18px;
+  }
+
+  section#recomendad_products {
+    margin: 40px 0;
+  }
+
+  section#recomendad_products h1 {
+    font-size: 32px;
+  }
+
+  section#thanku_sec h2 {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  section#thanku_sec .hair_box .form-check label img {
+    height: 82px;
+  }
+
+  section#thanku_sec .hair_box {
+    gap: 7px;
+  }
+
+  section#thanku_sec h1 {
+    font-size: 28px;
+    max-width: 100%;
+  }
+
+  section#thanku_sec .d-flex {
+    gap: 40px;
+  }
+
+  section#thanku_sec .set {
+    padding-right: 20px;
+  }
+  section#hair_step_form .box h4 {
+    font-size: 32px;
+    margin-bottom: 32px;
+  }
+
+  section#hair_step_form .box h3 {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  section#hair_step_form .progress_bar {
+    margin-bottom: 30px;
+  }
+}
+
+/* // Large devices (desktops, less than 1200px) */
+@media (max-width: 1199.98px) {
+  section#thanku_sec .hair_box.male_hair label {
+    padding: 12px 10px !important;
+    width: 115px !important;
+  }
+
+  section#type-loss .each-condition h4 {
+    font-size: 15px;
+    margin: 22px auto 0;
+  }
+
+  section#recomendad_products .alert_box p {
+    font-size: 14px;
+  }
+
+  section#recomendad_products .set {
+    padding: 15px;
+  }
+
+  section#recomendad_products .title a.btn {
+    margin-top: 14px;
+  }
+
+  section#recomendad_products .title h4 {
+    margin-top: 8px;
+  }
+
+  section#recomendad_products .title p {
+    margin-top: 8px;
+  }
+  section#recomendad_products .title .star {
+    margin-top: 4px;
+  }
+
+  section#recomendad_products .title h3 {
+    font-size: 22px;
+    margin-top: 15px;
+  }
+  section#thanku_sec .hair_box {
+    margin: 18px 0 22px;
+  }
+
+  section#thanku_sec h2 {
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  section#thanku_sec a.btn {
+    margin-top: 12px;
+  }
+
+  section#thanku_sec .d-flex {
+    gap: 20px;
+  }
+
+  section#thanku_sec h1 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  section#thanku_sec .hair_box .form-check label {
+    padding: 10px 6px;
+    width: 92px;
+  }
+
+  section#thanku_sec .hair_box .form-check label img {
+    height: 75px;
+  }
+
+  section#thanku_sec .hair_box {
+    gap: 4px;
+  }
+}
+
+/* // Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {
+  section#hair_step_form .male_pattern.shedding .form_stage label img {
+    height: 140px;
+  }
+
+  section#hair_step_form .male_pattern {
+    gap: 18px 15px;
+  }
+
+  section#hair_step_form .male_pattern .form_stage label {
+    padding: 12px 10px 22px;
+    width: 173px;
+    height: 220px;
+  }
+
+  section#hair_step_form .male_pattern .form_stage label img {
+    height: 165px;
+  }
+
+  section#hair_step_form .box .tick_all.size i {
+    font-size: 18px;
+  }
+
+  section#hair_step_form .box .tick_all.size {
+    padding: 15px;
+  }
+
+  section#hair_step_form .box .tick_all.size p {
+    font-size: 15px;
+    padding-left: 26px;
+  }
+
+  section#thanku_sec .hair_box .form-check label {
+    width: 100px;
+    background: #f3f3f3;
+  }
+
+  .minoxidil_popup .set a.btn {
+    margin-top: 30px;
+  }
+
+  .minoxidil_popup .modal-dialog {
+    max-width: 715px;
+  }
+
+  .minoxidil_popup .set {
+    padding: 20px 0 0;
+  }
+
+  .minoxidil_popup .set p {
+    font-size: 16px;
+    line-height: 27px;
+  }
+
+  section#hair_step_form .border_bottom {
+    margin-top: 40px;
+  }
+
+  .type_hair_popup .set .form-check {
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+
+  .type_hair_popup .modal-content {
+    padding: 50px 30px;
+    border-radius: 10px;
+  }
+
+  .type_hair_popup .modal-header h5 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  section#type-loss h1 {
+    margin-bottom: 28px;
+    font-size: 32px;
+  }
+
+  section#type-loss .each-condition img {
+    height: 115px;
+  }
+
+  section#recomendad_products .title .star {
+    margin-top: 10px;
+  }
+
+  section#recomendad_products .title h4 {
+    margin-top: 10px;
+  }
+
+  section#recomendad_products .title a.btn {
+    margin-top: 20px;
+  }
+
+  section#recomendad_products .title p {
+    margin-top: 14px;
+  }
+
+  section#recomendad_products .title h3 {
+    margin-top: 20px;
+    font-size: 24px;
+  }
+
+  section#thanku_sec h2 {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  section#thanku_sec .hair_box {
+    gap: 7px;
+  }
+
+  section#thanku_sec .set {
+    padding-right: 0;
+    max-width: 100%;
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  section#thanku_sec .img {
+    width: 100%;
+  }
+
+  section#thanku_sec .d-flex {
+    display: block !important;
+    padding: 0 15px;
+  }
+
+  section#hair_step_form::after {
+    display: none;
+  }
+
+  section#hair_step_form .next_btn {
+    margin-top: 22px;
+    background: #fff;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  section#hair_step_form .box .form-check input {
+    left: 42px;
+    top: 16px;
+    width: 18px;
+    height: 18px;
+  }
+
+  section#hair_step_form .box label.form-check-label {
+    height: 60px;
+    padding-left: 46px;
+    line-height: 18px;
+    font-size: 14px;
+  }
+}
+
+/* // Small devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) {
+  .minoxidil_popup button.btn-close {
+    right: 14px;
+    top: 14px;
+  }
+
+  .minoxidil_popup .modal-content {
+    border-radius: 10px;
+  }
+
+  .minoxidil_popup .modal-dialog {
+    max-width: 500px;
+  }
+
+  .minoxidil_popup .set a.btn {
+    margin-top: 20px;
+  }
+
+  .minoxidil_popup .modal-body {
+    padding: 25px 15px;
+  }
+
+  .minoxidil_popup .img {
+    text-align: center;
+  }
+
+  .minoxidil_popup .img img {
+    width: 146px;
+    height: 146px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border: 4px solid #fff;
+  }
+
+  section#hair_step_form .box ul.listing {
+    justify-content: inherit;
+  }
+
+  section#hair_step_form .box ul.listing li a {
+    height: 47px;
+    width: 47px;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+
+  section#type-loss .each-condition {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 0px;
+  }
+
+  section#type-loss h1 {
+    font-size: 28px;
+  }
+
+  section#recomendad_products .alert_box {
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 14px;
+  }
+
+  section#recomendad_products .title {
+    margin-top: 14px;
+  }
+
+  section#recomendad_products h1 {
+    font-size: 28px;
+  }
+
+  section#recomendad_products .set {
+    border-radius: 8px;
+    margin-top: 14px;
+  }
+
+  section#hair_step_form .box h4 {
+    font-size: 26px;
+    margin-bottom: 22px;
+  }
+}
+
+/* // X-Small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+  section#hair_step_form .male_pattern.shedding .form_stage label img {
+    height: 100px;
+  }
+
+  section#hair_step_form {
+    margin: 40px 0 40px;
+  }
+
+  section#hair_step_form .male_pattern .form_stage label {
+    padding: 12px 5px 10px;
+    width: 140px;
+    height: 175px;
+    border-radius: 10px;
+  }
+
+  section#hair_step_form .male_pattern .form_stage label img {
+    height: 110px;
+  }
+
+  section#thanku_sec .hair_box.male_hair label {
+    padding: 12px 5px !important;
+    width: 109px !important;
+  }
+
+  section#thanku_sec .hair_box.male_hair .form-check label {
+    border-radius: 12px;
+  }
+
+  section#thanku_sec .hair_box.male_hair {
+    gap: 10px 5px;
+  }
+  section#hair_step_form .step.active:after {
+    height: 5px;
+  }
+
+  .type_hair_popup .modal-header button.btn-close {
+    top: 15px;
+    right: 15px;
+  }
+
+  .type_hair_popup .modal-content {
+    padding: 50px 20px 20px;
+    border-radius: 10px;
+  }
+
+  .type_hair_popup .modal-header h5 {
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  .type_hair_popup .set .form-check label {
+    font-size: 14px;
+  }
+
+  section#type-loss {
+    margin: 30px 0;
+  }
+
+  section#type-loss h1 {
+    font-size: 24px;
+  }
+
+  section#recomendad_products .set .video .video_btn {
+    width: 50px;
+    height: 50px;
+  }
+
+  section#recomendad_products .set .video .video_btn svg {
+    width: 50px;
+    height: 50px;
+  }
+
+  section#recomendad_products h1 {
+    font-size: 24px;
+  }
+
+  section#thanku_sec h1 {
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  section#thanku_sec h2 {
+    font-size: 16px;
+    line-height: 25px;
+  }
+
+  section#hair_step_form .box .form-check {
+    margin-bottom: 10px;
+  }
+
+  section#hair_step_form .step {
+    height: 5px;
+  }
+
+  section#hair_step_form h2 span {
+    font-size: 14px;
+  }
+}
+
+/* // X-Small devices (portrait phones, less than 481px) */
+@media (max-width: 480px) {
+  .minoxidil_popup .img img {
+    width: 124px;
+    height: 124px;
+  }
+
+  .minoxidil_popup .set p {
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  section#hair_step_form .box ul.listing {
+    gap: 8px;
+  }
+
+  section#type-loss h1 {
+    font-size: 22px;
+  }
+  section#thanku_sec .d-flex {
+    padding: 0 12px;
+  }
+
+  section#thanku_sec .hair_box.male_hair {
+    gap: 6px 5px;
+  }
+
+  section#thanku_sec .hair_box.male_hair label {
+    width: 105px !important;
+  }
+
+  section#recomendad_products h1 {
+    font-size: 22px;
+  }
+
+  section#thanku_sec h1 {
+    font-size: 20px;
+    line-height: 25px;
+  }
+
+  section#hair_step_form .box h4 {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+}

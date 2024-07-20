@@ -1,0 +1,35 @@
+<!doctype html>
+
+<head>
+  <title>Sample Django App</title>
+  <script src="https://unpkg.com/@shopify/app-bridge"></script>
+  <script src="https://unpkg.com/@shopify/app-bridge-utils"></script>
+  <link rel="stylesheet" href="https://unpkg.com/@shopify/polaris@6.1.0/dist/styles.css" />
+  <script>
+    /*var AppBridge = window['app-bridge'];
+    var AppBridgeUtils = window['app-bridge-utils'];
+    var actions = AppBridge.actions;
+    var createApp = AppBridge.default;
+    var TitleBar = actions.TitleBar;
+    var app = createApp({
+      apiKey: '{{ api_key }}',
+      shopOrigin: '{{ shop_origin }}'
+    });
+    var myTitleBar = TitleBar.create(app, { title: 'Hello' });
+    var shopifyAuthenticatedFetch = AppBridgeUtils.authenticatedFetch(app);
+    var redirect = actions.Redirect.create(app);
+
+    function topLevelRedirectToLogin() {
+      redirect.dispatch(actions.Redirect.Action.REMOTE, `${app.localOrigin}/login?shop={{ shop_origin }}`);
+    }
+*/
+  </script>
+</head>
+
+<body>
+
+  <!-- Temporary Polaris workaround: https://polaris.shopify.com/components/get-started#navigation -->
+  <div>
+    <h1>Hello, World!</h1>
+  </div>
+</body>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Type-of-hair-loss</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/css/custom.css" />
+
+    <style>
+        body {
+            background-color: #F3F3F3;
+        }
+    </style>
+</head>
+
+<body>
+    <section id="type-loss">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1>Choose Your Type of Hair Loss</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                    <div class="each-condition" onclick="document.getElementById('selected-form-type').value = 'female_pattern_hair_loss';" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <img src="/static/images/female-pattern.svg" alt="female-pattern" title="female" height="177"
+                            width="124">
+                        <h4>Female pattern hair loss</h4>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                    <div class="each-condition" onclick="document.getElementById('selected-form-type').value = 'male_pattern_hair_loss';" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <img src="/static/images/male-pattern.svg" alt="female-pattern" title="female" height="177"
+                            width="124">
+                        <h4>Male pattern hair loss</h4>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                    <div class="each-condition" onclick="document.getElementById('selected-form-type').value = 'beard';" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <img src="/static/images/beard.svg" alt="female-pattern" title="female" height="177"
+                            width="124">
+                        <h4>beard</h4>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                    <div class="each-condition" onclick="document.getElementById('selected-form-type').value = 'lashes';" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <img src="/static/images/lashes.svg" alt="female-pattern" title="female" height="177"
+                            width="124">
+                        <h4>lashes</h4>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                    <div class="each-condition" onclick="document.getElementById('selected-form-type').value = 'brows';" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <img src="/static/images/brows.svg" alt="female-pattern" title="female" height="177"
+                            width="124">
+                        <h4>Brows</h4>
+
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                    <div class="each-condition" onclick="document.getElementById('selected-form-type').value = 'post_chemotheraphy_hair_loss';" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+                        <img src="/static/images/post-chemotheraphy.svg" alt="female-pattern" title="female"
+                            height="177" width="124">
+                        <h4>post chemotheraphy hair loss</h4>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                    <div class="each-condition" onclick="document.getElementById('selected-form-type').value = 'traction_related_hair_loss';" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <img src="/static/images/traction-related.svg" alt="female-pattern" title="female" height="177"
+                            width="124">
+                        <h4>traction related hair loss</h4>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                    <div class="each-condition" onclick="document.getElementById('selected-form-type').value = 'hair_shedding';" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <img src="/static/images/hair-shedding.svg" alt="female-pattern" title="female" height="177"
+                            width="124">
+                        <h4>hair shedding</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade type_hair_popup" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Before starting our online medical consultation
+                        please
+                        read the below carefully and tick to confirm the following:</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form class="modal-body" method="post" id="form">
+                    {% csrf_token %}
+                    <input type="hidden" name="form-type" id="selected-form-type">
+                    <div class="set">
+
+                        <div class="form-check">
+                            <input name="checkbox-1" class="form-check-input" type="checkbox" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                I am over 18
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input name="checkbox-2" class="form-check-input" type="checkbox" id="flexCheckDefault2">
+                            <label class="form-check-label" for="flexCheckDefault2">
+                                I confirm that the answers I provide are factual and accurate
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input name="checkbox-3" class="form-check-input" type="checkbox" id="flexCheckDefault3">
+                            <label class="form-check-label" for="flexCheckDefault3">
+                                I am aware that the online consultation has been devised by Consultant Dermatologist and
+                                Trichoderm, Dr Sharon Wong to assess my suitability for DOSE products
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input name="checkbox-4" class="form-check-input" type="checkbox" id="flexCheckDefault4">
+                            <label class="form-check-label" for="flexCheckDefault4">
+                                I understand that online consultations are not as accurate as in person assessments and
+                                inherently carries some limitations
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input name="checkbox-5" class="form-check-input" type="checkbox" id="flexCheckDefault5">
+                            <label class="form-check-label" for="flexCheckDefault5">
+                                I understand that DOSE products contain prescription medications that are for my
+                                personal
+                                use only. I will not share my treatment with any other individuals
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input name="checkbox-6" class="form-check-input" type="checkbox" id="flexCheckDefault6">
+                            <label class="form-check-label" for="flexCheckDefault6">
+                                I must stop all DOSE products if pregnant
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input name="checkbox-7" class="form-check-input" type="checkbox" id="flexCheckDefault7">
+                            <label class="form-check-label" for="flexCheckDefault7">
+                                I understand that as with any treatment, responses will vary between individuals
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input name="checkbox-8" class="form-check-input" type="checkbox" id="flexCheckDefault8">
+                            <label class="form-check-label" for="flexCheckDefault8">
+                                GDPR compliance/data usage – by ticking you give consent to the collection of this data
+                                which will be used for marketing and service development
+                            </label>
+                        </div>
+
+                        <a class="btn" onclick="document.getElementById('form').submit()" title="continue">continue</a>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

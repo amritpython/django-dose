@@ -8,8 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Female Hair Loss</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/custom.css" />
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/css/custom.css" />
+    {% include 'base/head.html' %}
     <style>
         body {
             background-color: #F3F3F3;
@@ -18,65 +19,67 @@
 </head>
 
 <body>
-
+    {% include 'base/header.html' %}
     <!-- Step Form  -->
-
     <section id="hair_step_form">
+        {% include 'base/alert.html' %}
         <div class="container-fluid p-0">
-            <form id="regForm" action="">
-
+            <form id="regForm" method="post">
+                {% csrf_token %}
                 <div class="width">
                     <!-- Circles which indicates the steps of the form: -->
                     <h2 class="d-flex justify-content-between align-items-center">Female Pattern Hair Loss
-                        <span>1/9</span>
+                        <span>
+                            {% if question_no == '8' %}7.1
+                            {% elif question_no == '9' %}8
+                            {% elif question_no == '10' %}9
+                            {% else %}{{question_no}}{% endif %}/9</span>
                     </h2>
                     <div class="progress_bar">
+                        {% if question_no == 9 %}
+                        <span class="step finish"></span>
+                        <span class="step finish"></span>
+                        <span class="step finish"></span>
+                        <span class="step finish"></span>
+                        <span class="step finish"></span>
+                        <span class="step finish"></span>
+                        <span class="step finish"></span>
+                        <span class="step finish"></span>
+                        <span class="step finish"></span>
+                        {% else %}
+                        {% for i in steps_range %}
+                        <span class="step finish"></span>
+                        {% endfor %}
+                        {% for i in steps_active_range %}
                         <span class="step"></span>
-                        <span class="step"></span>
-                        <span class="step"></span>
-                        <span class="step"></span>
-                        <span class="step"></span>
-                        <span class="step"></span>
-                        <span class="step"></span>
-                        <span class="step"></span>
-                        <span class="step"></span>
-                        <span class="step"></span>
+                        {% endfor %}
+                        {% endif %}
                     </div>
-
                 </div>
 
-
+                {% if question_no == '1' %}
+                <input type="hidden" name="question-no" value="{{question_no}}">
+                <input type="hidden" name="answer-tag-used" value="radio">
                 <!-- One -->
-                <div class="tab">
+                <div class="tab" style="display: block;">
                     <div class="box">
                         <h3>Question: 1</h3>
                         <h4>How old are you?</h4>
                         <div class="row">
-
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault1">
+                                    <input class="form-check-input" type="radio" name="answer-value" value="Between 18-30"
+                                        id="flexRadioDefault1" required {% if answer_value == 'Between 18-30' %}checked{% endif %}>
                                     <label class="form-check-label" for="flexRadioDefault1">
-                                        Between 18-20
+                                        Between 18-30
                                     </label>
                                 </div>
                             </div>
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault2">
-                                    <label class="form-check-label" for="flexRadioDefault2">
-                                        Between 21-30
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault3" checked>
+                                    <input class="form-check-input" type="radio" name="answer-value" value="Between 31-40"
+                                        id="flexRadioDefault3" {% if answer_value == 'Between 31-40' %}checked{% endif %}>
                                     <label class="form-check-label" for="flexRadioDefault3">
                                         Between 31-40
                                     </label>
@@ -85,8 +88,8 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault4">
+                                    <input class="form-check-input" type="radio" name="answer-value" value="Between 41-50"
+                                        id="flexRadioDefault4"  {% if answer_value == 'Between 41-50' %}checked{% endif %}>
                                     <label class="form-check-label" for="flexRadioDefault4">
                                         Between 41-50
                                     </label>
@@ -95,8 +98,8 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault5">
+                                    <input class="form-check-input" type="radio" name="answer-value" value="Between 51-60"
+                                        id="flexRadioDefault5"  {% if answer_value == 'Between 51-60' %}checked{% endif %}>
                                     <label class="form-check-label" for="flexRadioDefault5">
                                         Between 51-60
                                     </label>
@@ -105,8 +108,8 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="flexRadioDefault6">
+                                    <input class="form-check-input" type="radio" name="answer-value" value="60 or over"
+                                        id="flexRadioDefault6"  {% if answer_value == '60 or over' %}checked{% endif %}>
                                     <label class="form-check-label" for="flexRadioDefault6">
                                         60 or over
                                     </label>
@@ -117,32 +120,34 @@
                     </div>
                 </div>
 
+                {% elif question_no == '2' %}
+                <input type="hidden" name="question-no" value="{{question_no}}">
+                <input type="hidden" name="answer-tag-used" value="checkbox">
+                <input type="hidden" name="checkbox-values" value="['scalp massagers','Minoxidil','hair growth serum','anti-hair loss shampoo','supplements','prescription medicines','low level laser therapy','platelet rich plasma (PRP)','mesotherapy','Dermaroller','Scalp Oils','Other','None']">
                 <!-- Two -->
-                <div class="tab">
+                <div class="tab" style="display: block;">
                     <div class="box">
                         <h3>Question: 2</h3>
                         <h4>Previous products and treatments used?</h4>
                         <div class="tick_all">
                             <p><i class="bi bi-info-circle-fill"></i>Tick all that apply</p>
-
                         </div>
 
                         <div class="row">
-
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault">
+                                    <input class="form-check-input" type="checkbox" name="0"
+                                        id="flexCheckDefault" {% if 'scalp massagers' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault">
-                                        Mesotherapy
+                                        scalp massagers
                                     </label>
                                 </div>
                             </div>
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault2">
+                                    <input class="form-check-input" type="checkbox" name="1"
+                                        id="flexCheckDefault2" {% if 'Minoxidil' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault2">
                                         Minoxidil
                                     </label>
@@ -151,18 +156,18 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault3">
+                                    <input class="form-check-input" type="checkbox" name="2"
+                                        id="flexCheckDefault3" {% if 'hair growth serum' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault3">
-                                        Dermaroller
+                                        hair growth serum
                                     </label>
                                 </div>
                             </div>
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault4">
+                                    <input class="form-check-input" type="checkbox" name="3"
+                                        id="flexCheckDefault4" {% if 'anti-hair loss shampoo' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault4">
                                         anti-hair loss shampoo
                                     </label>
@@ -171,8 +176,8 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault5">
+                                    <input class="form-check-input" type="checkbox" name="4"
+                                        id="flexCheckDefault5" {% if 'supplements' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault5">
                                         supplements
                                     </label>
@@ -181,8 +186,8 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault6">
+                                    <input class="form-check-input" type="checkbox" name="5"
+                                        id="flexCheckDefault6" {% if 'prescription medicines' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault6">
                                         prescription medicines
                                     </label>
@@ -191,8 +196,8 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault7">
+                                    <input class="form-check-input" type="checkbox" name="6"
+                                        id="flexCheckDefault7" {% if 'low level laser therapy' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault7">
                                         low level laser therapy
                                     </label>
@@ -201,8 +206,8 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault8">
+                                    <input class="form-check-input" type="checkbox" name="7"
+                                        id="flexCheckDefault8" {% if 'platelet rich plasma (PRP)' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault8">
                                         platelet rich plasma (PRP)
                                     </label>
@@ -211,18 +216,18 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault9">
+                                    <input class="form-check-input" type="checkbox" name="8"
+                                        id="flexCheckDefault9" {% if 'mesotherapy' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault9">
-                                        scalp massagers
+                                        mesotherapy
                                     </label>
                                 </div>
                             </div>
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault10">
+                                    <input class="form-check-input" type="checkbox" name="9"
+                                        id="flexCheckDefault10" {% if 'Dermaroller' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault10">
                                         Dermaroller
                                     </label>
@@ -231,18 +236,18 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault11">
+                                    <input class="form-check-input" type="checkbox" name="10"
+                                        id="flexCheckDefault11" {% if 'Scalp Oils' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault11">
-                                        Hair Oils
+                                        Scalp Oils
                                     </label>
                                 </div>
                             </div>
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault12">
+                                    <input class="form-check-input" type="checkbox" name="11"
+                                        id="flexCheckDefault12" {% if 'Other' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault12">
                                         Other
                                     </label>
@@ -251,38 +256,33 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault13">
+                                    <input class="form-check-input none" type="checkbox" name="12"
+                                        id="flexCheckDefault13" {% if 'None' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault13">
                                         None
                                     </label>
                                 </div>
                             </div>
                         </div>
-
-
-
                     </div>
-
                 </div>
-
-
+                {% elif question_no == '3' %}
+                <input type="hidden" name="question-no" value="{{question_no}}">
+                <input type="hidden" name="answer-tag-used" value="checkbox">
+                <input type="hidden" name="checkbox-values" value="['social media','friends & family','Google','hairdresser','GP','Trichologist','Dermatologist','None','Other']">
                 <!-- Three -->
-                <div class="tab">
+                <div class="tab" style="display: block;">
                     <div class="box">
                         <h3>Question: 3</h3>
                         <h4>Where do you get your hair loss advice from?</h4>
                         <div class="tick_all">
                             <p><i class="bi bi-info-circle-fill"></i>Tick all that apply</p>
-
                         </div>
-
                         <div class="row">
-
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault13">
+                                    <input class="form-check-input" type="checkbox" name="0"
+                                        id="flexCheckDefault13" {% if 'social media' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault13">
                                         social media
                                     </label>
@@ -291,8 +291,8 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault14">
+                                    <input class="form-check-input" type="checkbox" name="1"
+                                        id="flexCheckDefault14" {% if 'friends & family' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault14">
                                         friends & family
                                     </label>
@@ -301,8 +301,8 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault15">
+                                    <input class="form-check-input" type="checkbox" name="2"
+                                        id="flexCheckDefault15" {% if 'Google' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault15">
                                         Google
                                     </label>
@@ -311,8 +311,8 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault16">
+                                    <input class="form-check-input" type="checkbox" name="3"
+                                        id="flexCheckDefault16" {% if 'hairdresser' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault16">
                                         hairdresser
                                     </label>
@@ -321,8 +321,8 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault17">
+                                    <input class="form-check-input" type="checkbox" name="4"
+                                        id="flexCheckDefault17" {% if 'GP' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault17">
                                         GP
                                     </label>
@@ -331,8 +331,8 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault18">
+                                    <input class="form-check-input" type="checkbox" name="5"
+                                        id="flexCheckDefault18" {% if 'Trichologist' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault18">
                                         Trichologist
                                     </label>
@@ -341,8 +341,8 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault19">
+                                    <input class="form-check-input" type="checkbox" name="6"
+                                        id="flexCheckDefault19"{% if 'Dermatologist' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault19">
                                         Dermatologist
                                     </label>
@@ -351,426 +351,415 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault20">
+                                    <input class="form-check-input none" type="checkbox" name="7"
+                                        id="flexCheckDefault20" {% if 'None' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault20">
-                                        Other
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault21">
-                                    <label class="form-check-label" for="flexCheckDefault21">
                                         None
                                     </label>
                                 </div>
                             </div>
 
+                            <div class="col-sm-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="8"
+                                        id="flexCheckDefault21" {% if 'Other' in answer_value %}checked{% endif %}>
+                                    <label class="form-check-label" for="flexCheckDefault21">
+                                        Other
+                                    </label>
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>
                 </div>
-
+                {% elif question_no == '4' %}
+                <input type="hidden" name="question-no" value="{{question_no}}">
+                <input type="hidden" name="answer-tag-used" value="radio">
                 <!-- Four -->
-                <div class="tab">
-                    <div class="box change_width female_width">
+                <div class="tab" style="display: block;">
+                    <div class="box change_width" style="max-width: 1110px;">
                         <h3>Question: 4</h3>
                         <h4>Please rate the severity of your hair loss based on the standardised Hamilton Norwood scale
                         </h4>
 
                         <div class="male_pattern">
-
                             <div class="form_stage">
-                                <input type="radio" name="flexCheckDefault" id="flexCheckDefault22">
+                                <input type="radio" name="answer-value" id="flexCheckDefault22" value="Stage 1" {% if 'Stage 1' in answer_value %}checked{% endif %}>
                                 <label for="flexCheckDefault22">
-                                    <img src="images/stage-1.png" alt="male" title="male" height="220" width="200">
+                                    <img src="/static/images/stage-1.png" alt="male" title="male" height="220" width="200">
                                     Stage 1
                                 </label>
                             </div>
 
                             <div class="form_stage">
-                                <input type="radio" name="flexCheckDefault" id="flexCheckDefault22">
+                                <input type="radio" name="answer-value" id="flexCheckDefault22" value="Stage 2" {% if 'Stage 2' in answer_value %}checked{% endif %}>
                                 <label for="flexCheckDefault22">
-                                    <img src="images/stage-2.png" alt="male" title="male" height="220" width="200">
+                                    <img src="/static/images/stage-2.png" alt="male" title="male" height="220" width="200">
                                     Stage 2
                                 </label>
                             </div>
 
                             <div class="form_stage">
-                                <input type="radio" name="flexCheckDefault" id="flexCheckDefault22">
+                                <input type="radio" name="answer-value" id="flexCheckDefault22" value="Stage 3" {% if 'Stage 3' in answer_value %}checked{% endif %}>
                                 <label for="flexCheckDefault22">
-                                    <img src="images/stage-3.png" alt="male" title="male" height="220" width="200">
+                                    <img src="/static/images/stage-3.png" alt="male" title="male" height="220" width="200">
                                     Stage 3
                                 </label>
                             </div>
 
                             <div class="form_stage">
-                                <input type="radio" name="flexCheckDefault" id="flexCheckDefault22">
+                                <input type="radio" name="answer-value" id="flexCheckDefault22" value="Stage 4" {% if 'Stage 4' in answer_value %}checked{% endif %}>
                                 <label for="flexCheckDefault22">
-                                    <img src="images/stage-4.png" alt="male" title="male" height="220" width="200">
+                                    <img src="/static/images/stage-4.png" alt="male" title="male" height="220" width="200">
                                     Stage 4
                                 </label>
                             </div>
 
                             <div class="form_stage">
-                                <input type="radio" name="flexCheckDefault" id="flexCheckDefault22">
+                                <input type="radio" name="answer-value" id="flexCheckDefault22" value="Stage 5" {% if 'Stage 5' in answer_value %}checked{% endif %}>
                                 <label for="flexCheckDefault22">
-                                    <img src="images/stage-5.png" alt="male" title="male" height="220" width="200">
+                                    <img src="/static/images/stage-5.png" alt="male" title="male" height="220" width="200">
                                     Stage 5
                                 </label>
                             </div>
-
-
                         </div>
-
-
-
-
 
                     </div>
                 </div>
-
+                {% elif question_no == '5' %}
+                <input type="hidden" name="question-no" value="{{question_no}}">
+                <input type="hidden" name="answer-tag-used" value="radio">
                 <!-- Five -->
-                <div class="tab">
+                <div class="tab" style="display: block;">
                     <div class="box">
                         <h3>Question: 5</h3>
                         <h4>Are you allergic to Minoxidil?
                         </h4>
-
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault7">
-                            <label class="form-check-label" for="flexRadioDefault7" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
+                            <input class="form-check-input modal-input" type="radio" name="answer-value" id="flexRadioDefault7" value="Yes" {% if 'Yes' in answer_value %}checked{% endif %} data-bs-target="#exampleModal">
+                            <label class="form-check-label" for="flexRadioDefault7">
                                 Yes
                             </label>
                         </div>
-
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault8">
+                            <input class="form-check-input" type="radio" name="answer-value" id="flexRadioDefault8" value="No" {% if 'No' in answer_value %}checked{% endif %}>
                             <label class="form-check-label" for="flexRadioDefault8">
                                 No
                             </label>
                         </div>
-
-
-
                     </div>
                 </div>
-
+                {% elif question_no == '6' %}
+                <input type="hidden" name="question-no" value="{{question_no}}">
+                <input type="hidden" name="answer-tag-used" value="checkbox">
+                <input type="hidden" name="checkbox-values" value="['Redness','Inflammation','Open Cuts/Wounds on the Scalp','None of the Above']">
                 <!-- Six -->
-                <div class="tab">
+                <div class="tab" style="display: block;">
                     <div class="box">
                         <h3>Question: 6</h3>
                         <h4>Do you have any of the following on your scalp?
                         </h4>
-
                         <div class="tick_all">
                             <p><i class="bi bi-info-circle-fill"></i>Tick all that apply</p>
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                id="flexCheckDefault25">
-                            <label class="form-check-label" for="flexCheckDefault25" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal2">
+                            <input class="form-check-input modal-input" type="checkbox" name="0"
+                                id="flexCheckDefault25" data-bs-target="#exampleModal2" {% if 'Redness' in answer_value %}checked{% endif %}>
+                            <label class="form-check-label" for="flexCheckDefault25" >
                                 Redness
                             </label>
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                id="flexCheckDefault26">
-                            <label class="form-check-label" for="flexCheckDefault26" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal2">
+                            <input class="form-check-input modal-input" type="checkbox" name="1"
+                                id="flexCheckDefault26" data-bs-target="#exampleModal2" {% if 'Inflammation' in answer_value %}checked{% endif %}>
+                            <label class="form-check-label" for="flexCheckDefault26" >
                                 Inflammation
                             </label>
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                id="flexCheckDefault27">
-                            <label class="form-check-label" for="flexCheckDefault27" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal2">
+                            <input class="form-check-input modal-input" type="checkbox" name="2"
+                                id="flexCheckDefault27" data-bs-target="#exampleModal2" {% if 'Open Cuts/Wounds on the Scalp' in answer_value %}checked{% endif %} >
+                            <label class="form-check-label" for="flexCheckDefault27">
                                 Open Cuts/Wounds on the Scalp
                             </label>
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                id="flexCheckDefault28">
-                            <label class="form-check-label" for="flexCheckDefault28" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal2">
+                            <input class="form-check-input none" type="checkbox" name="3"
+                                id="flexCheckDefault28" {% if 'None of the Above' in answer_value %}checked{% endif %}>
+                            <label class="form-check-label" for="flexCheckDefault28">
                                 None of the Above
                             </label>
                         </div>
-
-
-
                     </div>
                 </div>
-
+                {% elif question_no == '7' %}
+                <input type="hidden" name="question-no" value="{{question_no}}">
+                <input type="hidden" name="answer-tag-used" value="radio">
                 <!-- Seven -->
-                <div class="tab">
+                <div class="tab" style="display: block;">
                     <div class="box">
                         <h3>Question: 7</h3>
-                        <h4>Please select as appropriate
-                        </h4>
-
+                        <h4>Please select as appropriate</h4>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault9">
+                            <input class="form-check-input" type="radio" name="answer-value" id="flexRadioDefault9" value="I am post-menopausal / I have no potential of falling pregnant" {% if 'I am post-menopausal' in answer_value %}checked{% endif %}>
                             <label class="form-check-label" for="flexRadioDefault9">
                                 I am post-menopausal / I have no potential of falling pregnant
                             </label>
                         </div>
-
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault10">
+                            <input class="form-check-input" type="radio" name="answer-value" id="flexRadioDefault10" value="I am pre-menopausal and am not pregnant" {% if 'I am pre-menopausal and am not pregnant' in answer_value %}checked{% endif %}>
                             <label class="form-check-label" for="flexRadioDefault10">
                                 I am pre-menopausal and am not pregnant
                             </label>
                         </div>
-
-
-
                     </div>
                 </div>
-
+                {% elif question_no == '8' %}
+                <input type="hidden" name="question-no" value="{{question_no}}">
+                <input type="hidden" name="answer-tag-used" value="radio">
                 <!-- Eight -->
-                <div class="tab">
+                <div class="tab" style="display: block;">
                     <div class="box">
-                        <h3>Question: 8</h3>
+                        <h3>Question: 7.1</h3>
                         <h4>I have a personal or family history of breast cancer?
                         </h4>
-
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault11">
+                            <input class="form-check-input" type="radio" name="answer-value" value="Yes breast cancer" id="flexRadioDefault11" {% if 'Yes' in answer_value %}checked{% endif %}>
                             <label class="form-check-label" for="flexRadioDefault11">
                                 Yes
                             </label>
                         </div>
-
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault12">
+                            <input class="form-check-input" type="radio" name="answer-value" value="No" id="flexRadioDefault12" {% if 'No' in answer_value %}checked{% endif %}>
                             <label class="form-check-label" for="flexRadioDefault12">
                                 No
                             </label>
                         </div>
-
-
-
                     </div>
                 </div>
-
-                <!-- Nine -->
-                <div class="tab">
+                {% elif question_no == '9' %}
+                <input type="hidden" name="question-no" value="{{question_no}}">
+                <input type="hidden" name="answer-tag-used" value="radio">
+                <div class="tab" style="display: block;">
                     <div class="box">
-                        <h3>Question: 9</h3>
+                        <h3>Question: 8</h3>
                         <h4>How much does your hair loss affect you?
                         </h4>
-
                         <div class="tick_all">
-                            <p><i class="bi bi-info-circle-fill"></i>(0 = not affected at all, 10 = significantly
-                                affected)</p>
+                            <p><i class="bi bi-info-circle-fill"></i>(0 = not affected at all, 10 = significantly affected)</p>
                         </div>
-
                         <ul class="listing">
-                            <li><a href="#" title="add">0</a></li>
-                            <li><a href="#" title="add">2</a></li>
-                            <li><a href="#" title="add">3</a></li>
-                            <li><a href="#" title="add">4</a></li>
-                            <li><a href="#" title="add">5</a></li>
-                            <li><a href="#" title="add">6</a></li>
-                            <li><a href="#" title="add">7</a></li>
-                            <li><a href="#" title="add">8</a></li>
-                            <li><a href="#" title="add">9</a></li>
-                            <li><a href="#" title="add">10</a></li>
+                            <li class="form-check">
+                                <input class="form-check-input" type="radio" name="answer-value" id="flexRadioDefault1" value="1" {% if '1' in answer_value %}checked{% endif %} style="top: 11px;left:40px;height: 20px;width: 20px;visibility:hidden;">
+                                <label class="form-check-label" for="flexRadioDefault1"  style="padding:8px 22px;height: 50px;">
+                                    1
+                                </label>
+                            </li>
+                            <li class="form-check">
+                                <input class="form-check-input" type="radio" name="answer-value" id="flexRadioDefault2" value="2" {% if '2' in answer_value %}checked{% endif %} style="top: 11px;left:40px;height: 20px;width: 20px;visibility:hidden;">
+                                <label class="form-check-label" for="flexRadioDefault2" style="padding:8px 22px;height: 50px;">
+                                    2
+                                </label>
+                            </li>
+                            <li class="form-check">
+                                <input class="form-check-input" type="radio" name="answer-value" id="flexRadioDefault3" value="3" {% if '3' in answer_value %}checked{% endif %} style="top: 11px;left:40px;height: 20px;width: 20px;visibility:hidden;">
+                                <label class="form-check-label" for="flexRadioDefault3" style="padding:8px 22px;height: 50px;">
+                                    3
+                                </label>
+                            </li>
+                            <li class="form-check">
+                                <input class="form-check-input" type="radio" name="answer-value" id="flexRadioDefault4" value="4" {% if '4' in answer_value %}checked{% endif %} style="top: 11px;left:40px;height: 20px;width: 20px;visibility:hidden;">
+                                <label class="form-check-label" for="flexRadioDefault4"  style="padding:8px 22px;height: 50px;">
+                                    4
+                                </label>
+                            </li>
+                            <li class="form-check">
+                                <input class="form-check-input" type="radio" name="answer-value" id="flexRadioDefault5" value="5" {% if '5' in answer_value %}checked{% endif %} style="top: 11px;left:40px;height: 20px;width: 20px;visibility:hidden;">
+                                <label class="form-check-label" for="flexRadioDefault5" style="padding:8px 22px;height: 50px;">
+                                    5
+                                </label>
+                            </li>
+                            <li class="form-check">
+                                <input class="form-check-input" type="radio" name="answer-value" id="flexRadioDefault6" value="6" {% if '6' in answer_value %}checked{% endif %} style="top: 11px;left:40px;height: 20px;width: 20px;visibility:hidden;">
+                                <label class="form-check-label" for="flexRadioDefault6" style="padding:8px 22px;height: 50px;">
+                                    6
+                                </label>
+                            </li>
+                            <li class="form-check">
+                                <input class="form-check-input" type="radio" name="answer-value" id="flexRadioDefault7" value="7" {% if '7' in answer_value %}checked{% endif %} style="top: 11px;left:40px;height: 20px;width: 20px;visibility:hidden;">
+                                <label class="form-check-label" for="flexRadioDefault7" style="padding:8px 22px;height: 50px;">
+                                    7
+                                </label>
+                            </li>
+                            <li class="form-check">
+                                <input class="form-check-input" type="radio" name="answer-value" id="flexRadioDefault8" value="8" {% if '8' in answer_value %}checked{% endif %} style="top: 11px;left:40px;height: 20px;width: 20px;visibility:hidden;">
+                                <label class="form-check-label" for="flexRadioDefault8" style="padding:8px 22px;height: 50px;">
+                                    8
+                                </label>
+                            </li>
+                            <li class="form-check">
+                                <input class="form-check-input" type="radio" name="answer-value" id="flexRadioDefault9" value="9" {% if '9' in answer_value %}checked{% endif %} style="top: 11px;left:40px;height: 20px;width: 20px;visibility:hidden;">
+                                <label class="form-check-label" for="flexRadioDefault9" style="padding:8px 22px;height: 50px;">
+                                    9
+                                </label>
+                            </li>
+                            <li class="form-check">
+                                <input class="form-check-input" type="radio" name="answer-value" id="flexRadioDefault10" value="10" {% if '10' in answer_value %}checked{% endif %} style="top: 11px;left:40px;height: 20px;width: 20px;visibility:hidden;">
+                                <label class="form-check-label" for="flexRadioDefault10" style="padding:8px 22px;height: 50px;">
+                                    10
+                                </label>
+                            </li>
                         </ul>
-
-
-
-
                     </div>
                 </div>
-
-                <!-- Ten -->
-                <div class="tab">
+                {% elif question_no  == '10' %}
+                <input type="hidden" name="question-no" value="{{question_no}}">
+                <input type="hidden" name="answer-tag-used" value="checkbox">
+                <input type="hidden" name="checkbox-values" value="['Sad','Angry','Helpless','Embarrassed','Guilty','Morthless','Unattractive','Old','Anxious','Lonely','Frustrated','Overwhelmed','Scared']">
+                <div class="tab" style="display: block;">
                     <div class="box">
-                        <h3>Question: 10</h3>
+                        <h3>Question: 9</h3>
                         <h4>How does the hair loss make you feel?</h4>
-
                         <div class="tick_all">
                             <p><i class="bi bi-info-circle-fill"></i>Tick all that apply</p>
                         </div>
-
                         <div class="row">
-
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault29">
+                                    <input class="form-check-input" type="checkbox" name="0" id="flexCheckDefault29">
                                     <label class="form-check-label" for="flexCheckDefault29">
                                         Sad
                                     </label>
                                 </div>
                             </div>
-
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault30">
+                                    <input class="form-check-input" type="checkbox" name="1" id="flexCheckDefault30">
                                     <label class="form-check-label" for="flexCheckDefault30">
                                         Angry
                                     </label>
                                 </div>
                             </div>
-
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault31">
+                                    <input class="form-check-input" type="checkbox" name="2" id="flexCheckDefault31">
                                     <label class="form-check-label" for="flexCheckDefault31">
                                         Helpless
                                     </label>
                                 </div>
                             </div>
-
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault32">
+                                    <input class="form-check-input" type="checkbox" name="3" id="flexCheckDefault32">
                                     <label class="form-check-label" for="flexCheckDefault32">
                                         Embarrassed
                                     </label>
                                 </div>
                             </div>
-
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault33">
+                                    <input class="form-check-input" type="checkbox" name="4" id="flexCheckDefault33">
                                     <label class="form-check-label" for="flexCheckDefault33">
                                         Guilty
                                     </label>
                                 </div>
                             </div>
-
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault34">
+                                    <input class="form-check-input" type="checkbox" name="5" id="flexCheckDefault34">
                                     <label class="form-check-label" for="flexCheckDefault34">
                                         Worthless
                                     </label>
                                 </div>
                             </div>
-
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault35">
+                                    <input class="form-check-input" type="checkbox" name="6" id="flexCheckDefault35">
                                     <label class="form-check-label" for="flexCheckDefault35">
                                         Unattractive
                                     </label>
                                 </div>
                             </div>
-
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault36">
+                                    <input class="form-check-input" type="checkbox" name="7" id="flexCheckDefault36">
                                     <label class="form-check-label" for="flexCheckDefault36">
                                         Old
                                     </label>
                                 </div>
                             </div>
-
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault37">
+                                    <input class="form-check-input" type="checkbox" name="8" id="flexCheckDefault37">
                                     <label class="form-check-label" for="flexCheckDefault37">
                                         Anxious
                                     </label>
                                 </div>
                             </div>
-
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault38">
+                                    <input class="form-check-input" type="checkbox" name="9" id="flexCheckDefault38">
                                     <label class="form-check-label" for="flexCheckDefault38">
                                         Lonely
                                     </label>
                                 </div>
                             </div>
-
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault39">
+                                    <input class="form-check-input" type="checkbox" name="10" id="flexCheckDefault39">
                                     <label class="form-check-label" for="flexCheckDefault39">
                                         Frustrated
                                     </label>
                                 </div>
                             </div>
-
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault40">
+                                    <input class="form-check-input" type="checkbox" name="11" id="flexCheckDefault40">
                                     <label class="form-check-label" for="flexCheckDefault40">
                                         Overwhelmed
                                     </label>
                                 </div>
                             </div>
-
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="flexCheckDefault"
-                                        id="flexCheckDefault41">
+                                    <input class="form-check-input" type="checkbox" name="12" id="flexCheckDefault41">
                                     <label class="form-check-label" for="flexCheckDefault41">
                                         Scared
                                     </label>
                                 </div>
                             </div>
-
                         </div>
-
                         <div class="tick_all size">
                             <p><i class="bi bi-info-circle-fill"></i>Hair loss in it’s many forms can affect
                                 individuals differently and to varying extents. It is really important to know that
                                 you are not alone in this experience and there is a lot of support available for
                                 people living with hair loss. If you feel you need additional support please check
-                                the DOSE DIRECTORY for our recommended charities, patient support groups and
+                                the <a href="/dose_directory" style="color: currentColor;">DOSE DIRECTORY</a> for our recommended charities, patient support groups and
                                 psychologists. Remember - a problem shared, is a problem halved.</p>
                         </div>
-
-
-
-
-
                     </div>
                 </div>
+                {% endif %}
 
 
+                {% include 'base/next-button.html' %}
+                
 
-                <div class="border_bottom">
-                    <div class="next_btn">
-                        <button title="back" type="button" id="prevBtn" onclick="nextPrev(-1)">Back</button>
-                        <button title="next" type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
-                    </div>
-                </div>
-
+            </form>
+            <form method="post" id="back-form" style="display:none;">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="back">
             </form>
         </div>
     </section>
 
+    {% include 'base/footer.html' %}
 
-
-    <!--Five Tab Step Form Modal -->
 
     <div class="modal fade minoxidil_popup" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -781,7 +770,7 @@
                     <div class="row gx-0">
                         <div class="col-md-4">
                             <div class="img">
-                                <img src="images/minoxidil-img-5.png" alt="Minoxidil" title="Minoxidil" height="382"
+                                <img src="/static/images/minoxidil-img-5.png" alt="Minoxidil" title="Minoxidil" height="382"
                                     width="279">
                             </div>
                         </div>
@@ -790,13 +779,13 @@
                             <div class="d-flex align-items-center h-100">
                                 <div class="set">
 
-                                    <p>As DOSE for male pattern hair loss contains Minoxidil, unfortunately you will not
+                                    <p>As DOSE for female pattern hair loss contains Minoxidil, unfortunately you will not
                                         be suitable to use this medication. You may wish to discuss alternatives with
-                                        our recommended <span>DOSE DIRECTORY</span> dermatologists or consider our
+                                        our recommended <a href="/dose_directory" style="color:black;">DOSE DIRECTORY</a> dermatologists or consider our
                                         recommended
                                         non-pharmaceutical brands
                                     </p>
-                                    <a href="#" title="Next" class="btn">Next</a>
+                                    <a href="/dose_directory?ref={{form.id}}" title="Next" class="btn">Next</a>
                                 </div>
                             </div>
                         </div>
@@ -818,7 +807,7 @@
                     <div class="row gx-0">
                         <div class="col-md-4">
                             <div class="img">
-                                <img src="images/minoxidil-img-6.png" alt="Minoxidil" title="Minoxidil" height="382"
+                                <img src="/static/images/minoxidil-img-6.png" alt="Minoxidil" title="Minoxidil" height="382"
                                     width="279">
                             </div>
                         </div>
@@ -829,11 +818,11 @@
 
                                     <p>Any scalp inflammation or injury may increase your risk of developing irritation
                                         with DOSE products. Please arrange to see your GP or one of our recommended
-                                        <span>DOSE DIRECTORY</span>
+                                        <a href="/dose_directory" style="color:black;">DOSE DIRECTORY</a>
                                         dermatologists to diagnose and treat your scalp condition before
                                         purchasing DOSE for your hair.
                                     </p>
-                                    <a href="#" title="Next" class="btn">Next</a>
+                                    <a href="/dose_directory?ref={{form.id}}" title="Next" class="btn">Next</a>
                                 </div>
                             </div>
                         </div>
@@ -844,86 +833,9 @@
         </div>
     </div>
 
-
-    <!-- Step Form Script -->
-
-    <script>
-        var currentTab = 0; // Current tab is set to be the first tab (0)
-
-        showTab(currentTab); // Display the current tab
-
-        function showTab(n) {
-            // This function will display the specified tab of the form ...
-            var x = document.getElementsByClassName("tab");
-            x[n].style.display = "block";
-            // ... and fix the Previous/Next buttons:
-            if (n == 0) {
-                document.getElementById("prevBtn").style.display = "none";
-            } else {
-                document.getElementById("prevBtn").style.display = "inline";
-            }
-            if (n == (x.length - 1)) {
-                document.getElementById("nextBtn").innerHTML = "Submit";
-            } else {
-                document.getElementById("nextBtn").innerHTML = "Next";
-            }
-            // ... and run a function that displays the correct step indicator:
-            fixStepIndicator(n)
-        }
-
-        function nextPrev(n) {
-            // This function will figure out which tab to display
-            var x = document.getElementsByClassName("tab");
-            // Exit the function if any field in the current tab is invalid:
-            if (n == 1 && !validateForm()) return false;
-            // Hide the current tab:
-            x[currentTab].style.display = "none";
-            // Increase or decrease the current tab by 1:
-            currentTab = currentTab + n;
-            // if you have reached the end of the form... :
-            if (currentTab >= x.length) {
-                //...the form gets submitted:
-                document.getElementById("regForm").submit();
-                return false;
-            }
-            // Otherwise, display the correct tab:
-            showTab(currentTab);
-        }
-
-        function validateForm() {
-            // This function deals with validation of the form fields
-            var x, y, i, valid = true;
-            x = document.getElementsByClassName("tab");
-            y = x[currentTab].getElementsByTagName("");
-            // A loop that checks every input field in the current tab:
-            for (i = 0; i < y.length; i++) {
-                // If a field is empty...
-                if (y[i].value == "") {
-                    // add an "invalid" class to the field:
-                    y[i].className += " invalid";
-                    // and set the current valid status to false:
-                    valid = false;
-                }
-            }
-            // If the valid status is true, mark the step as finished and valid:
-            if (valid) {
-                document.getElementsByClassName("step")[currentTab].className += " finish";
-            }
-            return valid; // return the valid status
-        }
-
-        function fixStepIndicator(n) {
-            // This function removes the "active" class of all steps...
-            var i, x = document.getElementsByClassName("step");
-            for (i = 0; i < x.length; i++) {
-                x[i].className = x[i].className.replace(" active", "");
-            }
-            //... and adds the "active" class to the current step:
-            x[n].className += " active";
-        }
-    </script>
-
-    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/custom.js"></script>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
 </body>
+
 
 </html>

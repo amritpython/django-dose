@@ -1,0 +1,14 @@
+<div class="border_bottom">
+    <div class="next_btn">
+        {% if question_no != '1' %}
+        <button title="back" type="button" id="prevBtn" onclick="document.getElementById('back-form').submit();">Back</button>
+        {% else %}
+        <button title="back" type="button" id="prevBtn2" style="background-color: white;color: black;" onmouseover="this.style.color = 'white';this.style.backgroundColor = 'black';" onmouseleave="this.style.color='black';this.style.backgroundColor = 'white';" onclick="window.location.href='/';">Back</button>
+        {% endif %}
+        <button title="next" type="button" id="nextBtn">Next</button>
+    </div>
+</div>
+
+
+
+

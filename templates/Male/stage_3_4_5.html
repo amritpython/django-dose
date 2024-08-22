@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Screen 179</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/css/custom.css" />
+    {% include 'base/head.html' %}
+    </style>
+</head>
+
+<body>
+    {% include 'base/header.html' %}
+
+    <section id="thanku_sec">
+        <div class="d-flex align-items-center">
+            <div class="img">
+                <img src="{% if 'Stage 3' in answer_value %}/static/images/man-2.png{% elif 'Stage 4' in answer_value %}/static/images/man-3.png{% elif 'Stage 5' in answer_value %}/static/images/man-4.png{% endif %}" alt="male" title="male" height="800" width="700">
+            </div>
+
+            <div class="set">
+                <h1>Thank you for completing the online consultation. Based on your
+                    answers here is a summary of your product
+                    recommendation:</h1>
+
+                    <div class="hair_box male_hair">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+                                >
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                <img src="/static/images/man-stage-1.png" alt="stage 1" height="166" width="130">
+                                Stage 1
+                            </label>
+                        </div>
+    
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                <img src="/static/images/man-stage-2.png" alt="stage 2" height="166" width="130">
+                                Stage 2
+                            </label>
+                        </div>
+    
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" {% if 'Stage 3' in answer_value %}checked{% endif %}>
+                            <label class="form-check-label" for="flexRadioDefault">
+                                <img src="/static/images/man-stage-3.png" alt="stage 3" height="166" width="130">
+                                Stage 3
+                            </label>
+                        </div>
+    
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault" {% if 'Stage 4' in answer_value %}checked{% endif %}>
+                            <label class="form-check-label" for="flexRadioDefault4">
+                                <img src="/static/images/man-stage-4.png" alt="stage 4" height="166" width="130">
+                                Stage 4
+                            </label>
+                        </div>
+    
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5" {% if 'Stage 5' in answer_value %}checked{% endif %}>
+                            <label class="form-check-label" for="flexRadioDefault5">
+                                <img src="/static/images/man-stage-5.png" alt="stage 5" height="166" width="130">
+                                Stage 5
+                            </label>
+                        </div>
+    
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault6" {% if 'Stage 6' in answer_value %}checked{% endif %}>
+                            <label class="form-check-label" for="flexRadioDefault6">
+                                <img src="/static/images/man-stage-6.png" alt="stage 6" height="166" width="130">
+                                Stage 6
+                            </label>
+                        </div>
+    
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault7" {% if 'Stage 7' in answer_value %}checked{% endif %}>
+                            <label class="form-check-label" for="flexRadioDefault7">
+                                <img src="/static/images/man-stage-7.png" alt="stage 7" height="166" width="130">
+                                Stage 7
+                            </label>
+                        </div>
+    
+                    </div>
+    
+
+
+
+
+                <h2>You have progressive receding of the hairline and thinning on the crown. Stages 3-5 are most suitable for our DOSE product which aims to stabilise your hair and slow down the progression of further hair loss. DOSE may also improve thickness and density of hair growth with continued use. 
+                </h2>
+
+                <a href="/consulation_result/{{form.id}}" title="Next" class="btn">Next</a>
+            </div>
+        </div>
+    </section>
+
+    {% include 'base/footer.html' %}
+</body>
+
+</html>

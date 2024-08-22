@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Screen 45</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/css/custom.css" />
+    {% include 'base/head.html' %}
+    </style>
+</head>
+
+<body>
+    {% include 'base/header.html' %}
+
+    <section id="thanku_sec">
+        <div class="d-flex align-items-center">
+            <div class="img">
+                <img src="/static/images/female-7.png" alt="female" title="femail" height="800" width="700">
+            </div>
+
+            <div class="set">
+                <h1>Thank you for completing the online consultation. Based on your
+                    answers here is a summary of your product
+                    recommendation:</h1>
+
+                <div class="hair_box">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" {% if 'Stage 1' in answer_values %}checked{% endif %}>
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            <img src="/static/images/stage-1.png" alt="stage 1" height="92" width="60">
+                            Stage 1
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" {% if 'Stage 2' in answer_values %}checked{% endif %}>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            <img src="/static/images/stage-2.png" alt="stage 2" height="92" width="60">
+                            Stage 2
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" {% if 'Stage 3' in answer_values %}checked{% endif %}>
+                        <label class="form-check-label" for="flexRadioDefault3">
+                            <img src="/static/images/stage-3.png" alt="stage 3" height="92" width="60">
+                            Stage 3
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
+                        <label class="form-check-label" for="flexRadioDefault4" {% if 'Stage 4' in answer_values %}checked{% endif %}>
+                            <img src="/static/images/stage-4.png" alt="stage 4" height="92" width="60">
+                            Stage 4
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5" {% if 'Stage 5' in answer_values %}checked{% endif %}>
+                        <label class="form-check-label" for="flexRadioDefault5">
+                            <img src="/static/images/stage-5.png" alt="stage 5" height="92" width="60">
+                            Stage 5
+                        </label>
+                    </div>
+                </div>
+                <h2>You have advanced female pattern hair loss. Whilst DOSE can stabilise and slow down progression of further hair loss, it is unlikely to provide meaningful regrowth. You may benefit from stronger prescription medications and treatments. Please see our <a href="/dose_directory" style="color:black;">DOSE DIRECTORY</a> for recommended Dermatologists if you see no response after 6-12 months of use.
+                </h2>
+
+                <a href="/consulation_result/{{form.id}}" title="Next" class="btn">Next</a>
+            </div>
+        </div>
+    </section>
+    {% include 'base/footer.html' %}
+
+</body>
+
+</html>

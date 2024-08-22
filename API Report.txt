@@ -1,0 +1,31 @@
+Medichecks.com API
+
+1.  Documentation link:  https://medichecks.readme.io/reference/createaccesstoken
+In this documentation, instructions were given how to use access token to connect to API using client credentials.
+But, we don't have client credentials. We checked the Getting Started section of documentation and from there we got the following information.
+
+2.  Documentation Link:  https://medichecks.readme.io/docs/authentication
+As mentioned in the documentation, for obtaining the client credentials we have sent the request mail to business@medichecks.com.
+
+
+Roseway.com API
+
+1.  Documentation link:  https://eroseway.com/learn/introduction
+This documentation provides the instructions for the authentication for connecting to eRoseway API by using api_key and api_secret.
+But, we don't have api_key and api_secret. To get the api_key and api_secret we needed to setup an account with Roseway Labs.
+Upon exploring the site of Roseway Labs, we found the following information on setting up account to use eRoseway.com:
+
+https://rosewaylabs.com/prescribers/e-prescribing/
+In this page they have mentioned following Instructions (image is also given):
+
+a. Email us your clinic name, address, email and phone number along with your regulatory number (e.g. GMC, NMC, GPhC) and we will create your profile.
+b. You will receive an email asking you to create a password (for logging in) and a PIN (for authorising prescriptions).
+c. Log in to eRoseway.com and create or import your patients. All prescriptions start with a patient.
+d. After authorisation, you will select whether your clinic is paying or you want the patient to receive an email requesting payment. You can choose from a variety of delivery options here too. 
+   Now, you complete your order.
+
+As mentioned in the instruction (a), We don't have the required details like regulatory number etc to setup the account.
+The regulatory number can be obtained from any of the one organizations GMC, NMC, GPhC by completing registeration on their official site.
+GMC - General Medical Council
+NMC - Nursing and Midwifery Council
+GPhC - General Pharmaceutical Council

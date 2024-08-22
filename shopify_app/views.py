@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib import messages
 from django.urls import reverse
 from django.http import HttpResponse
@@ -13,21 +13,40 @@ import json
 import os
 import re
 import shopify
+import requests
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
 class LoginView(View):
     def get(self, request, *args, **kwargs):
+        context = {}
+        if Shop.objects.filter(shopify_domain=os.getenv('SHOP')).exists():
+            context['exists'] = True
+            context['shop'] = Shop.objects.get(shopify_domain=os.getenv('SHOP'))
         if request.GET.get("shop"):
             return authenticate(request)
-        return render(
-            request, "shopify_app/login.html", {"app_name": "Online Consultation"}
-        )
+        context['app_name'] = os.getenv('APP_NAME')
+        return render(request, "shopify_app/login.html",context)
 
     def post(self, request):
         print(request)
         print(request.POST)
         print(request.GET)
-        return authenticate(request)
+        context = {}
+        if request.POST.get('action') == 'install':
+            if request.POST.get('install-secret') != os.getenv('INSTALL_SECRET'):
+                return render(request,'shopify_app/login.html',{'app_name':os.getenv('APP_NAME'),'messages':["INSTALL_SECRET doesn't match"]})
+            if request.POST.get('shop') != os.getenv('SHOP'):
+                return render(request,'shopoify_app/login.html',{'app_name':os.getenv('APP_NAME'),'message':["Domain doesn't matching with SHOP(.env)"]})
+            return authenticate(request)
+        elif request.POST.get('action') == 'uninstall':
+            if request.POST.get('uninstall-secret') != os.getenv('UNINSTALL_SECRET'):
+                return render(request,'shopify_app/login.html',{'app_name':os.getenv('APP_NAME'),'messages':["UNINSTALL_SECRET doesn't match"],'exists':True})
+            Shop.objects.filter(shopify_domain=request.POST.get('shop-domain')).delete()
+            context['app_name'] = os.getenv('APP_NAME')
+            return render(request,'shopify_app/login.html',context)
 
 
 def callback(request):
@@ -160,7 +179,7 @@ def build_callback_redirect_uri(request, params):
 
 def after_authenticate_jobs(shop, access_token):
     create_uninstall_webhook(shop, access_token)
-
+    create_order_webhook(shop,access_token)
 
 def create_uninstall_webhook(shop, access_token):
     with shopify_session(shop, access_token):
@@ -176,3 +195,215 @@ def shopify_session(shopify_domain, access_token):
     api_version = apps.get_app_config("shopify_app").SHOPIFY_API_VERSION
 
     return shopify.Session.temp(shopify_domain, api_version, access_token)
+
+
+
+
+def get_customer_details(customer_id):
+    shop_name = os.getenv('SHOP')
+    shopify_store = get_object_or_404(Shop, shopify_domain=shop_name)
+    access_token = shopify_store.shopify_token
+    print(access_token)
+    headers = {
+        'Content-Type': 'application/json',
+        'X-Shopify-Access-Token': access_token
+    }
+    url = f"https://{shop_name}/admin/api/2024-07/customers/{customer_id}.json" 
+    response = requests.get(url, headers=headers, timeout=600)
+    response.raise_for_status()
+    response_data = response.json()
+    customers = response_data.get('customer', {})
+    return customers
+
+
+
+def get_product_details(product_id):
+    shop_name = os.getenv('SHOP')
+    shopify_store = get_object_or_404(Shop,shopify_domain=shop_name)
+    access_token = shopify_store.shopify_token
+    headers = {
+        'Content-Type':'application/json',
+        'X-Shopify-Access-Token':access_token
+    }
+    url = f'https://{shop_name}/admin/api/2024-07/products/{product_id}.json'
+    response = requests.get(url, headers=headers,timeout=600)
+    response.raise_for_status()
+    response_data = response.json()
+    return response_data.get('product',{})
+
+
+def get_customer_orders(customer_id):
+    shop_name = os.getenv('SHOP')
+    shopify_store = get_object_or_404(Shop,shopify_domain=shop_name)
+    access_token = shopify_store.shopify_token
+    headers = {
+        'Content-Type':'application/json',
+        'X-Shopify-Access-Token':access_token
+    }
+    url = f'https://{shop_name}/admin/api/2024-07/customers/{customer_id}/orders.json'
+    response = requests.get(url,headers=headers,timeout=600)
+    response.raise_for_status()
+    response_data = response.json()
+    return response_data.get('orders',[])
+
+
+def get_cart_info(customer_id):
+    shop_name = os.getenv("SHOP")
+    shopify_store = get_object_or_404(Shop,shopify_domain=shop_name)
+    access_token = shopify_store.shopify_token
+    headers = {
+        'Content-Type':'application/json',
+        'X-Shopify-Access-Token':access_token,
+    }
+    url = f'https://{shop_name}/admin/api/2024-07/checkouts.json'
+    response = requests.get(url,headers=headers,timeout=600)
+    response.raise_for_status()
+    response_data = response.json()
+    cart_list = response_data.get('checkouts')
+    for cart in cart_list :
+        if cart.get('customer').get('id') == int(customer_id):
+            return cart
+        else: print(len(cart.get('customer').get('id')),cart.get('customer').get('id') , customer_id, len(int(customer_id)))
+    return None
+
+
+
+
+def create_order_webhook(shop, access_token):
+    with shopify_session(shop, access_token):
+        app_url = apps.get_app_config("shopify_app").APP_URL
+        webhook = shopify.Webhook()
+        webhook.topic = "orders_create"
+        webhook.address = "https://{host}/orders_create".format(host=app_url)
+        webhook.format = "json"
+        webhook.save()
+        
+        
+        
+from home import roseway_helpers
+from home import medicheck_helpers
+from home.models import ShopifyUser
+
+@csrf_exempt
+def orders_create(request):
+    if request.method == 'POST':
+        try:
+            order = json.loads(request.body)
+            shop_name = request.headers.get('X-Shopify-Shop-Domain')
+            shopify_store = get_object_or_404(Shop, shopify_domain=shop_name)
+            access_token = shopify_store.shopify_token
+            order_line_items = order['line_items']
+            customer = order.get('customer')
+            if not customer:return HttpResponse(status=204)
+            customer_id = customer.get('id')
+            customer_info = get_customer_details(customer_id=customer_id)
+            customer , created = ShopifyUser.objects.get_or_create(customer_id=customer_id)
+            customer.email = customer_info['email']
+            customer.created_at = customer_info['created_at']
+            customer.updated_at = customer_info['updated_at']
+            customer.first_name = customer_info['first_name']
+            customer.last_name = customer_info['last_name']
+            customer.verified_email = customer_info['verified_email']
+            customer.currency = customer_info['currency']
+            customer.address_id = customer_info['default_address']['id']
+            customer.address_firstname = customer_info['default_address']['first_name']
+            customer.address_lastname = customer_info['default_address']['last_name']
+            customer.address_company = customer_info['default_address']['company']
+            customer.address_address_one = customer_info['default_address']['address1']
+            customer.address_address_two = customer_info['default_address']['address2']
+            customer.address_city = customer_info['default_address']['city']
+            customer.address_province = customer_info['default_address']['province']
+            customer.address_country = customer_info['default_address']['country']
+            customer.address_zipcode = customer_info['default_address']['zip']
+            customer.address_phone = customer_info['default_address']['phone']
+            customer.address_provice_code = customer_info['default_address']['province_code']
+            customer.address_country_code = customer_info['default_address']['country_code']
+            customer.address_country_name = customer_info['default_address']['country_name']
+            customer.save()
+            roseway_payload = {
+                'address1':customer.address_address_one,
+                'address2':customer.address_address_two,
+                'city':customer.address_city,
+                'country':customer.address_country,
+                'date_of_birth':'2000-01-01',
+                'email':customer.email,
+                'first_name':customer.first_name,
+                'last_name':customer.last_name,
+                'mobile_number':customer.address_phone,
+                'postcode':customer.address_zipcode,
+                'prescribers':['66bc91fdfcfb9f487029edce'],
+                'prescribers_notes':'',
+                'title':'',
+                'skin_size':''
+            }
+            medicheck_payload = {
+                "resourceType": "Patient",
+                "active": True,
+                "name": [
+                    {
+                        "given": [customer.first_name],
+                        "prefix": ['Mr'],
+                        "family": customer.last_name
+                    }
+                ],
+                "gender": "male",
+                "extension": [
+                    {
+                    "url": "https://fhir.medichecks.com/patient-ethnicity",
+                    "valueString": "OTHER"
+                    },
+                    {
+                    "url": "https://fhir.medichecks.com/patient-sex-at-birth",
+                    "valueString": "male"
+                    }
+                ],
+                "telecom": [
+                    {
+                    "system": "email",
+                    "use": "mobile",
+                    "value": customer.email
+                    },
+                    {
+                    "system": "phone",
+                    "use": "mobile",
+                    "value": f'0{customer.address_phone}'
+                    }
+                ],
+                "address": [
+                    {
+                    "country": customer.address_country,
+                    "line": [
+                        customer.address_address_one,
+                        customer.address_address_two,
+                    ],
+                    "type": "both",
+                    "use": "home",
+                    "city": customer.address_city,
+                    "district": "",
+                    "postalCode": customer.address_zipcode
+                    }
+                ],
+                "birthDate": "2000-01-01"
+                }
+            print('medicheck payload : ',medicheck_payload)
+            try:
+                roseway_helpers.create_patient(roseway_payload)
+                print(medicheck_helpers.create_patient(medicheck_payload))
+            except Exception as e:
+                print('create patint throw : ',e)
+                return HttpResponse(status=500)
+            return HttpResponse(status=204)
+        except json.JSONDecodeError as e:
+            # Log the error
+            #logger.error('Invalid JSON received: %s', e)
+            return HttpResponse(status=400)
+        except Exception as e:
+            print(e)
+            # Log any other error
+            #logger.error('Error processing webhook: %s', e)
+            return HttpResponse(status=500)
+    else:
+        # Return a 405 Method Not Allowed if the request method is not POST
+        return HttpResponse(status=405)
+
+

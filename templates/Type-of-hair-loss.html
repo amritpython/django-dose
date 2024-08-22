@@ -9,7 +9,7 @@
     <title>Type-of-hair-loss</title>
     <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/static/css/custom.css" />
-
+    {% include 'base/head.html' %}
     <style>
         body {
             background-color: #F3F3F3;
@@ -18,7 +18,9 @@
 </head>
 
 <body>
+    {% include 'base/header.html' %}
     <section id="type-loss">
+        {% include 'base/alert.html' %}
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -87,7 +89,7 @@
         </div>
     </section>
 
-
+    {% include 'base/footer.html' %}
 
     <!-- Modal -->
     <div class="modal fade type_hair_popup" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -106,7 +108,7 @@
                     <div class="set">
 
                         <div class="form-check">
-                            <input name="checkbox-1" class="form-check-input" type="checkbox" id="flexCheckDefault">
+                            <input name="checkbox-1" class="form-check-input" type="checkbox" id="flexCheckDefault" required>
                             <label class="form-check-label" for="flexCheckDefault">
                                 I am over 18
                             </label>
@@ -166,8 +168,8 @@
                             </label>
                         </div>
 
-                        <a class="btn" onclick="document.getElementById('form').submit()" title="continue">continue</a>
-
+                        <a class="btn" onclick="document.getElementById('submit-input').click()" title="continue">continue</a>
+                        <input type="submit" style="display: none;" id="submit-input">
                     </div>
                 </form>
 
@@ -176,5 +178,21 @@
     </div>
     
     <script src="/static/js/bootstrap.bundle.min.js"></script>
+    {% if success or error %}
+    <script>
+        var status_div = document.getElementById('status-div');
+        status_div.style.backgroundColor = 'white';
+        async function toast(){            
+            status_div.innerHTML = '{% if success %}{{success}}{% endif %}{% if error %}{{error}}{% endif %}';
+            status_div.style.borderColor = "{% if success %}green{% endif %}{% if error %}red{% endif %}";
+            await new Promise(r => setTimeout(r, 300));
+            status_div.classList.add("div-activate");
+            status_div.style.backgroundColor = '#F3F3F3';
+            await new Promise(r => setTimeout(r, 5000));
+            status_div.classList.remove("div-activate");
+        };
+        toast();
+    </script>
+    {% endif %}
 </body>
 </html>

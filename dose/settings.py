@@ -88,6 +88,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dose.wsgi.application'
 
+AUTH_USER_MODEL = 'home.ShopifyUser'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases

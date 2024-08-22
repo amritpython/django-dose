@@ -1,0 +1,312 @@
+{
+    "id": 6175860621658,
+    "admin_graphql_api_id": "gid://shopify/Order/6175860621658",
+    "app_id": 1354745,
+    "browser_ip": "112.196.88.154",
+    "buyer_accepts_marketing": True,
+    "cancel_reason": None,
+    "cancelled_at": None,
+    "cart_token": None,
+    "checkout_id": 45889464402266,
+    "checkout_token": "53ef90dbc85554a4293945f22fd77423",
+    "client_details": {
+        "accept_language": None,
+        "browser_height": None,
+        "browser_ip": "112.196.88.154",
+        "browser_width": None,
+        "session_hash": None,
+        "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
+    },
+    "closed_at": None,
+    "confirmation_number": "KGXYPUT17",
+    "confirmed": True,
+    "contact_email": "amritsingh@brihaspatitech.com",
+    "created_at": "2024-08-20T06:30:57-07:00",
+    "currency": "GBP",
+    "current_subtotal_price": "30.71",
+    "current_subtotal_price_set": {
+        "shop_money": {
+            "amount": "30.71",
+            "currency_code": "GBP"
+        },
+        "presentment_money": {
+            "amount": "40.00",
+            "currency_code": "USD"
+        }
+    },
+    "current_total_additional_fees_set": None,
+    "current_total_discounts": "0.00",
+    "current_total_discounts_set": {
+        "shop_money": {
+            "amount": "0.00",
+            "currency_code": "GBP"
+        },
+        "presentment_money": {
+            "amount": "0.00",
+            "currency_code": "USD"
+        }
+    },
+    "current_total_duties_set": None,
+    "current_total_price": "30.71",
+    "current_total_price_set": {
+        "shop_money": {
+            "amount": "30.71",
+            "currency_code": "GBP"
+        },
+        "presentment_money": {
+            "amount": "40.00",
+            "currency_code": "USD"
+        }
+    },
+    "current_total_tax": "0.00",
+    "current_total_tax_set": {
+        "shop_money": {
+            "amount": "0.00",
+            "currency_code": "GBP"
+        },
+        "presentment_money": {
+            "amount": "0.00",
+            "currency_code": "USD"
+        }
+    },
+    "customer_locale": "en-GB",
+    "device_id": None,
+    "discount_codes": [],
+    "email": "amritsingh@brihaspatitech.com",
+    "estimated_taxes": False,
+    "financial_status": "paid",
+    "fulfillment_status": None,
+    "landing_site": None,
+    "landing_site_ref": None,
+    "location_id": None,
+    "merchant_of_record_app_id": None,
+    "name": "#1012",
+    "note": None,
+    "note_attributes": [],
+    "number": 12,
+    "order_number": 1012,
+    "order_status_url": "https://865a57-7e.myshopify.com/83165643098/orders/4e96a472e9a4cca040576789e4fefe55/authenticate?key=437a04d4095377edb3357bda402a9b08&none=VQBXAFdKXFBURlJI",
+    "original_total_additional_fees_set": None,
+    "original_total_duties_set": None,
+    "payment_gateway_names": [
+        "manual"
+    ],
+    "phone": None,
+    "po_number": None,
+    "presentment_currency": "USD",
+    "processed_at": "2024-08-20T06:30:57-07:00",
+    "reference": "597bf92c3d4ac408e79992ca99c83ebb",
+    "referring_site": None,
+    "source_identifier": "597bf92c3d4ac408e79992ca99c83ebb",
+    "source_name": "shopify_draft_order",
+    "source_url": None,
+    "subtotal_price": "30.71",
+    "subtotal_price_set": {
+        "shop_money": {
+            "amount": "30.71",
+            "currency_code": "GBP"
+        },
+        "presentment_money": {
+            "amount": "40.00",
+            "currency_code": "USD"
+        }
+    },
+    "tags": "",
+    "tax_exempt": False,
+    "tax_lines": [],
+    "taxes_included": True,
+    "test": False,
+    "token": "4e96a472e9a4cca040576789e4fefe55",
+    "total_discounts": "0.00",
+    "total_discounts_set": {
+        "shop_money": {
+            "amount": "0.00",
+            "currency_code": "GBP"
+        },
+        "presentment_money": {
+            "amount": "0.00",
+            "currency_code": "USD"
+        }
+    },
+    "total_line_items_price": "30.71",
+    "total_line_items_price_set": {
+        "shop_money": {
+            "amount": "30.71",
+            "currency_code": "GBP"
+        },
+        "presentment_money": {
+            "amount": "40.00",
+            "currency_code": "USD"
+        }
+    },
+    "total_outstanding": "0.00",
+    "total_price": "30.71",
+    "total_price_set": {
+        "shop_money": {
+            "amount": "30.71",
+            "currency_code": "GBP"
+        },
+        "presentment_money": {
+            "amount": "40.00",
+            "currency_code": "USD"
+        }
+    },
+    "total_shipping_price_set": {
+        "shop_money": {
+            "amount": "0.00",
+            "currency_code": "GBP"
+        },
+        "presentment_money": {
+            "amount": "0.00",
+            "currency_code": "USD"
+        }
+    },
+    "total_tax": "0.00",
+    "total_tax_set": {
+        "shop_money": {
+            "amount": "0.00",
+            "currency_code": "GBP"
+        },
+        "presentment_money": {
+            "amount": "0.00",
+            "currency_code": "USD"
+        }
+    },
+    "total_tip_received": "0.00",
+    "total_weight": 1072745,
+    "updated_at": "2024-08-20T06:30:58-07:00",
+    "user_id": 106715873626,
+    "billing_address": {
+        "first_name": "Amrit",
+        "address1": "Apartment 5002",
+        "phone": "1234567890",
+        "city": "Kharar",
+        "zip": "160160",
+        "province": "Delhi",
+        "country": "India",
+        "last_name": "Singh",
+        "address2": "Street2",
+        "company": "Company",
+        "latitude": 28.7040592,
+        "longitude": 77.10249019999999,
+        "name": "Amrit Singh",
+        "country_code": "IN",
+        "province_code": "DL"
+    },
+    "customer": {
+        "id": 8114690425178,
+        "email": "amritsingh@brihaspatitech.com",
+        "created_at": "2024-07-29T06:00:23-07:00",
+        "updated_at": "2024-08-20T06:30:58-07:00",
+        "first_name": "amrit",
+        "last_name": "singh",
+        "state": "enabled",
+        "note": None,
+        "verified_email": False,
+        "multipass_identifier": None,
+        "tax_exempt": False,
+        "phone": None,
+        "email_marketing_consent": {
+            "state": "subscribed",
+            "opt_in_level": "single_opt_in",
+            "consent_updated_at": "2024-08-02T02:55:01-07:00"
+        },
+        "sms_marketing_consent": None,
+        "tags": "newsletter, prospect",
+        "currency": "USD",
+        "tax_exemptions": [],
+        "admin_graphql_api_id": "gid://shopify/Customer/8114690425178",
+        "default_address": {
+            "id": 10537393652058,
+            "customer_id": 8114690425178,
+            "first_name": "Amrit",
+            "last_name": "Singh",
+            "company": "Company",
+            "address1": "Apartment 5002",
+            "address2": "Street2",
+            "city": "Kharar",
+            "province": "Delhi",
+            "country": "India",
+            "zip": "160160",
+            "phone": "1234567890",
+            "name": "Amrit Singh",
+            "province_code": "DL",
+            "country_code": "IN",
+            "country_name": "India",
+            "default": True
+        }
+    },
+    "discount_applications": [],
+    "fulfillments": [],
+    "line_items": [
+        {
+            "id": 15736951963994,
+            "admin_graphql_api_id": "gid://shopify/LineItem/15736951963994",
+            "attributed_staffs": [],
+            "current_quantity": 1,
+            "fulfillable_quantity": 1,
+            "fulfillment_service": "manual",
+            "fulfillment_status": None,
+            "gift_card": False,
+            "grams": 1072746,
+            "name": "Beard 2",
+            "price": "30.71",
+            "price_set": {
+                "shop_money": {
+                    "amount": "30.71",
+                    "currency_code": "GBP"
+                },
+                "presentment_money": {
+                    "amount": "40.00",
+                    "currency_code": "USD"
+                }
+            },
+            "product_exists": True,
+            "product_id": 9688859509082,
+            "properties": [],
+            "quantity": 1,
+            "requires_shipping": True,
+            "sku": "",
+            "taxable": True,
+            "title": "Beard 2",
+            "total_discount": "0.00",
+            "total_discount_set": {
+                "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "GBP"
+                },
+                "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "USD"
+                }
+            },
+            "variant_id": 49220493771098,
+            "variant_inventory_management": "shopify",
+            "variant_title": None,
+            "vendor": "Haircare",
+            "tax_lines": [],
+            "duties": [],
+            "discount_allocations": []
+        }
+    ],
+    "payment_terms": None,
+    "refunds": [],
+    "shipping_address": {
+        "first_name": "Amrit",
+        "address1": "Apartment 5002",
+        "phone": "1234567890",
+        "city": "Kharar",
+        "zip": "160160",
+        "province": "Delhi",
+        "country": "India",
+        "last_name": "Singh",
+        "address2": "Street2",
+        "company": "Company",
+        "latitude": 28.7040592,
+        "longitude": 77.10249019999999,
+        "name": "Amrit Singh",
+        "country_code": "IN",
+        "province_code": "DL"
+    },
+    "shipping_lines": []
+}

@@ -16,14 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from shopify_app.views import  callback, LoginView, uninstall
+from shopify_app.views import  callback, LoginView, uninstall 
 from home.views import HomeView
+from shopify_app.views import orders_create
+from home import urls
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', HomeView.as_view(), name='root_path'),
     path('login/', LoginView.as_view(), name='login'),
     path('auth/shopify/callback', callback, name='callback'),
     path('uninstall', uninstall, name='uninstall'),
+    path('orders_create', orders_create, name='orders_create'),
+    path('', HomeView.as_view(), name='root_path'),
+    path('',include('home.urls')),
+    path('djangoadmin/', admin.site.urls),
 ]
 

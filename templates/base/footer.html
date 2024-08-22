@@ -1,0 +1,64 @@
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <h3>Orders & Support</h3>
+                <ul>
+                    <li><a href="{{request.user.shop}}/pages/contact" title="contact">Contact Us</a></li>
+                    <li><a href="{{request.user.shop}}/pages/faq" title="Faq">FAQs</a></li>
+                    <li><a href="" title="Privacy">Privacy Policy</a></li>
+                    <li><a href="" title="Term">Term & Conditions</a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-4 col-md-3 col-sm-6">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{{request.user.shop}}/mission" title="Mission" style="color:#fff;">Our Mission </a></li>
+                    <li><a href="{{request.user.shop}}/collections/all" title="Products">Our Products</a></li>
+                    <li><a href="{{request.user.shop}}/pages/reviews" title="Testimonials">Testimonials</a></li>
+                    <li><a href="/my_account" title="Account">My Account</a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-4 col-md-5">
+                <h3>Join the community</h3>
+                <p>Unlock an exclusive offer on the first order and get the scoop on launches, promos, and more.</p>
+                <form class="form-group" action="/email/subscribe" method="post">
+                    {% csrf_token %}
+                    <input type="text" class="form-control" placeholder="Enter your email" name="email" required>
+                    <button type="submit"><i class="bi bi-arrow-right"></i></button>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</footer>
+
+<div class="copy_right">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <p>Copyright © 2024. Dose. All Rights Reserved.</p>
+            <div class="img">
+                <span> <img src="/static/images/c-1.svg" alt="card" title="card" height="26" width="48"></span>
+                <span> <img src="/static/images/c-2.svg" alt="card" title="card" height="26" width="48"></span>
+                <span> <img src="/static/images/c-3.svg" alt="card" title="card" height="26" width="48"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="show-modal-div" style="display: none;" data-bs-toggle="" data-bs-target="">
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $(".close_menu").click(function () {
+            $(".main_header").toggleClass("main");
+        });
+    });
+</script>

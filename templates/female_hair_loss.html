@@ -269,7 +269,7 @@
                 {% elif question_no == '3' %}
                 <input type="hidden" name="question-no" value="{{question_no}}">
                 <input type="hidden" name="answer-tag-used" value="checkbox">
-                <input type="hidden" name="checkbox-values" value="['social media','friends & family','Google','hairdresser','GP','Trichologist','Dermatologist','None','Other']">
+                <input type="hidden" name="checkbox-values" value="['social media','friends & family','hairdresser','GP','Trichologist','Dermatologist','Other','None']">
                 <!-- Three -->
                 <div class="tab" style="display: block;">
                     <div class="box">
@@ -299,19 +299,10 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-6">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="2"
-                                        id="flexCheckDefault15" {% if 'Google' in answer_value %}checked{% endif %}>
-                                    <label class="form-check-label" for="flexCheckDefault15">
-                                        Google
-                                    </label>
-                                </div>
-                            </div>
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="3"
+                                    <input class="form-check-input" type="checkbox" name="2"
                                         id="flexCheckDefault16" {% if 'hairdresser' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault16">
                                         hairdresser
@@ -321,7 +312,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="4"
+                                    <input class="form-check-input" type="checkbox" name="3"
                                         id="flexCheckDefault17" {% if 'GP' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault17">
                                         GP
@@ -331,7 +322,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="5"
+                                    <input class="form-check-input" type="checkbox" name="4"
                                         id="flexCheckDefault18" {% if 'Trichologist' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault18">
                                         Trichologist
@@ -341,10 +332,20 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="6"
+                                    <input class="form-check-input" type="checkbox" name="5"
                                         id="flexCheckDefault19"{% if 'Dermatologist' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault19">
                                         Dermatologist
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="6"
+                                        id="flexCheckDefault21" {% if 'Other' in answer_value %}checked{% endif %}>
+                                    <label class="form-check-label" for="flexCheckDefault21">
+                                        Other
                                     </label>
                                 </div>
                             </div>
@@ -359,18 +360,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-6">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="8"
-                                        id="flexCheckDefault21" {% if 'Other' in answer_value %}checked{% endif %}>
-                                    <label class="form-check-label" for="flexCheckDefault21">
-                                        Other
-                                    </label>
-                                </div>
-                            </div>
-
                         </div>
-
                     </div>
                 </div>
                 {% elif question_no == '4' %}
@@ -380,7 +370,7 @@
                 <div class="tab" style="display: block;">
                     <div class="box change_width" style="max-width: 1110px;">
                         <h3>Question: 4</h3>
-                        <h4>Please rate the severity of your hair loss based on the standardised Hamilton Norwood scale
+                        <h4>Please rate the severity of your hair loss based on the standardised Sinclair scoring scale 
                         </h4>
 
                         <div class="male_pattern">
@@ -778,7 +768,6 @@
                         <div class="col-md-8">
                             <div class="d-flex align-items-center h-100">
                                 <div class="set">
-
                                     <p>As DOSE for female pattern hair loss contains Minoxidil, unfortunately you will not
                                         be suitable to use this medication. You may wish to discuss alternatives with
                                         our recommended <a href="/dose_directory" style="color:black;">DOSE DIRECTORY</a> dermatologists or consider our

@@ -31,7 +31,7 @@
                 <div class="width">
                     <!-- Circles which indicates the steps of the form: -->
                     <h2 class="d-flex justify-content-between align-items-center">Hair Shedding
-                        <span>{{question_no}}/10</span>
+                        <span>{{question_no}}/9</span>
                     </h2>
                     <div class="progress_bar">
                         {% for i in steps_range %}
@@ -65,7 +65,7 @@
                                     <input class="form-check-input" type="radio" name="answer-value" value="Between 30-40"
                                         id="flexRadioDefault2" {% if 'Between 30-40' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexRadioDefault2">
-                                        Between 30-40
+                                        Between 31-40
                                     </label>
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
                                     <input class="form-check-input" type="radio" name="answer-value" value="Between 40-50"
                                         id="flexRadioDefault3" {% if 'Between 40-50' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexRadioDefault3">
-                                        Between 40-50
+                                        Between 41-50
                                     </label>
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
                                     <input class="form-check-input" type="radio" name="answer-value" value="Between 50-60"
                                         id="flexRadioDefault4" {% if 'Between 50-60' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexRadioDefault4">
-                                        Between 50-60
+                                        Between 51-60
                                     </label>
                                 </div>
                             </div>
@@ -242,7 +242,7 @@
                 {% elif question_no == '3' %}
                 <input type="hidden" name="question-no" value="{{question_no}}">
                 <input type="hidden" name="answer-tag-used" value="checkbox">
-                <input type="hidden" name="checkbox-values" value="['social media','friends & family','Google','hairdresser','GP','Trichologist','Dermatologist','None','Other']">
+                <input type="hidden" name="checkbox-values" value="['social media','friends & family','hairdresser','GP','Trichologist','Dermatologist','Other','None']">
                 <!-- Three -->
                 <div class="tab" style="display: block;">
                     <div class="box">
@@ -272,19 +272,10 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-6">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="2"
-                                        id="flexCheckDefault15" {% if 'Google' in answer_value %}checked{% endif %}>
-                                    <label class="form-check-label" for="flexCheckDefault15">
-                                        Google
-                                    </label>
-                                </div>
-                            </div>
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="3"
+                                    <input class="form-check-input" type="checkbox" name="2"
                                         id="flexCheckDefault16" {% if 'hairdresser' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault16">
                                         hairdresser
@@ -294,7 +285,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="4"
+                                    <input class="form-check-input" type="checkbox" name="3"
                                         id="flexCheckDefault17" {% if 'GP' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault17">
                                         GP
@@ -304,7 +295,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="5"
+                                    <input class="form-check-input" type="checkbox" name="4"
                                         id="flexCheckDefault18" {% if 'Trichologist' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault18">
                                         Trichologist
@@ -314,7 +305,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="6"
+                                    <input class="form-check-input" type="checkbox" name="5"
                                         id="flexCheckDefault19"{% if 'Dermatologist' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault19">
                                         Dermatologist
@@ -324,20 +315,20 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input none" type="checkbox" name="7"
-                                        id="flexCheckDefault20" {% if 'None' in answer_value %}checked{% endif %}>
+                                    <input class="form-check-input" type="checkbox" name="6"
+                                        id="flexCheckDefault20" {% if 'Other' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault20">
-                                        None
+                                        Other
                                     </label>
                                 </div>
                             </div>
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="8"
-                                        id="flexCheckDefault21" {% if 'Other' in answer_value %}checked{% endif %}>
+                                    <input class="form-check-input none" type="checkbox" name="7"
+                                        id="flexCheckDefault21" {% if 'None' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault21">
-                                        Other
+                                        None
                                     </label>
                                 </div>
                             </div>
@@ -442,12 +433,13 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="2" id="flexCheckDefault44" {% if 'Google' in answer_value %}checked{% endif %}>
-                                    <label class="form-check-label" for="flexCheckDefault44">
+                                    <input class="form-check-input" type="checkbox" name="2" id="flexCheckDefault43" {% if 'Google' in answer_value %}checked{% endif %}>
+                                    <label class="form-check-label" for="flexCheckDefault43">
                                         Google
                                     </label>
                                 </div>
                             </div>
+
 
                             <div class="col-sm-6">
                                 <div class="form-check">

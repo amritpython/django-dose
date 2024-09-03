@@ -110,7 +110,7 @@
                 {% elif question_no == '2' %}
                 <input type="hidden" name="question-no" value="{{question_no}}">
                 <input type="hidden" name="answer-tag-used" value="checkbox">
-                <input type="hidden" name="checkbox-values" value="['scalp massagers','Minoxidil','hair growth serum','anti-hair loss shampoo','supplements','prescription medicines','low level laser therapy','platelet rich plasma (PRP)','mesotherapy','Dermaroller','Scalp Oils','Other','none']">
+                <input type="hidden" name="checkbox-values" value="['hair growth serum','anti-hair loss shampoo','supplements','Minoxidil','prescription medicines','low level laser therapy','Dermaroller','platelet','mesotherapy','Other','None']">
                 <!-- Two -->
                 <div class="tab" style="display: block;">
                     <div class="box">
@@ -121,29 +121,10 @@
                         </div>
 
                         <div class="row">
+
                             <div class="col-sm-6">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="0"
-                                        id="flexCheckDefault" {% if 'scalp massagers' in answer_value %}checked{% endif %}>
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                        scalp massagers
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="1"
-                                        id="flexCheckDefault2" {% if 'Minoxidil' in answer_value %}checked{% endif %}>
-                                    <label class="form-check-label" for="flexCheckDefault2">
-                                        Minoxidil
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="2"
                                         id="flexCheckDefault3" {% if 'hair growth serum' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault3">
                                         hair growth serum
@@ -153,7 +134,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="3"
+                                    <input class="form-check-input" type="checkbox" name="1"
                                         id="flexCheckDefault4" {% if 'anti-hair loss shampoo' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault4">
                                         anti-hair loss shampoo
@@ -161,9 +142,10 @@
                                 </div>
                             </div>
 
+                            
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="4"
+                                    <input class="form-check-input" type="checkbox" name="2"
                                         id="flexCheckDefault5" {% if 'supplements' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault5">
                                         supplements
@@ -173,7 +155,17 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="5"
+                                    <input class="form-check-input" type="checkbox" name="3"
+                                        id="flexCheckDefault2" {% if 'Minoxidil' in answer_value %}checked{% endif %}>
+                                    <label class="form-check-label" for="flexCheckDefault2">
+                                        Minoxidil
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="4"
                                         id="flexCheckDefault6" {% if 'prescription medicines' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault6">
                                         prescription medicines
@@ -181,9 +173,10 @@
                                 </div>
                             </div>
 
+
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="6"
+                                    <input class="form-check-input" type="checkbox" name="5"
                                         id="flexCheckDefault7" {% if 'low level laser therapy' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault7">
                                         low level laser therapy
@@ -193,9 +186,19 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="7"
-                                        id="flexCheckDefault8" {% if 'platelet rich plasma (PRP)' in answer_value %}checked{% endif %}>
+                                    <input class="form-check-input" type="checkbox" name="6"
+                                            id="flexCheckDefault8" {% if 'Dermaroller' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault8">
+                                            Dermaroller
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="7"
+                                        id="flexCheckDefault9" {% if 'platelet rich plasma (PRP)' in answer_value %}checked{% endif %}>
+                                    <label class="form-check-label" for="flexCheckDefault9">
                                         platelet rich plasma (PRP)
                                     </label>
                                 </div>
@@ -204,8 +207,8 @@
                             <div class="col-sm-6">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="8"
-                                        id="flexCheckDefault9" {% if 'mesotherapy' in answer_value %}checked{% endif %}>
-                                    <label class="form-check-label" for="flexCheckDefault9">
+                                    id="flexCheckDefault10" {% if 'mesotherapy' in answer_value %}checked{% endif %}>
+                                    <label class="form-check-label" for="flexCheckDefault10">
                                         mesotherapy
                                     </label>
                                 </div>
@@ -214,28 +217,8 @@
                             <div class="col-sm-6">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="9"
-                                        id="flexCheckDefault10" {% if 'Dermaroller' in answer_value %}checked{% endif %}>
-                                    <label class="form-check-label" for="flexCheckDefault10">
-                                        Dermaroller
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="10"
-                                        id="flexCheckDefault11" {% if 'Scalp Oils' in answer_value %}checked{% endif %}>
+                                        id="flexCheckDefault11" {% if 'Other' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault11">
-                                        Scalp Oils
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="11"
-                                        id="flexCheckDefault12" {% if 'Other' in answer_value %}checked{% endif %}>
-                                    <label class="form-check-label" for="flexCheckDefault12">
                                         Other
                                     </label>
                                 </div>
@@ -243,20 +226,21 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input none" type="checkbox" name="12"
-                                        id="flexCheckDefault13" {% if 'None' in answer_value %}checked{% endif %}>
-                                    <label class="form-check-label" for="flexCheckDefault13">
+                                    <input class="form-check-input none" type="checkbox" name="10"
+                                        id="flexCheckDefault12" {% if 'None' in answer_value %}checked{% endif %}>
+                                    <label class="form-check-label" for="flexCheckDefault12">
                                         None
                                     </label>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
                 {% elif question_no == '3' %}
                 <input type="hidden" name="question-no" value="{{question_no}}">
                 <input type="hidden" name="answer-tag-used" value="checkbox">
-                <input type="hidden" name="checkbox-values" value="['social media','friends & family','Google','hairdresser','GP','Trichologist','Dermatologist','None','Other']">
+                <input type="hidden" name="checkbox-values" value="['social media','friends & family','hairdresser','GP','Trichologist','Dermatologist','Other','None']">
                 <!-- Three -->
                 <div class="tab" style="display: block;">
                     <div class="box">
@@ -289,16 +273,6 @@
                             <div class="col-sm-6">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="2"
-                                        id="flexCheckDefault15" {% if 'Google' in answer_value %}checked{% endif %}>
-                                    <label class="form-check-label" for="flexCheckDefault15">
-                                        Google
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="3"
                                         id="flexCheckDefault16" {% if 'hairdresser' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault16">
                                         hairdresser
@@ -308,7 +282,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="4"
+                                    <input class="form-check-input" type="checkbox" name="3"
                                         id="flexCheckDefault17" {% if 'GP' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault17">
                                         GP
@@ -318,7 +292,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="5"
+                                    <input class="form-check-input" type="checkbox" name="4"
                                         id="flexCheckDefault18" {% if 'Trichologist' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault18">
                                         Trichologist
@@ -328,7 +302,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="6"
+                                    <input class="form-check-input" type="checkbox" name="5"
                                         id="flexCheckDefault19"{% if 'Dermatologist' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault19">
                                         Dermatologist
@@ -338,26 +312,25 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input none" type="checkbox" name="7"
-                                        id="flexCheckDefault20" {% if 'None' in answer_value %}checked{% endif %}>
+                                    <input class="form-check-input" type="checkbox" name="6"
+                                        id="flexCheckDefault20" {% if 'Other' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault20">
-                                        None
+                                        Other
                                     </label>
                                 </div>
                             </div>
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="8"
-                                        id="flexCheckDefault21" {% if 'Other' in answer_value %}checked{% endif %}>
+                                    <input class="form-check-input none" type="checkbox" name="7"
+                                        id="flexCheckDefault21" {% if 'None' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault21">
-                                        Other
+                                        None
                                     </label>
                                 </div>
                             </div>
 
                         </div>
-
                     </div>
                 </div>
                 {% elif question_no == '4' %}

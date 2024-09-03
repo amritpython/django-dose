@@ -66,7 +66,7 @@
                                     <input class="form-check-input" type="radio" name="answer-value" value="Between 30-40"
                                         id="flexRadioDefault2" {% if 'Between 30-40' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexRadioDefault2">
-                                        Between 30-40
+                                        Between 31-40
                                     </label>
                                 </div>
                             </div>
@@ -75,7 +75,7 @@
                                     <input class="form-check-input" type="radio" name="answer-value" value="Between 40-50"
                                         id="flexRadioDefault3" {% if 'Between 40-50' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexRadioDefault3">
-                                        Between 40-50
+                                        Between 41-50
                                     </label>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                                     <input class="form-check-input" type="radio" name="answer-value" value="Between 50-60"
                                         id="flexRadioDefault4" {% if 'Between 50-60' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexRadioDefault4">
-                                        Between 50-60
+                                        Between 51-60
                                     </label>
                                 </div>
                             </div>
@@ -243,7 +243,7 @@
                 {% elif question_no == '3' %}
                 <input type="hidden" name="question-no" value="{{question_no}}">
                 <input type="hidden" name="answer-tag-used" value="checkbox">
-                <input type="hidden" name="checkbox-values" value="['social media','friends & family','Google','hairdresser','GP','Trichologist','Dermatologist','None','Other']">
+                <input type="hidden" name="checkbox-values" value="['social media','friends & family','hairdresser','GP','Trichologist','Dermatologist','None','Other']">
                 <!-- Three -->
                 <div class="tab" style="display: block;">
                     <div class="box">
@@ -276,16 +276,6 @@
                             <div class="col-sm-6">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="2"
-                                        id="flexCheckDefault15" {% if 'Google' in answer_value %}checked{% endif %}>
-                                    <label class="form-check-label" for="flexCheckDefault15">
-                                        Google
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="3"
                                         id="flexCheckDefault16" {% if 'hairdresser' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault16">
                                         hairdresser
@@ -295,7 +285,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="4"
+                                    <input class="form-check-input" type="checkbox" name="3"
                                         id="flexCheckDefault17" {% if 'GP' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault17">
                                         GP
@@ -305,7 +295,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="5"
+                                    <input class="form-check-input" type="checkbox" name="4"
                                         id="flexCheckDefault18" {% if 'Trichologist' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault18">
                                         Trichologist
@@ -315,7 +305,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="6"
+                                    <input class="form-check-input" type="checkbox" name="5"
                                         id="flexCheckDefault19"{% if 'Dermatologist' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault19">
                                         Dermatologist
@@ -325,7 +315,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input none" type="checkbox" name="7"
+                                    <input class="form-check-input none" type="checkbox" name="6"
                                         id="flexCheckDefault20" {% if 'None' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault20">
                                         None
@@ -335,7 +325,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="8"
+                                    <input class="form-check-input" type="checkbox" name="7"
                                         id="flexCheckDefault21" {% if 'Other' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault21">
                                         Other
@@ -397,7 +387,7 @@
                 {% elif question_no == '5' %}
                 <input type="hidden" name="question-no" value="{{question_no}}">
                 <input type="hidden" name="answer-tag-used" value="checkbox">
-                <input type="hidden" name="checkbox-values" value="['Relaxers','Braids','Cornrows','Weavers','Tightponytails','Heat Straighteners','None','Other']">
+                <input type="hidden" name="checkbox-values" value="['Relaxers','Braids','Cornrows','Weavers','Tightponytails','Heat Straighteners']">
                 <!-- Five -->
                 <div class="tab" style="display: block;">
                     <div class="box">
@@ -458,25 +448,6 @@
                                     </label>
                                 </div>
                             </div>
-
-                            <div class="col-sm-6">
-                                <div class="form-check">
-                                    <input class="form-check-input none" type="checkbox" name="6" id="flexCheckDefault27" {% if 'None' in answer_value %}checked{% endif %}>
-                                    <label class="form-check-label" for="flexCheckDefault27">
-                                        None
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="7" id="flexCheckDefault28" {% if 'Other' in answer_value %}checked{% endif %}>
-                                    <label class="form-check-label" for="flexCheckDefault28">
-                                        Other
-                                    </label>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                 </div>
@@ -567,7 +538,7 @@
                         <h4>Are you allergic to Minoxidil?
                         </h4>
                         <div class="form-check">
-                            <input class="form-check-input modal-input" type="radio" name="answer-value" value="Yes" id="flexRadioDefault1" data-bs-target="#exampleModal" {% if 'Yes' in answer_value %}checked{% endif %}>
+                            <input class="form-check-input modal-input" type="radio" name="answer-value" value="Yes" id="flexRadioDefault1" data-bs-target="#exampleModal7" {% if 'Yes' in answer_value %}checked{% endif %}>
                             <label class="form-check-label" for="flexRadioDefault1">
                                 Yes
                             </label>
@@ -596,21 +567,21 @@
 
                         <div class="form-check">
                             <input class="form-check-input modal-input" type="checkbox" name="0"
-                                id="flexCheckDefault25" data-bs-target="#exampleModal2" {% if 'Redness' in answer_value %}checked{% endif %}>
+                                id="flexCheckDefault25" data-bs-target="#exampleModal8" {% if 'Redness' in answer_value %}checked{% endif %}>
                             <label class="form-check-label" for="flexCheckDefault25">
                                 Redness
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input modal-input" type="checkbox" name="1"
-                                id="flexCheckDefault26" data-bs-target="#exampleModal2" {% if 'Inflammation' in answer_value %}checked{% endif %}>
+                                id="flexCheckDefault26" data-bs-target="#exampleModal8" {% if 'Inflammation' in answer_value %}checked{% endif %}>
                             <label class="form-check-label" for="flexCheckDefault26">
                                 Inflammation
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input modal-input" type="checkbox" name="2"
-                                id="flexCheckDefault27" data-bs-target="#exampleModal2" {% if 'Open cuts/wounds on the scalp' in answer_value %}checked{% endif %}>
+                                id="flexCheckDefault27" data-bs-target="#exampleModal8" {% if 'Open cuts/wounds on the scalp' in answer_value %}checked{% endif %}>
                             <label class="form-check-label" for="flexCheckDefault27">
                                 Open cuts/wounds on the scalp
                             </label>
@@ -883,7 +854,7 @@
                     <div class="row gx-0">
                         <div class="col-md-4">
                             <div class="img">
-                                <img src="/static/images/minoxidil-img-14.png" alt="Minoxidil" title="Minoxidil" height="382"
+                                <img src="/static/images/traction6.png" alt="Minoxidil" title="Minoxidil" height="382"
                                     width="279">
                             </div>
                         </div>
@@ -892,11 +863,39 @@
                             <div class="d-flex align-items-center h-100">
                                 <div class="set">
 
-                                    <p>As DOSE for traction related hair loss contains Minoxidil, unfortunately you will
-                                        not be suitable to use this medication. You may wish to discuss alternatives
-                                        with our recommended  <a href="/dose_directory" style="color: currentColor;">DOSE DIRECTORY</a> dermatologists or consider our
-                                        recommended
-                                        non-pharmaceutical brands.
+                                    <p>Please note that ongoing tight or traumatic hairstyling will reduce the effectiveness of any treatment and ideally hair should be worn loose and natural as much as is practically possible
+                                    </p>
+                                    <a onclick="document.getElementById('regForm').submit();" title="Next" class="btn">Next</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!--Seven Tab Step Form Modal -->
+
+        <div class="modal fade minoxidil_popup" id="exampleModal7" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body">
+                    <div class="row gx-0">
+                        <div class="col-md-4">
+                            <div class="img">
+                                <img src="/static/images/minoxidil-img-15.png" alt="Minoxidil" title="Minoxidil" height="382"
+                                    width="279">
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="d-flex align-items-center h-100">
+                                <div class="set">
+                                    <p>As DOSE for traction related hair loss contains Minoxidil, unfortunately you will not be suitable to use this medication. You may wish to discuss alternatives with our recommended <a href="/dose_directory" style="color:black;">DOSE DIRECTORY</a>  dermatologists or consider our recommended non-pharmaceutical brands.
                                     </p>
                                     <a href="/dose_directory?ref={{form.id}}" title="Next" class="btn">Next</a>
                                 </div>
@@ -909,9 +908,9 @@
         </div>
     </div>
 
-    <!--Seven Tab Step Form Modal -->
+    <!--Eight Tab Step Form Modal -->
 
-    <div class="modal fade minoxidil_popup" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+    <div class="modal fade minoxidil_popup" id="exampleModal8" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">

@@ -1,0 +1,148 @@
+{
+  "id": "PL1000472480",
+  "text": {
+    "status": "generated",
+    "div": "Antinuclear Antibodies tests with venous sample for amrit singh"
+  },
+  "extension": [
+    {
+      "url": "https://fhir.medichecks.com/StructureDefinition/order-created-at",
+      "valueDateTime": "2024-08-27T08:34:47Z"
+    },
+    {
+      "url": "https://fhir.medichecks.com/StructureDefinition/order-updated-at",
+      "valueDateTime": "2024-08-27T08:34:47Z"
+    },
+    {
+      "url": "https://fhir.medichecks.com/StructureDefinition/order-total",
+      "valueMoney": {
+        "value": 148.6,
+        "currency": "GBP"
+      }
+    },
+    {
+      "url": "https://fhir.medichecks.com/StructureDefinition/order-status",
+      "valueCoding": {
+        "code": "P",
+        "display": "Payment authorised"
+      }
+    },
+    {
+      "url": "https://fhir.medichecks.com/StructureDefinition/order-payment",
+      "valueCoding": {
+        "code": "I",
+        "display": "On account"
+      }
+    }
+  ],
+  "identifier": [
+    {
+      "system": "https://fhir.medichecks.com/service-request-identifier",
+      "value": "PL1000472480"
+    }
+  ],
+  "status": "active",
+  "intent": "order",
+  "code": {
+    "coding": [
+      {
+        "extension": [
+          {
+            "extension": [
+              {
+                "url": "price",
+                "valueMoney": {
+                  "value": 89.6,
+                  "currency": "GBP"
+                }
+              },
+              {
+                "url": "code",
+                "valueString": "ANAB"
+              }
+            ],
+            "url": "https://fhir.medichecks.com/StructureDefinition/order-item"
+          }
+        ],
+        "system": "https://fhir.medichecks.com/product-identifier",
+        "code": "63",
+        "display": "Antinuclear Antibodies"
+      }
+    ]
+  },
+  "orderDetail": [
+    {
+      "coding": [
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "price",
+                  "valueMoney": {
+                    "value": 59,
+                    "currency": "GBP"
+                  }
+                },
+                {
+                  "url": "method",
+                  "valueString": "venous"
+                }
+              ],
+              "url": "https://fhir.medichecks.com/StructureDefinition/order-phlebotomy-option"
+            }
+          ],
+          "system": "https://fhir.medichecks.com/phlebotomy-option-identifier",
+          "code": "nurse-home-visit",
+          "display": "Nurse home visit"
+        }
+      ]
+    },
+    {
+      "coding": [
+        {
+          "extension": [
+            {
+              "extension": [
+                {
+                  "url": "price",
+                  "valueMoney": {
+                    "value": 0,
+                    "currency": "GBP"
+                  }
+                }
+              ],
+              "url": "https://fhir.medichecks.com/StructureDefinition/order-delivery-option"
+            }
+          ],
+          "system": "https://fhir.medichecks.com/delivery-option-identifier",
+          "code": "standard",
+          "display": "Standard delivery"
+        }
+      ]
+    }
+  ],
+  "subject": {
+    "id": "2024353074",
+    "extension": [
+      {
+        "url": "https://fhir.medichecks.com/StructureDefinition/order-subject-name",
+        "valueHumanName": {
+          "text": "amrit singh",
+          "family": "singh",
+          "given": [
+            "amrit"
+          ]
+        }
+      }
+    ],
+    "reference": "Patient/2024353074",
+    "type": "Patient",
+    "identifier": {
+      "system": "https://fhir.medichecks.com/subject-identifier",
+      "value": "2024353074"
+    }
+  },
+  "authoredOn": "2024-08-27T08:34:47+01:00",
+  "resourceType": "ServiceRequest"
+}

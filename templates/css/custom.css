@@ -257,13 +257,13 @@ section#type-loss .each-condition {
   border-radius: 20px;
   border: 1px solid #fff;
   margin-bottom: 4px;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.1s ease-in;
   height: 100%;
   cursor: pointer;
 }
 
 section#type-loss .each-condition:hover {
-  border: 1px solid #000;
+  border: 1px solid;
 }
 
 section#type-loss {
@@ -522,7 +522,7 @@ section#hair_step_form .box .tick_all p {
 }
 
 section#hair_step_form .box .form-check-input:checked[type="checkbox"] {
-  background-image: url(../images/checked.png);
+  background-image: url(/static/images/checked.png);
   background-color: #ffffff;
   background-size: 13px;
   background-repeat: no-repeat;
@@ -817,7 +817,7 @@ section#thanku_sec .hair_box.male_hair {
 }
 
 .type_hair_popup .form-check-input:checked[type="checkbox"] {
-  background-image: url(../images/checked-white.png);
+  background-image: url(/static/images/checked-white.png);
   background-color: #000;
   background-size: 11px;
   background-repeat: no-repeat;

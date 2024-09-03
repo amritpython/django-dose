@@ -36,6 +36,51 @@ class ShopifyUser(AbstractUser):
     address_provice_code = models.CharField(max_length=255,blank=True,null=True)
     address_country_code = models.CharField(max_length=255,blank=True,null=True)
     address_country_name = models.CharField(max_length=255,blank=True,null=True)
+    medicheck_patient_id = models.CharField(max_length=255,blank=True,null=True)
+    roseway_patient_id = models.CharField(max_length=255,blank=True,null=True)
+    choice_open = models.BooleanField(default=False)
+    last_access_session = models.CharField(max_length=255,blank=True,null=True)
+    
+    
+    def is_form_filled(self,form_type):
+        print('form type : ',form_type)
+        if form_type == 'male_pattern_hair_loss':return self.is_filled_male_form
+        if form_type in ['female_pattern_hair_loss','female_post_meno','female_pre_meno']:return self.is_filled_female_form
+        if form_type == 'beard':return self.is_filled_beard_form
+        if form_type == 'lashes':return self.is_filled_lashes_form
+        if form_type == 'brows':return self.is_filled_brows_form
+        if form_type == 'post_chemotheraphy_hair_loss':return self.is_filled_chemo_form
+        if form_type == 'traction_related_hair_loss':return self.is_filled_traction_form
+        if form_type == 'hair_shedding':return self.is_filled_shedding_form
+        return False
+        
+    
+    @property
+    def is_filled_male_form(self):
+        return True if Form.objects.filter(user=self,form_type='male_pattern_hair_loss').exists() else False
+    @property
+    def is_filled_female_form(self):
+        print(Form.objects.filter(user=self,form_type='female_pattern_hair_loss').exists())
+        return True if Form.objects.filter(user=self,form_type='female_pattern_hair_loss').exists() else False
+    @property
+    def is_filled_beard_form(self):
+        return True if Form.objects.filter(user=self,form_type='beard').exists() else False
+    @property
+    def is_filled_lashes_form(self):
+        return True if Form.objects.filter(user=self,form_type='lashes').exists() else False
+    @property
+    def is_filled_brows_form(self):
+        return True if Form.objects.filter(user=self,form_type='brows').exists() else False
+    @property
+    def is_filled_chemo_form(self):
+        return True if Form.objects.filter(user=self,form_type='post_chemotheraphy_hair_loss').exists() else False
+    @property
+    def is_filled_traction_form(self):
+        return True if Form.objects.filter(user=self,form_type='traction_related_hair_loss').exists() else False
+    @property
+    def is_filled_shedding_form(self):
+        return True if Form.objects.filter(user=self,form_type='hair_shedding').exists() else False
+    
     
     
     @property
@@ -165,12 +210,25 @@ class Question(models.Model):
 
 class Extra(models.Model):
     field_name = models.CharField(max_length=255,blank=True,null=True)
-    field_value = models.TextField(max_length=255,blank=True,null=True)
+    field_value = models.TextField(blank=True,null=True)
+    
+    
+class ApiLog(models.Model):
+    customer_id = models.CharField(max_length=255,blank=True,null=True)
+    order_id = models.CharField(max_length=255,blank=True)
+    server = models.CharField(max_length=255,blank=True,null=True)
+    date_time = models.DateTimeField(auto_now_add=True)
+    error = models.TextField(blank=True,null=True)
 
     
     
     
 
+# class OrderRelForm(models.Model):
+#     user = models.ForeignKey(ShopifyUser,on_delete=models.CASCADE)
+#     order_id = models.CharField(max_length=255,blank=True,null=True)
+#     form_type = models.CharField(max_length=255,blank=True,null=True)
+    
 
 
 

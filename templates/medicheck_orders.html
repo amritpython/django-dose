@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicheck Orders</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <!-- <div class="py-4">Token : {{orders.0.token}}</div>
+
+    <section class="py-2">
+        <div class="py-3"> <strong>--</strong> To verify order entry at medicheck, take above token and order_id and locate <a class="underline text-blue-500" href="https://medichecks.readme.io/reference/getservicerequest">here</a></div>
+        <div class="py-3"><strong>--</strong> if token got expired, refresh this page</div>
+    </section>
+    <div></div> -->
+
+    <table class="w-[100vw]">
+        <tr class="w-[100vw]">
+            <th>Order Id</th>
+            <th>Patient Name</th>
+            <th>Payment Status</th>
+            <th>Payment Code</th>
+            <th>Created at</th>
+            <th>Status</th>
+        </tr>
+        {% for order in orders %}
+        <tr class="w-[100vw]">
+            <td class="text-center">{{order.order_id}}</td>
+            <td class="text-center">{{order.patient_name}}</td>
+            <td class="text-center">{{order.payment_status}}</td>
+            <td class="text-center">{{order.payment_code}}</td>
+            <td class="text-center">{{order.created_at}}</td>
+            <td class="text-center">{{order.status}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+</body>
+</html>

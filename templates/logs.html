@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Api Logs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Order ID</th>
+        <th>Customer ID</th>
+        <th>Server</th>
+        <th>Datetime</th>
+        <th>Error</th>
+    <tr>
+    {% for log in logs %}
+    <tr>
+        <td>{{log.id}}</td>
+        <td>{{log.order_id}}</td>
+        <td>{{log.customer_id}}</td>
+        <td>{{log.server}}</td>
+        <td>{{log.datetime}}</td>
+        <td>{{log.error}}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+    
+</body>
+</html>

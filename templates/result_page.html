@@ -29,134 +29,70 @@
             <div class="row">
                 <div class="col-lg-8">
                     {% for product in products %}
-                    <div class="set">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <div class="img">
-                                    <img src="{{product.image.src}}" alt="Pre-Meno" title="Pre-Meno" height="287"
-                                        width="294">
-                                </div>
-                            </div>
-
-                            <div class="col-md-7">
-                                <div class="title">
-                                    <span class="tag">RECOMMENDED FOR YOU</span>
-                                    <h3>{{product.title}}</h3>
-                                    <div class="star"><span>
-                                            <svg width="15" height="14" viewBox="0 0 15 14" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M7.77919 0.23022L9.36978 5.02848H14.5558C14.8872 5.02848 15.0363 5.44853 14.7546 5.6424L10.5627 8.61506L12.1699 13.4133C12.2693 13.7203 11.9048 13.9788 11.6397 13.7849L7.44781 10.8284L3.25594 13.8011C2.99084 13.9949 2.60976 13.7364 2.72574 13.4295L4.3329 8.63121L0.141025 5.65855C-0.124074 5.46468 0.00847588 5.04463 0.339849 5.04463H5.52585L7.11644 0.23022C7.21585 -0.0767398 7.67977 -0.0767398 7.77919 0.23022Z"
-                                                    fill="black" />
-                                            </svg>
-                                            <svg width="15" height="14" viewBox="0 0 15 14" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M7.77919 0.23022L9.36978 5.02848H14.5558C14.8872 5.02848 15.0363 5.44853 14.7546 5.6424L10.5627 8.61506L12.1699 13.4133C12.2693 13.7203 11.9048 13.9788 11.6397 13.7849L7.44781 10.8284L3.25594 13.8011C2.99084 13.9949 2.60976 13.7364 2.72574 13.4295L4.3329 8.63121L0.141025 5.65855C-0.124074 5.46468 0.00847588 5.04463 0.339849 5.04463H5.52585L7.11644 0.23022C7.21585 -0.0767398 7.67977 -0.0767398 7.77919 0.23022Z"
-                                                    fill="black" />
-                                            </svg>
-                                            <svg width="15" height="14" viewBox="0 0 15 14" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M7.77919 0.23022L9.36978 5.02848H14.5558C14.8872 5.02848 15.0363 5.44853 14.7546 5.6424L10.5627 8.61506L12.1699 13.4133C12.2693 13.7203 11.9048 13.9788 11.6397 13.7849L7.44781 10.8284L3.25594 13.8011C2.99084 13.9949 2.60976 13.7364 2.72574 13.4295L4.3329 8.63121L0.141025 5.65855C-0.124074 5.46468 0.00847588 5.04463 0.339849 5.04463H5.52585L7.11644 0.23022C7.21585 -0.0767398 7.67977 -0.0767398 7.77919 0.23022Z"
-                                                    fill="black" />
-                                            </svg>
-                                            <svg width="15" height="14" viewBox="0 0 15 14" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M7.77919 0.23022L9.36978 5.02848H14.5558C14.8872 5.02848 15.0363 5.44853 14.7546 5.6424L10.5627 8.61506L12.1699 13.4133C12.2693 13.7203 11.9048 13.9788 11.6397 13.7849L7.44781 10.8284L3.25594 13.8011C2.99084 13.9949 2.60976 13.7364 2.72574 13.4295L4.3329 8.63121L0.141025 5.65855C-0.124074 5.46468 0.00847588 5.04463 0.339849 5.04463H5.52585L7.11644 0.23022C7.21585 -0.0767398 7.67977 -0.0767398 7.77919 0.23022Z"
-                                                    fill="black" />
-                                            </svg>
-                                            <svg width="15" height="14" viewBox="0 0 15 14" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M7.77919 0.23022L9.36978 5.02848H14.5558C14.8872 5.02848 15.0363 5.44853 14.7546 5.6424L10.5627 8.61506L12.1699 13.4133C12.2693 13.7203 11.9048 13.9788 11.6397 13.7849L7.44781 10.8284L3.25594 13.8011C2.99084 13.9949 2.60976 13.7364 2.72574 13.4295L4.3329 8.63121L0.141025 5.65855C-0.124074 5.46468 0.00847588 5.04463 0.339849 5.04463H5.52585L7.11644 0.23022C7.21585 -0.0767398 7.67977 -0.0767398 7.77919 0.23022Z"
-                                                    fill="black" />
-                                            </svg>
-                                        </span>
-                                        (175)
+                            <div class="set">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="img">
+                                            <img src="{{product.image.src}}" alt="Pre-Meno" title="Pre-Meno" height="287"
+                                                width="294">
+                                        </div>
                                     </div>
-                                    <p>{{product.description}}</p>
-                                    <h4>Starting at ${{product.variants.0.price}}.00</h4>
-                                    <a title="Add" class="btn" onclick="add_to_cart('{{product.variants.0.id}}','{{product.id}}');">Add to Cart</a>
+                                    <div class="col-md-7">
+                                        <div class="title">
+                                            <span class="tag">RECOMMENDED FOR YOU</span>
+                                            <h3 id="title-{{product.id}}">{{product.title}}</h3>
+                                            <div class="star"><span>
+                                                    <svg width="15" height="14" viewBox="0 0 15 14" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M7.77919 0.23022L9.36978 5.02848H14.5558C14.8872 5.02848 15.0363 5.44853 14.7546 5.6424L10.5627 8.61506L12.1699 13.4133C12.2693 13.7203 11.9048 13.9788 11.6397 13.7849L7.44781 10.8284L3.25594 13.8011C2.99084 13.9949 2.60976 13.7364 2.72574 13.4295L4.3329 8.63121L0.141025 5.65855C-0.124074 5.46468 0.00847588 5.04463 0.339849 5.04463H5.52585L7.11644 0.23022C7.21585 -0.0767398 7.67977 -0.0767398 7.77919 0.23022Z"
+                                                            fill="black" />
+                                                    </svg>
+                                                    <svg width="15" height="14" viewBox="0 0 15 14" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M7.77919 0.23022L9.36978 5.02848H14.5558C14.8872 5.02848 15.0363 5.44853 14.7546 5.6424L10.5627 8.61506L12.1699 13.4133C12.2693 13.7203 11.9048 13.9788 11.6397 13.7849L7.44781 10.8284L3.25594 13.8011C2.99084 13.9949 2.60976 13.7364 2.72574 13.4295L4.3329 8.63121L0.141025 5.65855C-0.124074 5.46468 0.00847588 5.04463 0.339849 5.04463H5.52585L7.11644 0.23022C7.21585 -0.0767398 7.67977 -0.0767398 7.77919 0.23022Z"
+                                                            fill="black" />
+                                                    </svg>
+                                                    <svg width="15" height="14" viewBox="0 0 15 14" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M7.77919 0.23022L9.36978 5.02848H14.5558C14.8872 5.02848 15.0363 5.44853 14.7546 5.6424L10.5627 8.61506L12.1699 13.4133C12.2693 13.7203 11.9048 13.9788 11.6397 13.7849L7.44781 10.8284L3.25594 13.8011C2.99084 13.9949 2.60976 13.7364 2.72574 13.4295L4.3329 8.63121L0.141025 5.65855C-0.124074 5.46468 0.00847588 5.04463 0.339849 5.04463H5.52585L7.11644 0.23022C7.21585 -0.0767398 7.67977 -0.0767398 7.77919 0.23022Z"
+                                                            fill="black" />
+                                                    </svg>
+                                                    <svg width="15" height="14" viewBox="0 0 15 14" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M7.77919 0.23022L9.36978 5.02848H14.5558C14.8872 5.02848 15.0363 5.44853 14.7546 5.6424L10.5627 8.61506L12.1699 13.4133C12.2693 13.7203 11.9048 13.9788 11.6397 13.7849L7.44781 10.8284L3.25594 13.8011C2.99084 13.9949 2.60976 13.7364 2.72574 13.4295L4.3329 8.63121L0.141025 5.65855C-0.124074 5.46468 0.00847588 5.04463 0.339849 5.04463H5.52585L7.11644 0.23022C7.21585 -0.0767398 7.67977 -0.0767398 7.77919 0.23022Z"
+                                                            fill="black" />
+                                                    </svg>
+                                                    <svg width="15" height="14" viewBox="0 0 15 14" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M7.77919 0.23022L9.36978 5.02848H14.5558C14.8872 5.02848 15.0363 5.44853 14.7546 5.6424L10.5627 8.61506L12.1699 13.4133C12.2693 13.7203 11.9048 13.9788 11.6397 13.7849L7.44781 10.8284L3.25594 13.8011C2.99084 13.9949 2.60976 13.7364 2.72574 13.4295L4.3329 8.63121L0.141025 5.65855C-0.124074 5.46468 0.00847588 5.04463 0.339849 5.04463H5.52585L7.11644 0.23022C7.21585 -0.0767398 7.67977 -0.0767398 7.77919 0.23022Z"
+                                                            fill="black" />
+                                                    </svg>
+                                                </span>
+                                                (175)
+                                            </div>
+                                            <p>{{product.description}}</p>
+                                            <h4>Starting at $<span id="price-span-{{product.id}}">{{product.variants.0.price}}</span>.00</h4>
+                                            <a title="Add" class="btn" onclick="add_to_cart('{{product.variants.0.id}}','{{product.id}}','{{product.handle}}');">Add to Cart</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-                            <form action="{{request.user.shop}}/cart/add" method="post" id="product-form-{{product.id}}" style="display: none;">
-                                <input type="hidden" name="id[]" id="product-variant-{{product.id}}">
-                                {% for item in request.user.cart.items %}
-                                {% for i in item.quantity_range %}
-                                <input type="hidden" name="id[]" value="{{item.variant_id}}">
-                                {% endfor %}
-                                {% endfor %}
-                                <div>
-                                <button type="submit" name="add">Add to cart</button>
-                                </div>
-                            </form>
-
-
-                        </div>
-                    </div>
                     {% endfor %}
-
-                    <!-- <div class="set">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <div class="img">
-                                    <img src="/static/images/reco-2.png" alt="Pre-Meno" title="Pre-Meno" height="287"
-                                        width="294">
-                                </div>
-                            </div>
-
-                            <div class="col-md-7">
-                                <div class="title">
-                                    <span class="tag">RECOMMENDED FOR YOU</span>
-                                    <h3>Blood Test Kit</h3>
-                                    <div class="star"><span>
-                                            <svg width="15" height="14" viewBox="0 0 15 14" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M7.77919 0.23022L9.36978 5.02848H14.5558C14.8872 5.02848 15.0363 5.44853 14.7546 5.6424L10.5627 8.61506L12.1699 13.4133C12.2693 13.7203 11.9048 13.9788 11.6397 13.7849L7.44781 10.8284L3.25594 13.8011C2.99084 13.9949 2.60976 13.7364 2.72574 13.4295L4.3329 8.63121L0.141025 5.65855C-0.124074 5.46468 0.00847588 5.04463 0.339849 5.04463H5.52585L7.11644 0.23022C7.21585 -0.0767398 7.67977 -0.0767398 7.77919 0.23022Z"
-                                                    fill="black" />
-                                            </svg>
-                                            <svg width="15" height="14" viewBox="0 0 15 14" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M7.77919 0.23022L9.36978 5.02848H14.5558C14.8872 5.02848 15.0363 5.44853 14.7546 5.6424L10.5627 8.61506L12.1699 13.4133C12.2693 13.7203 11.9048 13.9788 11.6397 13.7849L7.44781 10.8284L3.25594 13.8011C2.99084 13.9949 2.60976 13.7364 2.72574 13.4295L4.3329 8.63121L0.141025 5.65855C-0.124074 5.46468 0.00847588 5.04463 0.339849 5.04463H5.52585L7.11644 0.23022C7.21585 -0.0767398 7.67977 -0.0767398 7.77919 0.23022Z"
-                                                    fill="black" />
-                                            </svg>
-                                            <svg width="15" height="14" viewBox="0 0 15 14" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M7.77919 0.23022L9.36978 5.02848H14.5558C14.8872 5.02848 15.0363 5.44853 14.7546 5.6424L10.5627 8.61506L12.1699 13.4133C12.2693 13.7203 11.9048 13.9788 11.6397 13.7849L7.44781 10.8284L3.25594 13.8011C2.99084 13.9949 2.60976 13.7364 2.72574 13.4295L4.3329 8.63121L0.141025 5.65855C-0.124074 5.46468 0.00847588 5.04463 0.339849 5.04463H5.52585L7.11644 0.23022C7.21585 -0.0767398 7.67977 -0.0767398 7.77919 0.23022Z"
-                                                    fill="black" />
-                                            </svg>
-                                            <svg width="15" height="14" viewBox="0 0 15 14" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M7.77919 0.23022L9.36978 5.02848H14.5558C14.8872 5.02848 15.0363 5.44853 14.7546 5.6424L10.5627 8.61506L12.1699 13.4133C12.2693 13.7203 11.9048 13.9788 11.6397 13.7849L7.44781 10.8284L3.25594 13.8011C2.99084 13.9949 2.60976 13.7364 2.72574 13.4295L4.3329 8.63121L0.141025 5.65855C-0.124074 5.46468 0.00847588 5.04463 0.339849 5.04463H5.52585L7.11644 0.23022C7.21585 -0.0767398 7.67977 -0.0767398 7.77919 0.23022Z"
-                                                    fill="black" />
-                                            </svg>
-                                            <svg width="15" height="14" viewBox="0 0 15 14" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M7.77919 0.23022L9.36978 5.02848H14.5558C14.8872 5.02848 15.0363 5.44853 14.7546 5.6424L10.5627 8.61506L12.1699 13.4133C12.2693 13.7203 11.9048 13.9788 11.6397 13.7849L7.44781 10.8284L3.25594 13.8011C2.99084 13.9949 2.60976 13.7364 2.72574 13.4295L4.3329 8.63121L0.141025 5.65855C-0.124074 5.46468 0.00847588 5.04463 0.339849 5.04463H5.52585L7.11644 0.23022C7.21585 -0.0767398 7.67977 -0.0767398 7.77919 0.23022Z"
-                                                    fill="black" />
-                                            </svg>
-                                        </span>
-
-                                        (175)
-
-                                    </div>
-                                    <p>Convenient at-home blood test kit for easy health monitoring. Accurate, quick
-                                        results without leaving home.</p>
-                                    <h4>Starting at $25.60</h4>
-
-                                    <a href="#" title="Add" class="btn">add to cart</a>
-                                </div>
-                            </div>
+                    <form action="{{request.user.shop}}/cart/add" method="post" id="dynamic-form" style="display: none;">
+                        {% for item in request.user.cart.items %}
+                        {% for i in item.quantity_range %}
+                        <input type="hidden" name="id[]" value="{{item.variant_id}}">
+                        {% endfor %}
+                        {% endfor %}
+                        <div>
+                        <button type="submit" name="add">Add to cart</button>
                         </div>
-                    </div> -->
+                    </form>
                     {% if form and form.product_recommendation_message %}
                     <div class="alert_box">
                         <p id="product-recommendation-message"><i class="bi bi-info-circle-fill"></i>
@@ -197,11 +133,16 @@
 
     <script>
 
-        async function add_to_cart(variant_id,product_id){
-            response = await fetch(`/add_to_cart?variant_id=${variant_id}`);
+        async function add_to_cart(variant_id,product_id,handle){
+            window.location.href = '{{request.user.shop}}/products/' + handle;
+            return;
+            response = await fetch(`/cart?operation=add&customer_id={{request.user.customer_id}}&variant_id=${variant_id}`);
             res = await response.json();
-            document.getElementById(`product-variant-${product_id}`).setAttribute('value',variant_id);
-            document.getElementById(`product-form-${product_id}`).submit();
+            var cics = document.getElementById('cartitemcount-span');
+            cics.innerHTML = parseInt(cics.innerHTML) + 1;
+            document.getElementById('dynamic-form').insertAdjacentHTML('beforeend',`<input type="hidden" name="id[]" value="${variant_id}">`);
+            document.getElementById('dynamic-form-cart').insertAdjacentHTML('beforeend',`<input type="hidden" name="id[]" value="${variant_id}">`);
+            document.getElementById('dynamic-form').submit();
         };
 
     </script>
@@ -209,7 +150,7 @@
     <script>
         var msg = document.getElementById('product-recommendation-message').innerHTML;
         msg = msg.replace('DOSE DIRECTORY',`<a href="/dose_directory" style="color:currentColor;">DOSE DIRECTORY</a>`);
-        msg = msg.replace('Most cases of telogen effluvium (increased hair shedding) are completely reversible once the trigger factor is identified and corrected. Common contributing causes include nutritional deficiencies, thyroid disease and hormone imbalances. These can be easily checked by a convenient home blood testing kit through our partner lab THRIVA','<br><br>Most cases of telogen effluvium (increased hair shedding) are completely reversible once the trigger factor is identified and corrected. Common contributing causes include nutritional deficiencies, thyroid disease and hormone imbalances. These can be easily checked by a convenient home blood testing kit through our partner lab THRIVA')
+        msg = msg.replace('Most cases of telogen effluvium (increased hair shedding) are completely reversible once the trigger factor is identified and corrected. Common contributing causes include nutritional deficiencies, thyroid disease and hormone imbalances. These can be easily checked by a convenient home blood testing kit through our partner lab Medichecks','<br><br>Most cases of telogen effluvium (increased hair shedding) are completely reversible once the trigger factor is identified and corrected. Common contributing causes include nutritional deficiencies, thyroid disease and hormone imbalances. These can be easily checked by a convenient home blood testing kit through our partner lab Medichecks')
         document.getElementById('product-recommendation-message').innerHTML = msg;
     </script>
     {% endif %}

@@ -106,7 +106,7 @@
                 {% elif question_no == '2' %}
                 <input type="hidden" name="question-no" value="{{question_no}}">
                 <input type="hidden" name="answer-tag-used" value="checkbox">
-                <input type="hidden" name="checkbox-values" value="['Brow growth serum', 'prescription medicines','supplements','platelet rich plasma (PRP)','Low Level Laser Therapy','Minoxidil','None','Other']">
+                <input type="hidden" name="checkbox-values" value="['Brow growth serum', 'prescription medicines','supplements','platelet rich plasma (PRP)','Low Level Laser Therapy','Minoxidil','Other','None']">
                 <!-- Two -->
                 <div class="tab" style="display: block;">
                     <div class="box">
@@ -172,29 +172,29 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input none" type="checkbox" name="6" id="flexCheckDefault7" {% if 'None' in answer_value %}checked{% endif %}>
+                                    <input class="form-check-input" type="checkbox" name="6" id="flexCheckDefault7" {% if 'Other' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault7">
-                                        None
+                                        Other
                                     </label>
                                 </div>
                             </div>
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="7" id="flexCheckDefault8" {% if 'Other' in answer_value %}checked{% endif %}>
+                                    <input class="form-check-input none" type="checkbox" name="7" id="flexCheckDefault8" {% if 'None' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault8">
-                                        Other
+                                        None
                                     </label>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
                 {% elif question_no == '3' %}
                 <input type="hidden" name="question-no" value="{{question_no}}">
                 <input type="hidden" name="answer-tag-used" value="checkbox">
-                <input type="hidden" name="checkbox-values" value="['social media','friends & family','Google','hairdresser','GP','Trichologist','Dermatologist','None','Other']">
+                <input type="hidden" name="checkbox-values" value="['social media','friends & family','hairdresser','GP','Trichologist','Dermatologist','Other','None']">
                 <!-- Three -->
                 <div class="tab" style="display: block;">
                     <div class="box">
@@ -224,19 +224,10 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-6">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="2"
-                                        id="flexCheckDefault15" {% if 'Google' in answer_value %}checked{% endif %}>
-                                    <label class="form-check-label" for="flexCheckDefault15">
-                                        Google
-                                    </label>
-                                </div>
-                            </div>
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="3"
+                                    <input class="form-check-input" type="checkbox" name="2"
                                         id="flexCheckDefault16" {% if 'hairdresser' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault16">
                                         hairdresser
@@ -246,7 +237,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="4"
+                                    <input class="form-check-input" type="checkbox" name="3"
                                         id="flexCheckDefault17" {% if 'GP' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault17">
                                         GP
@@ -256,7 +247,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="5"
+                                    <input class="form-check-input" type="checkbox" name="4"
                                         id="flexCheckDefault18" {% if 'Trichologist' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault18">
                                         Trichologist
@@ -266,10 +257,20 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="6"
+                                    <input class="form-check-input" type="checkbox" name="5"
                                         id="flexCheckDefault19"{% if 'Dermatologist' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault19">
                                         Dermatologist
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="6"
+                                        id="flexCheckDefault21" {% if 'Other' in answer_value %}checked{% endif %}>
+                                    <label class="form-check-label" for="flexCheckDefault21">
+                                        Other
                                     </label>
                                 </div>
                             </div>
@@ -280,16 +281,6 @@
                                         id="flexCheckDefault20" {% if 'None' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault20">
                                         None
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="8"
-                                        id="flexCheckDefault21" {% if 'Other' in answer_value %}checked{% endif %}>
-                                    <label class="form-check-label" for="flexCheckDefault21">
-                                        Other
                                     </label>
                                 </div>
                             </div>
@@ -341,7 +332,7 @@
                         <h4>Are you allergic to Minoxidil ?
                         </h4>
                         <div class="form-check">
-                            <input class="form-check-input modal-input" type="radio" name="answer-value" value="Yes" id="flexRadioDefault1" data-bs-target="#exampleModal" {% if 'Yes' in answer_value %}checked{% endif %} >
+                            <input class="form-check-input modal-input" type="radio" name="answer-value" value="Yes" id="flexRadioDefault1" data-bs-target="#exampleModal2" {% if 'Yes' in answer_value %}checked{% endif %} >
                             <label class="form-check-label" for="flexRadioDefault1">
                                 Yes
                             </label>
@@ -370,21 +361,21 @@
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input modal-input" type="checkbox" name="0" id="flexCheckDefault25" data-bs-target="#exampleModal2" {% if 'Redness' in answer_value %}checked{% endif %}>
+                            <input class="form-check-input modal-input" type="checkbox" name="0" id="flexCheckDefault25" data-bs-target="#exampleModal" {% if 'Redness' in answer_value %}checked{% endif %}>
                             <label class="form-check-label" for="flexCheckDefault25">
                                 Redness
                             </label>
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input modal-input" type="checkbox" name="1" data-bs-target="#exampleModal2" id="flexCheckDefault26" {% if 'Inflammation' in answer_value %}checked{% endif %}>
+                            <input class="form-check-input modal-input" type="checkbox" name="1" data-bs-target="#exampleModal" id="flexCheckDefault26" {% if 'Inflammation' in answer_value %}checked{% endif %}>
                             <label class="form-check-label" for="flexCheckDefault26">
                                 Inflammation
                             </label>
                         </div>
 
                         <div class="form-check">
-                            <input class="form-check-input modal-input" type="checkbox" name="2" id="flexCheckDefault27" data-bs-target="#exampleModal2" {% if 'Open Cuts/Wounds' in answer_value %}checked{% endif %}>
+                            <input class="form-check-input modal-input" type="checkbox" name="2" id="flexCheckDefault27" data-bs-target="#exampleModal" {% if 'Open Cuts/Wounds' in answer_value %}checked{% endif %}>
                             <label class="form-check-label" for="flexCheckDefault27">
                                 Open Cuts/Wounds
                             </label>

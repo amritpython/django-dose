@@ -27,12 +27,16 @@
                 <div class="login_sec">
                     <ul class="login">
                         <li><a href="/my_account" title="My Account">My Account</a></li>
-                        <li><a href="{{request.user.shop}}/cart" title="Cart"><svg width="22" height="24" viewBox="0 0 22 24" fill="none"
+
+                        <!-- onclick="document.getElementById('dynamic-form-cart').submit();" -->
+                        <li><a style="cursor: pointer;" href="{{request.user.shop}}/cart"
+                            title="Cart"><svg width="22" height="24" viewBox="0 0 22 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M21.7653 19.168L19.9875 8.03609C19.8299 7.06009 18.9936 6.34807 17.9915 6.34807H16.1612V5.18808C16.1612 3.80007 15.6158 2.49598 14.6218 1.51601C13.6319 0.540008 12.3147 0 10.9088 0C8.01183 0 5.65635 2.32802 5.65635 5.19195V6.35194H3.82605C2.82402 6.35194 1.98765 7.05993 1.83006 8.03995L0.0522756 19.1719C-0.141665 20.3799 0.209854 21.6039 1.00985 22.536C1.8139 23.464 2.98965 24 4.22616 24H17.592C18.8324 24 20.0042 23.464 20.8083 22.532C21.6083 21.604 21.9598 20.376 21.7659 19.1679L21.7653 19.168ZM7.27227 5.19192C7.27227 3.21191 8.9046 1.59998 10.9085 1.59998C11.8823 1.59998 12.7954 1.97197 13.4823 2.65199C14.1691 3.32798 14.5449 4.232 14.5449 5.192V6.35199H7.27214L7.27227 5.19192ZM19.5753 21.4961C19.0824 22.0681 18.3551 22.4001 17.5915 22.4001H4.22562C3.45792 22.4001 2.73471 22.0681 2.23773 21.4961C1.74075 20.9241 1.52661 20.1641 1.64784 19.4201L3.42562 8.28815C3.45795 8.09215 3.6236 7.95215 3.82563 7.95215H17.9913C18.1933 7.95215 18.359 8.09215 18.3913 8.28815L20.1691 19.4201C20.2863 20.1641 20.0723 20.9201 19.5753 21.4961Z"
                                         fill="black" />
-                                </svg> <span class="bach">{{request.user.cart.items_quantity}}</span>
+                                </svg>
+                                <!-- <span class="bach" id="cartitemcount-span">{{request.user.cart.items_quantity}}</span> -->
                             </a>
                         </li>
                         <li> <a href="/" title="Online" class="btn">ONLINE CONSULTATION</a></li>

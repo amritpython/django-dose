@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.apps import apps
 from .models import Shop
 from shopify.utils import shop_url
+from home.models import ApiLog
 
 import binascii
 import json
@@ -14,6 +15,8 @@ import os
 import re
 import shopify
 import requests
+import datetime
+# from home.models import OrderRelForm
 from dotenv import load_dotenv
 import os
 
@@ -259,13 +262,54 @@ def get_cart_info(customer_id):
     response = requests.get(url,headers=headers,timeout=600)
     response.raise_for_status()
     response_data = response.json()
-    cart_list = response_data.get('checkouts')
+    cart_list = list(response_data.get('checkouts',[]))
+    cart_list.reverse()
+    # return cart_list
+    customer_carts = []
     for cart in cart_list :
-        if cart.get('customer').get('id') == int(customer_id):
-            return cart
-        else: print(len(cart.get('customer').get('id')),cart.get('customer').get('id') , customer_id, len(int(customer_id)))
-    return None
+        customer = cart.get('customer')
+        cart_customer_id = customer.get('id')
+        if cart_customer_id == int(customer_id) and cart.get('closed_at') is None:
+            customer_carts.append(cart)
+    if len(customer_carts) == 1:return customer_carts[0]
+    elif len(customer_carts) == 0 :return None
+    latest_updated_at = datetime.datetime.strptime(customer_carts[0].get('updated_at')[:19],'%Y-%m-%dT%H:%M:%S')
+    latest_cart = customer_carts[0]
+    for cart in customer_carts:
+        updated_at = cart.get('updated_at')
+        updated_at = updated_at[:19]
+        updated_at = datetime.datetime.strptime(updated_at,'%Y-%m-%dT%H:%M:%S')
+        if updated_at > latest_updated_at:
+            latest_cart = cart
+    return latest_cart
+        
 
+def get_order_details(order_id):
+    shop_name = os.getenv('SHOP')
+    shopify_store = get_object_or_404(Shop,shopify_domain=shop_name)
+    access_token = shopify_store.shopify_token
+    headers = {
+        'Content-Type':'application/json',
+        'X-Shopify-Access-Token':access_token,
+    }
+    url = f'https://{shop_name}/admin/api/2024-07/orders/{order_id}.json'
+    response = requests.get(url,headers=headers)
+    response_data = response.json()
+    return response_data.get('order',{})
+
+def get_currencies():
+    shop_name = os.getenv('SHOP')
+    shopify_store = get_object_or_404(Shop,shopify_domain=shop_name)
+    access_token = shopify_store.shopify_token
+    headers = {
+        'Content-Type':'application/json',
+        'X-Shopify-Access-Token':access_token
+    }
+    url = f"https://{shop_name}/admin/api/2024-07/currencies.json"
+    response = requests.get(url,headers)
+    response_data = response.json()
+    return response_data.get('currencies',[])
+    
 
 
 
@@ -320,78 +364,59 @@ def orders_create(request):
             customer.address_country_code = customer_info['default_address']['country_code']
             customer.address_country_name = customer_info['default_address']['country_name']
             customer.save()
-            roseway_payload = {
-                'address1':customer.address_address_one,
-                'address2':customer.address_address_two,
-                'city':customer.address_city,
-                'country':customer.address_country,
-                'date_of_birth':'2000-01-01',
-                'email':customer.email,
-                'first_name':customer.first_name,
-                'last_name':customer.last_name,
-                'mobile_number':customer.address_phone,
-                'postcode':customer.address_zipcode,
-                'prescribers':['66bc91fdfcfb9f487029edce'],
-                'prescribers_notes':'',
-                'title':'',
-                'skin_size':''
-            }
-            medicheck_payload = {
-                "resourceType": "Patient",
-                "active": True,
-                "name": [
-                    {
-                        "given": [customer.first_name],
-                        "prefix": ['Mr'],
-                        "family": customer.last_name
-                    }
-                ],
-                "gender": "male",
-                "extension": [
-                    {
-                    "url": "https://fhir.medichecks.com/patient-ethnicity",
-                    "valueString": "OTHER"
-                    },
-                    {
-                    "url": "https://fhir.medichecks.com/patient-sex-at-birth",
-                    "valueString": "male"
-                    }
-                ],
-                "telecom": [
-                    {
-                    "system": "email",
-                    "use": "mobile",
-                    "value": customer.email
-                    },
-                    {
-                    "system": "phone",
-                    "use": "mobile",
-                    "value": f'0{customer.address_phone}'
-                    }
-                ],
-                "address": [
-                    {
-                    "country": customer.address_country,
-                    "line": [
-                        customer.address_address_one,
-                        customer.address_address_two,
-                    ],
-                    "type": "both",
-                    "use": "home",
-                    "city": customer.address_city,
-                    "district": "",
-                    "postalCode": customer.address_zipcode
-                    }
-                ],
-                "birthDate": "2000-01-01"
-                }
-            print('medicheck payload : ',medicheck_payload)
+            with open('store_resultpage_relation.json','r') as file:
+                products = json.load(file)
+            bloodkit_id = products['bloodkit']
+            bloodkit_orders = []
+            product_orders = []
+            for order in order_line_items:
+                print(order['product_id'],bloodkit_id)
+                if str(order['product_id']) == bloodkit_id:
+                    bloodkit_orders.append(order)
+                    continue
+                product_orders.append(order)
+            # ----   Creating Entry in database    ----
+            # orderid = order['id']
+            # ordermeta = OrderRelForm.objects.create(order_id=orderid)
+
+            # ----   Medicheck    ----
+            print('bloodkit orders : ',bloodkit_orders)
             try:
-                roseway_helpers.create_patient(roseway_payload)
-                print(medicheck_helpers.create_patient(medicheck_payload))
+                if len(bloodkit_orders) > 0 :
+                    if not customer.medicheck_patient_id:
+                        customer.medicheck_patient_id = medicheck_helpers.create_patient(customer)
+                        customer.save()
+                    with open('store_medicheck_relation.json','r') as file:
+                        product_mapper = json.load(file)
+                    for order in bloodkit_orders:
+                        medicheck_product_id = product_mapper[str(order['variant_id'])]
+                        print('medicheck product id : ',medicheck_product_id)
+                        note = 'Order from Dose API'
+                        medicheck_helpers.create_order(customer,product_id=medicheck_product_id,note=note)
             except Exception as e:
-                print('create patint throw : ',e)
-                return HttpResponse(status=500)
+                ApiLog.objects.create(customer_id=customer.customer_id,order_id=order.get('id'),server='Medicheck',error=str(e))
+                print('Medicheck Failed : ',str(e))
+
+            # ----   Roseway    ----
+            print('product_orders : ',product_orders)
+            try:
+                if len(product_orders) > 0 :
+                    if not customer.roseway_patient_id:
+                        customer.roseway_patient_id = roseway_helpers.create_patient(customer)
+                        customer.save()
+                    with open('store_roseway_relation.json','r') as file:
+                        product_mapper = json.load(file)
+                    for order in product_orders:
+                        v_id = product_mapper.get(str(order['variant_id']))
+                        p_id = product_mapper.get(str(order['product_id']))
+                        print('--got vid and pid')
+                        if not v_id and not p_id:raise Exception('product id not found in store_roseway_relation.json file')
+                        roseway_product_id = v_id if v_id else p_id
+                        print('--before main--')
+                        roseway_helpers.create_order(customer,product_id=roseway_product_id)
+            except Exception as e:
+                ApiLog.objects.create(customer_id=customer.customer_id,order_id=order.get('id'),server='Roseway',error=str(e))
+                print('Roseway Failed : ',e)
             return HttpResponse(status=204)
         except json.JSONDecodeError as e:
             # Log the error

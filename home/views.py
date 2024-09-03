@@ -2,34 +2,81 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 from django.apps import apps
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.clickjacking import xframe_options_exempt
 from shopify_app.decorators import known_shop_required, latest_access_scopes_required
-from home.models import ShopifyUser,Form,Question
+from home.models import ShopifyUser,Form,Question,Cart,CartItem,Extra,ApiLog
+from home import medicheck_helpers,roseway_helpers
 from shopify_app.models import Shop
 from shopify_app.views import get_product_details,get_customer_details
 from shopify_app.views import get_customer_orders
+from shopify_app.views import get_cart_info
 from django.contrib.auth import login,logout
 from django.http import HttpResponseRedirect,HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from dotenv import load_dotenv
 import os,datetime
 import json,requests
-import random
 
 
 dose_directory_url = '/dose_directory'
-
-
 
 
 def custom_auth(view_func):
     def wrapper(request, *args, **kwargs):
         if not request.user.is_authenticated: return redirect('https://'+os.getenv('SHOP'))
         request.user.cart = request.user.get_cart(sessionid=request.session.session_key)
-        print('cart set : ',request.user.cart)
+        request.user.last_access_session = request.session.session_key
         return view_func(request, *args, **kwargs) if Shop.objects.filter(shopify_domain=os.getenv('SHOP')).exists() else redirect('/login')
     return wrapper
 
+# def update_customer_cart(customer_id,user=None):
+#     cart_json = get_cart_info(customer_id=customer_id) if not user else get_cart_info(customer_id=user.customer_id)
+#     if not cart_json: return
+#     if not user:user = ShopifyUser.objects.get(customer_id=customer_id)
+#     cart_obj = user.get_cart(sessionid=user.last_access_session)
+#     CartItem.objects.filter(cart=cart_obj).delete()
+#     # print(cart_json.get('line_items'))
+#     for item in cart_json['line_items']:
+#         CartItem.objects.create(cart=cart_obj,variant_id=item.get('variant_id'),quantity=item.get('quantity'))
+#     user.cart = cart_obj
+
+
+@custom_auth
+def logs_view(request):
+    context = {}
+    context['logs'] = ApiLog.objects.all()
+    return render(request,'logs.html',context)
+
+
+
+def roseway_orders_view(request):
+    return HttpResponse(content=json.dumps(roseway_helpers.get_orders()),content_type="application/json")
+
+
+def medicheck_orders_view(request):
+    context = {}
+    context['orders'] = medicheck_helpers.get_orders()
+    return render(request,'medicheck_orders.html',context)
+    return HttpResponse(content=json.dumps(medicheck_helpers.get_orders()),content_type="application/json")
+
+# @custom_auth
+# def reorder_view(request):
+#     order_id = request.GET.get('orderid')
+#     ordermeta = OrderRelForm.objects.filter(user=request.user,order_id=order_id)
+#     if not ordermeta.exists():return redirect('/my_account')
+#     order = ordermeta.first() 
+#     form = Form.objects.create(user=request.user,form_type=order.form_type)
+#     form.checkbox_1 = True if request.POST.get('checkbox-1') == 'on' else False
+#     form.checkbox_2 = True if request.POST.get('checkbox-2') == 'on' else False
+#     form.checkbox_3 = True if request.POST.get('checkbox-3') == 'on' else False
+#     form.checkbox_4 = True if request.POST.get('checkbox-4') == 'on' else False
+#     form.checkbox_5 = True if request.POST.get('checkbox-5') == 'on' else False
+#     form.checkbox_6 = True if request.POST.get('checkbox-6') == 'on' else False
+#     form.checkbox_7 = True if request.POST.get('checkbox-7') == 'on' else False
+#     form.checkbox_8 = True if request.POST.get('checkbox-8') == 'on' else False
+#     form.is_opened = True
+#     form.save()
+#     return redirect(f"/{order.form_type}?id={form.form.id}")
 
 @custom_auth
 def email_subscribe_view(request):
@@ -88,36 +135,52 @@ def dose_directory_view(request):
 
 @custom_auth
 def consulation_result_view(request,id):
+    cookies = dict(pair.split('=', 1) for pair in request.headers.get('cookie').split('; '))
+    print(cookies)
     context = {}
-    with open('products.json','r') as file:
+    with open('store_resultpage_relation.json','r') as file:
         products = json.load(file)
+    context['bloodkit_id'] = int(products.get('bloodkit',0))
     if not Form.objects.filter(id=int(id)).exists():return redirect('/')
     form = Form.objects.get(id=int(id))
     if form.form_type == 'male_pattern_hair_loss' and form.get_question(4).answer_value in ['Stage 6','Stage 7']:
         return redirect('/dose_directory')
-    product_ids = products[form.form_type]    
+    if form.form_type == 'female_pattern_hair_loss':
+        if form.get_question(8).answer_value and 'breast cancer' in form.get_question(8).answer_value:
+            product_ids = products['female_pre_meno']
+        else:product_ids = products['female_post_meno']
+    else:product_ids = products[form.form_type]
     products = []
     for product_id in product_ids:
-        details = get_product_details(product_id)
-        description = str(details['body_html'])
+        try:
+            product_details = get_product_details(product_id)
+        except Exception as e :
+            print('product not found : ',product_id)
+            continue
+        description = str(product_details['body_html'])
         description = description.removeprefix('<p>')
         description = description.removesuffix('<!---->')
         description = description.removesuffix('\n')
         description = description.removesuffix('</p>')
-        details['description'] = description
-        price = details['variants'][0]['price']
-        # GBP to us dollar
-        price = float(price) * 1.28197
-        # 2% conversion fee
-        price = price + (price * 0.02)
-        # nearest price
-        price = int(round(price))
-        details['variants'][0]['price'] = price
-        products.append(details)
+        product_details['description'] = description
+        for variant in product_details.get('variants'):
+            price = variant['price']
+            # Dynamic exchange rate
+            exchange_rate = Extra.objects.get(field_name='GBPUSD_exchange_rate')
+            # GBP to us dollar
+            price = float(price) * float(exchange_rate.field_value)
+            # 2% conversion fee
+            price = price + (price * 0.02)
+            # nearest price
+            price = int(round(price))
+            variant['price'] = price
+        products.append(product_details)
     context['form'] = form
     context['products'] = products
+    # update_customer_cart(customer_id='',user=request.user)
     return render(request,'result_page.html',context)
 
+@csrf_exempt
 def my_account_view(request):
     if not Shop.objects.filter(shopify_domain=os.getenv('SHOP')).exists():
         return redirect('/login')
@@ -156,14 +219,30 @@ def my_account_view(request):
         except Exception as e:
             print('\n'+str(e)+'\n')
             return redirect('https://'+os.getenv('SHOP'))
+    if not request.user.is_authenticated:return redirect('https://'+os.getenv('SHOP'))
     user = request.user
     request.user.cart = request.user.get_cart(sessionid=request.session.session_key)
-    if request.method == 'POST':
-        print(request.POST)
+    request.user.last_access_session = request.session.session_key
+    request.user.save()
+    if request.method == "POST" and request.POST.get('action') == 'choice_open':
+        request.user.choice_open = True
+        request.user.save()
+        return redirect('/')
     user_forms = Form.objects.filter(user=user).order_by('-id')
     customer_orders = get_customer_orders(request.user.customer_id)
+    with open('store_resultpage_relation.json','r') as file:
+        products = json.load(file)
+    for i,order in enumerate(customer_orders):
+        variants = []
+        only_bloodkit = True
+        for item in order.get('line_items'):
+            if str(item['product_id']) != products['bloodkit']:
+                only_bloodkit = False
+            variants.append(item.get('variant_id')) 
+        order['only_bloodkit'] = only_bloodkit
+        if None in variants:continue
+        customer_orders[i]['all_variants_exists'] = True
     for order in customer_orders:order['updated_at_formatted'] = datetime.datetime.strptime(order['updated_at'][:10],'%Y-%m-%d').strftime('%B %-d, %Y')
-    
     all_records = user_forms
     p = Paginator(all_records,10)
     page_number = request.GET.get('page')
@@ -344,42 +423,42 @@ def female_pattern_hair_loss_view(request):
                 answer_values += question.answer_value_str
             # stage 1   yes breast cancer
             if 'Stage 1' in answer_values and 'breast cancer' in answer_values:
-                form.product_recommendation_message = 'There are many other causes which can contribute to hair loss and or thinning. These may include nutritional deficiencies, thyroid disease and hormone imbalances. These can be easily checked by a convenient home blood testing kit through our partner lab THRIVA.'
+                form.product_recommendation_message = 'There are many other causes which can contribute to hair loss and or thinning. These may include nutritional deficiencies, thyroid disease and hormone imbalances. These can be easily checked by a convenient home blood testing kit through our partner lab Medichecks.'
                 form.save()
                 return render(request,'Female/stage_1_yes_bc.html',{'form':form,'answer_values':answer_values})
             # stage 1   no breast cancer
             elif 'Stage 1' in answer_values and 'brest cancer' not in answer_values:
-                form.product_recommendation_message = 'There are many other causes which can contribute to hair loss and or thinning. These may include nutritional deficiencies, thyroid disease and hormone imbalances. These can be easily checked by a convenient home blood testing kit through our partner lab THRIVA.'
+                form.product_recommendation_message = 'There are many other causes which can contribute to hair loss and or thinning. These may include nutritional deficiencies, thyroid disease and hormone imbalances. These can be easily checked by a convenient home blood testing kit through our partner lab Medichecks.'
                 form.save()
                 return render(request,'Female/stage_1_no_bc.html',{'form':form,'answer_values':answer_values})
             # stage 2 or 3   yes breast cancer
             elif ('Stage 2' in answer_values or 'Stage 3' in answer_values) and 'breast cancer' in answer_values:
-                form.product_recommendation_message = 'There are many other causes which can contribute to hair loss and or thinning. These may include nutritional deficiencies, thyroid disease and hormone imbalances. These can be easily checked by a convenient home blood testing kit through our partner lab THRIVA.'
+                form.product_recommendation_message = 'There are many other causes which can contribute to hair loss and or thinning. These may include nutritional deficiencies, thyroid disease and hormone imbalances. These can be easily checked by a convenient home blood testing kit through our partner lab Medichecks.'
                 form.save()
                 return render(request,'Female/stage_2_3_yes_bc.html',{'form':form,'answer_values':answer_values})
             # stage 2 or 3   no breast cancer
             elif ('Stage 2' in answer_values or 'Stage 3' in answer_values) and 'breast cancer' not in answer_values:
-                form.product_recommendation_message = 'There are many other causes which can contribute to hair loss and or thinning. These may include nutritional deficiencies, thyroid disease and hormone imbalances. These can be easily checked by a convenient home blood testing kit through our partner lab THRIVA.'
+                form.product_recommendation_message = 'There are many other causes which can contribute to hair loss and or thinning. These may include nutritional deficiencies, thyroid disease and hormone imbalances. These can be easily checked by a convenient home blood testing kit through our partner lab Medichecks.'
                 form.save()
                 return render(request,'Female/stage_2_3_no_bc.html',{'form':form,'answer_values':answer_values})
             # stage 4 yes breast cancer
             elif 'Stage 4' in answer_values and 'breast cancer' in answer_values:
-                form.product_recommendation_message = 'There are many other causes which can contribute to hair loss and or thinning. These may include nutritional deficiencies, thyroid disease and hormone imbalances. These can be easily checked by a convenient home blood testing kit through our partner lab THRIVA.'
+                form.product_recommendation_message = 'There are many other causes which can contribute to hair loss and or thinning. These may include nutritional deficiencies, thyroid disease and hormone imbalances. These can be easily checked by a convenient home blood testing kit through our partner lab Medichecks.'
                 form.save()
                 return render(request,'Female/stage_4_yes_bc.html',{'form':form,'answer_values':answer_values}) 
             # stage 4 no breast cancer
             elif 'Stage 4' in answer_values and 'breast cancer' not in answer_values:
-                form.product_recommendation_message = 'There are many other causes which can contribute to hair loss and or thinning. These may include nutritional deficiencies, thyroid disease and hormone imbalances. These can be easily checked by a convenient home blood testing kit through our partner lab THRIVA.'
+                form.product_recommendation_message = 'There are many other causes which can contribute to hair loss and or thinning. These may include nutritional deficiencies, thyroid disease and hormone imbalances. These can be easily checked by a convenient home blood testing kit through our partner lab Medichecks.'
                 form.save()
                 return render(request,'Female/stage_4_no_bc.html',{'form':form,'answer_values':answer_values})
             # stage 5 yes breast cancer
             elif 'Stage 5' in answer_values and 'breast cancer' in answer_values:
-                form.product_recommendation_message = 'There are many other causes which can contribute to hair loss and or thinning. These may include nutritional deficiencies, thyroid disease and hormone imbalances. These can be easily checked by a convenient home blood testing kit through our partner lab THRIVA.'
+                form.product_recommendation_message = 'There are many other causes which can contribute to hair loss and or thinning. These may include nutritional deficiencies, thyroid disease and hormone imbalances. These can be easily checked by a convenient home blood testing kit through our partner lab Medichecks.'
                 form.save()
                 return render(request,'Female/stage_5_yes_bc.html',{'form':form,'answer_values':answer_values})
             # stage 5 no breast cancer
             elif 'Stage 5' in answer_values and 'breast cancer' not in answer_values:
-                form.product_recommendation_message = 'There are many other causes which can contribute to hair loss and or thinning. These may include nutritional deficiencies, thyroid disease and hormone imbalances. These can be easily checked by a convenient home blood testing kit through our partner lab THRIVA.'
+                form.product_recommendation_message = 'There are many other causes which can contribute to hair loss and or thinning. These may include nutritional deficiencies, thyroid disease and hormone imbalances. These can be easily checked by a convenient home blood testing kit through our partner lab Medichecks.'
                 form.save()
                 return render(request,'Female/stage_5_no_bc.html',{'form':form,'answer_values':answer_values})
             return redirect(f'/consulation_result/{form.id}')
@@ -432,7 +511,7 @@ def hair_shedding_step_form_view(request):
             form.ongoing_question = 1
             form.is_completed = True
             form.product_recommendation_message = f"""DOSE SHEDDING will help to stabilise the hair cycle and reduce shedding, however with more extensive hair loss you may require stronger prescription medication. Please visit our DOSE DIRECTORY for recommended Dermatologists if no improvement is seen after 6 months of use.
-Most cases of telogen effluvium (increased hair shedding) are completely reversible once the trigger factor is identified and corrected. Common contributing causes include nutritional deficiencies, thyroid disease and hormone imbalances. These can be easily checked by a convenient home blood testing kit through our partner lab THRIVA """
+Most cases of telogen effluvium (increased hair shedding) are completely reversible once the trigger factor is identified and corrected. Common contributing causes include nutritional deficiencies, thyroid disease and hormone imbalances. These can be easily checked by a convenient home blood testing kit through our partner lab Medichecks """
             form.save()
             return render(request,'tq_hair_shedding.html',{'form':form})
     question = form.get_question(str(form.ongoing_question))
@@ -667,7 +746,6 @@ class HomeView(View):
     #@known_shop_required
     @latest_access_scopes_required
     def get(self, request, *args, **kwargs):
-        print('req received')
         if not Shop.objects.filter(shopify_domain=os.getenv('SHOP')).exists():
             return redirect('/login')
         else:print('Using shop domain : ',os.getenv('SHOP'))
@@ -704,7 +782,11 @@ class HomeView(View):
             except Exception as e:
                 print('\n'+str(e)+'\n')
                 return redirect('https://'+os.getenv('SHOP'))
+        if not request.user.is_authenticated: return redirect('https://'+os.getenv('SHOP'))
         request.user.cart = request.user.get_cart(sessionid=request.session.session_key)
+        request.user.last_access_session = request.session.session_key
+        request.user.save()
+        
         context = {
             "shop_origin": kwargs.get("shopify_domain"),
             "api_key": apps.get_app_config("shopify_app").SHOPIFY_API_KEY,
@@ -728,10 +810,11 @@ class HomeView(View):
         elif context.get('error') is not None:response.set_cookie('error','')
         return response
     
-    
     def post(self,request,*args,**kwargs):
-        print(request.user)
         user = request.user
+        if request.user.choice_open and request.user.is_form_filled(request.POST.get('form-type')):
+            request.user.choice_open = False
+            request.user.save()
         form = Form.objects.create(user=user,form_type=request.POST.get('form-type'))
         form.checkbox_1 = True if request.POST.get('checkbox-1') == 'on' else False
         form.checkbox_2 = True if request.POST.get('checkbox-2') == 'on' else False

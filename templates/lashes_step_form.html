@@ -131,7 +131,7 @@
                                     <input class="form-check-input" type="checkbox" name="1"
                                         id="flexCheckDefault3" {% if 'Prescription Medicine' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault3">
-                                        Prescription Medicine
+                                        Prescription Medicines
                                     </label>
                                 </div>
                             </div>
@@ -152,7 +152,7 @@
                 {% elif question_no == '3' %}
                 <input type="hidden" name="question-no" value="{{question_no}}">
                 <input type="hidden" name="answer-tag-used" value="checkbox">
-                <input type="hidden" name="checkbox-values" value="['social media','friends & family','Google','hairdresser','GP','Trichologist','Dermatologist','None','Other']">
+                <input type="hidden" name="checkbox-values" value="['social media','friends & family','hairdresser','GP','Trichologist','Dermatologist','Other','None']">
                 <!-- Three -->
                 <div class="tab" style="display: block;">
                     <div class="box">
@@ -185,16 +185,6 @@
                             <div class="col-sm-6">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="2"
-                                        id="flexCheckDefault15" {% if 'Google' in answer_value %}checked{% endif %}>
-                                    <label class="form-check-label" for="flexCheckDefault15">
-                                        Google
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="3"
                                         id="flexCheckDefault16" {% if 'hairdresser' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault16">
                                         hairdresser
@@ -204,7 +194,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="4"
+                                    <input class="form-check-input" type="checkbox" name="3"
                                         id="flexCheckDefault17" {% if 'GP' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault17">
                                         GP
@@ -214,7 +204,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="5"
+                                    <input class="form-check-input" type="checkbox" name="4"
                                         id="flexCheckDefault18" {% if 'Trichologist' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault18">
                                         Trichologist
@@ -224,7 +214,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="6"
+                                    <input class="form-check-input" type="checkbox" name="5"
                                         id="flexCheckDefault19"{% if 'Dermatologist' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault19">
                                         Dermatologist
@@ -234,26 +224,25 @@
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input none" type="checkbox" name="7"
-                                        id="flexCheckDefault20" {% if 'None' in answer_value %}checked{% endif %}>
+                                    <input class="form-check-input" type="checkbox" name="6"
+                                        id="flexCheckDefault20" {% if 'Other' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault20">
-                                        None
+                                        Other
                                     </label>
                                 </div>
                             </div>
 
                             <div class="col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="8"
-                                        id="flexCheckDefault21" {% if 'Other' in answer_value %}checked{% endif %}>
+                                    <input class="form-check-input none" type="checkbox" name="7"
+                                        id="flexCheckDefault21" {% if 'None' in answer_value %}checked{% endif %}>
                                     <label class="form-check-label" for="flexCheckDefault21">
-                                        Other
+                                        None
                                     </label>
                                 </div>
                             </div>
 
                         </div>
-
                     </div>
                 </div>
                 {% elif question_no == '4' %}
@@ -299,6 +288,9 @@
                         <h3>Question: 5</h3>
                         <h4>Do you have any of the following ?
                         </h4>
+                        <div class="tick_all">
+                            <p><i class="bi bi-info-circle-fill"></i>Tick all that apply</p>
+                        </div>
                         <div class="form-check">
                             <input class="form-check-input modal-input" type="checkbox" name="0" id="flexRadioDefault1" data-bs-target="#exampleModal" {% if 'Eye surgery within the last 6 months' in answer_value %}checked{% endif %}>
                             <label class="form-check-label" for="flexRadioDefault1" data-bs-target="#exampleModal">

@@ -29,35 +29,35 @@
             </div>
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-                    <div class="each-condition" onclick="document.getElementById('selected-form-type').value = 'female_pattern_hair_loss';" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <div class="each-condition" {% if request.user.is_filled_female_form and not request.user.choice_open %} onclick="window.location.href='/my_account';" onmouseover="this.style.boxShadow='inset 0 0 2px 1px red';this.style.borderColor='red';" onmouseleave="this.style.boxShadow='none';this.style.borderColor='transparent';" {% else %} data-bs-toggle="modal" data-bs-target="#exampleModal" onmouseover="this.style.boxShadow='inset 0 0 2px 1px green';this.style.borderColor='green';" onmouseleave="this.style.boxShadow='none';this.style.borderColor='transparent';" {% endif %}>
                         <img src="/static/images/female-pattern.svg" alt="female-pattern" title="female" height="177"
                             width="124">
                         <h4>Female pattern hair loss</h4>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-                    <div class="each-condition" onclick="document.getElementById('selected-form-type').value = 'male_pattern_hair_loss';" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <div class="each-condition" {% if request.user.is_filled_male_form and not request.user.choice_open %} onclick="window.location.href='/my_account';" onmouseover="this.style.boxShadow='inset 0 0 2px 1px red';this.style.borderColor='red';" onmouseleave="this.style.boxShadow='none';this.style.borderColor='transparent';" {% else %} onclick="document.getElementById('selected-form-type').value = 'male_pattern_hair_loss';" data-bs-toggle="modal" data-bs-target="#exampleModal" onmouseover="this.style.boxShadow='inset 0 0 2px 1px green';this.style.borderColor='green';" onmouseleave="this.style.boxShadow='none';this.style.borderColor='transparent';" {% endif %}>
                         <img src="/static/images/male-pattern.svg" alt="female-pattern" title="female" height="177"
                             width="124">
                         <h4>Male pattern hair loss</h4>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-                    <div class="each-condition" onclick="document.getElementById('selected-form-type').value = 'beard';" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <div class="each-condition" {% if request.user.is_filled_beard_form and not request.user.choice_open %} onclick="window.location.href='/my_account';" onmouseover="this.style.boxShadow='inset 0 0 2px 1px red';this.style.borderColor='red';" onmouseleave="this.style.boxShadow='none';this.style.borderColor='transparent';" {% else %} onmouseover="this.style.boxShadow='inset 0 0 2px 1px green';this.style.borderColor='green';" onmouseleave="this.style.boxShadow='none';this.style.borderColor='transparent';" onclick="document.getElementById('selected-form-type').value = 'beard';" data-bs-toggle="modal" data-bs-target="#exampleModal" {% endif %}>
                         <img src="/static/images/beard.svg" alt="female-pattern" title="female" height="177"
                             width="124">
                         <h4>beard</h4>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-                    <div class="each-condition" onclick="document.getElementById('selected-form-type').value = 'lashes';" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <div class="each-condition" {% if request.user.is_filled_lashes_form and not request.user.choice_open %} onclick="window.location.href='/my_account';" onmouseover="this.style.boxShadow='inset 0 0 2px 1px red';this.style.borderColor='red';" onmouseleave="this.style.boxShadow='none';this.style.borderColor='transparent';" {% else %} onmouseover="this.style.boxShadow='inset 0 0 2px 1px green';this.style.borderColor='green';" onmouseleave="this.style.boxShadow='none';this.style.borderColor='transparent';" onclick="document.getElementById('selected-form-type').value = 'lashes';" data-bs-toggle="modal" data-bs-target="#exampleModal" {% endif %}>
                         <img src="/static/images/lashes.svg" alt="female-pattern" title="female" height="177"
                             width="124">
                         <h4>lashes</h4>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-                    <div class="each-condition" onclick="document.getElementById('selected-form-type').value = 'brows';" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <div class="each-condition" {% if request.user.is_filled_brows_form and not request.user.choice_open %} onclick="window.location.href='/my_account';" onmouseover="this.style.boxShadow='inset 0 0 2px 1px red';this.style.borderColor='red';" onmouseleave="this.style.boxShadow='none';this.style.borderColor='transparent';" {% else %} onmouseover="this.style.boxShadow='inset 0 0 2px 1px green';this.style.borderColor='green';" onmouseleave="this.style.boxShadow='none';this.style.borderColor='transparent';" onclick="document.getElementById('selected-form-type').value = 'brows';" data-bs-toggle="modal" data-bs-target="#exampleModal" {% endif %}>
                         <img src="/static/images/brows.svg" alt="female-pattern" title="female" height="177"
                             width="124">
                         <h4>Brows</h4>
@@ -65,21 +65,21 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-                    <div class="each-condition" onclick="document.getElementById('selected-form-type').value = 'post_chemotheraphy_hair_loss';" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+                    <div class="each-condition" {% if request.user.is_filled_chemo_form and not request.user.choice_open %} onclick="window.location.href='/my_account';" onmouseover="this.style.boxShadow='inset 0 0 2px 1px red';this.style.borderColor='red';" onmouseleave="this.style.boxShadow='none';this.style.borderColor='transparent';" {% else %} onmouseover="this.style.boxShadow='inset 0 0 2px 1px green';this.style.borderColor='green';" onmouseleave="this.style.boxShadow='none';this.style.borderColor='transparent';" onclick="document.getElementById('selected-form-type').value = 'post_chemotheraphy_hair_loss';" data-bs-toggle="modal" data-bs-target="#exampleModal" {% endif %}>
                         <img src="/static/images/post-chemotheraphy.svg" alt="female-pattern" title="female"
                             height="177" width="124">
                         <h4>post chemotheraphy hair loss</h4>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-                    <div class="each-condition" onclick="document.getElementById('selected-form-type').value = 'traction_related_hair_loss';" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <div class="each-condition" {% if request.user.is_filled_traction_form and not request.user.choice_open %} onclick="window.location.href='/my_account';" onmouseover="this.style.boxShadow='inset 0 0 2px 1px red';this.style.borderColor='red';" onmouseleave="this.style.boxShadow='none';this.style.borderColor='transparent';" {% else %} onmouseover="this.style.boxShadow='inset 0 0 2px 1px green';this.style.borderColor='green';" onmouseleave="this.style.boxShadow='none';this.style.borderColor='transparent';" onclick="document.getElementById('selected-form-type').value = 'traction_related_hair_loss';" data-bs-toggle="modal" data-bs-target="#exampleModal" {% endif %}>
                         <img src="/static/images/traction-related.svg" alt="female-pattern" title="female" height="177"
                             width="124">
                         <h4>traction related hair loss</h4>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-                    <div class="each-condition" onclick="document.getElementById('selected-form-type').value = 'hair_shedding';" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <div class="each-condition" {% if request.user.is_filled_shedding_form and not request.user.choice_open %} onclick="window.location.href='/my_account';" onmouseover="this.style.boxShadow='inset 0 0 2px 1px red';this.style.borderColor='red';" onmouseleave="this.style.boxShadow='none';this.style.borderColor='transparent';" {% else %} onmouseover="this.style.boxShadow='inset 0 0 2px 1px green';this.style.borderColor='green';" onmouseleave="this.style.boxShadow='none';this.style.borderColor='transparent';" onclick="document.getElementById('selected-form-type').value = 'hair_shedding';" data-bs-toggle="modal" data-bs-target="#exampleModal" {% endif %}>
                         <img src="/static/images/hair-shedding.svg" alt="female-pattern" title="female" height="177"
                             width="124">
                         <h4>hair shedding</h4>
@@ -115,14 +115,14 @@
                         </div>
 
                         <div class="form-check">
-                            <input name="checkbox-2" class="form-check-input" type="checkbox" id="flexCheckDefault2">
+                            <input name="checkbox-2" class="form-check-input" type="checkbox" id="flexCheckDefault2" required>
                             <label class="form-check-label" for="flexCheckDefault2">
                                 I confirm that the answers I provide are factual and accurate
                             </label>
                         </div>
 
                         <div class="form-check">
-                            <input name="checkbox-3" class="form-check-input" type="checkbox" id="flexCheckDefault3">
+                            <input name="checkbox-3" class="form-check-input" type="checkbox" id="flexCheckDefault3" required>
                             <label class="form-check-label" for="flexCheckDefault3">
                                 I am aware that the online consultation has been devised by Consultant Dermatologist and
                                 Trichoderm, Dr Sharon Wong to assess my suitability for DOSE products
@@ -130,7 +130,7 @@
                         </div>
 
                         <div class="form-check">
-                            <input name="checkbox-4" class="form-check-input" type="checkbox" id="flexCheckDefault4">
+                            <input name="checkbox-4" class="form-check-input" type="checkbox" id="flexCheckDefault4" required>
                             <label class="form-check-label" for="flexCheckDefault4">
                                 I understand that online consultations are not as accurate as in person assessments and
                                 inherently carries some limitations
@@ -138,7 +138,7 @@
                         </div>
 
                         <div class="form-check">
-                            <input name="checkbox-5" class="form-check-input" type="checkbox" id="flexCheckDefault5">
+                            <input name="checkbox-5" class="form-check-input" type="checkbox" id="flexCheckDefault5" required>
                             <label class="form-check-label" for="flexCheckDefault5">
                                 I understand that DOSE products contain prescription medications that are for my
                                 personal
@@ -147,21 +147,21 @@
                         </div>
 
                         <div class="form-check">
-                            <input name="checkbox-6" class="form-check-input" type="checkbox" id="flexCheckDefault6">
+                            <input name="checkbox-6" class="form-check-input" type="checkbox" id="flexCheckDefault6" required>
                             <label class="form-check-label" for="flexCheckDefault6">
                                 I must stop all DOSE products if pregnant
                             </label>
                         </div>
 
                         <div class="form-check">
-                            <input name="checkbox-7" class="form-check-input" type="checkbox" id="flexCheckDefault7">
+                            <input name="checkbox-7" class="form-check-input" type="checkbox" id="flexCheckDefault7" required>
                             <label class="form-check-label" for="flexCheckDefault7">
                                 I understand that as with any treatment, responses will vary between individuals
                             </label>
                         </div>
 
                         <div class="form-check">
-                            <input name="checkbox-8" class="form-check-input" type="checkbox" id="flexCheckDefault8">
+                            <input name="checkbox-8" class="form-check-input" type="checkbox" id="flexCheckDefault8" required>
                             <label class="form-check-label" for="flexCheckDefault8">
                                 GDPR compliance/data usage – by ticking you give consent to the collection of this data
                                 which will be used for marketing and service development

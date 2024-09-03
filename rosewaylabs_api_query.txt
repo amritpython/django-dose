@@ -1,0 +1,137 @@
+----    Query 3    ----
+
+:What is missing ?
+- Kindly guide to know what we are missing in order to get the same response as mentioned in the docs. 
+- by using the same payload parameter as mentioned in the documention. We are unable to get the prescription_items in the prescription object.
+- kindly refer the following response for this.
+
+
+Our response : {
+    '_id': '66cf329e24702083c4fb69e5', 
+    'chapter': '', 
+    'clinic_user': '66c87c07fcfb9f487029eddd', 
+    'created': '2024-08-28 14:22:22', 
+    'delivery_value': 0, 
+    'notes': 'Testing prescription', 
+    'patient': '66cf31a824702083c4fb69e3', 
+    'patient_delivery_value': 0, 
+    'patient_total_value': 0, 
+    'prescribing_user': '66bc91fdfcfb9f487029edce', 
+    'prescription_items': [], 
+    'ref': 'PSLLKWSK', 
+    'status': 'pending', 
+    'total_value': 0
+   }
+
+Docuemntaion response: {
+    "_id": "661e4c9c2601768d6e50e7bf",
+    "chapter": "",
+    "clinic_user": "5c5b07c9224b4e313f6e0abe",
+    "created": "2024-04-16 10:02:04",
+    "delivery_value": 0,
+    "notes": "Patient is gluten intolerant",
+    "patient": "5c65ba59224b4e6827195906",
+    "patient_delivery_value": 0,
+    "patient_total_value": 5000,
+    "prescribing_user": "5c5b07c9224b4e313f6e0abe",
+    "prescription_items": [
+        {
+            "_id": "661e4c9c2601768d6e50e7c1",
+            "initial_repeat_number": 20,
+            "line_item_amount": 1,
+            "long_usage_instructions": "As directed",
+            "pack_size": 1,
+            "product": {
+                "_id": "6229e4ec80a789086471c52c",
+                "active_product_ingredients": "Aloe Vera: 3.0%",
+                "product_category": "Derma",
+                "product_code": "ZPBD4",
+                "product_form": "Cream"
+            }
+        }
+    ],
+    "ref": "PSJGCMWS",
+    "status": "pending",
+    "total_value": 4000
+}
+
+
+
+ 
+Our payload : {
+    'clinic_user': '66c87c07fcfb9f487029eddd',
+    'patient': '66cf31a824702083c4fb69e3' ,
+    'prescribing_user': '66bc91fdfcfb9f487029edce',
+    'notes': 'Testing prescription',
+    'prescription_items': """[
+          {
+           "product": "66cf08134a6d0f83adb8b553",
+           "number_of_repeats": 4,
+           "pack_size": 1,
+           "line_item_amount": 1,
+           "usage_instructions": "As directed"
+           }
+      ]"""
+}
+
+
+Documentaion payload: {
+        'clinic_user': '5c5b07c9224b4e313f6e0abe',
+        'patient': '5c65ba59224b4e6827195906',
+        'prescribing_user': '5c5b07c9224b4e313f6e0abe',
+        'notes': 'Patient is gluten intolerant',
+        'prescription_items': """[
+            {
+                "product": "6229e4ec80a789086471c52c",
+                "number_of_repeats": 20,
+                "pack_size": 1,
+                "line_item_amount": 1,
+                "usage_instructions": "As directed"
+            }
+        ]""",
+    }
+
+
+
+
+
+
+
+
+
+----    Query 2    ----
+
+
+Issue : Unable to add items in prescription object
+
+Description : '/v1/prescriptions' api return response which contains empty list as a value of parameter 'prescription_items'. If possible kindly share flow to successfully create order. 
+
+Using payload : 
+{
+            'clinic_user': '66c87c07fcfb9f487029eddd',
+            'patient': '66cf31a824702083c4fb69e3' ,
+            'prescribing_user': '66bc91fdfcfb9f487029edce',
+            'notes': 'Testing prescription',
+            'prescription_items': """[
+                            {
+                                "product": "66cf08134a6d0f83adb8b553",
+                                "number_of_repeats": 4,
+                                "pack_size": 1,
+                                "line_item_amount": 1,
+                                "usage_instructions": "As directed"
+                            }
+                        ]"""
+        }
+
+
+Response : 
+{'_id': '66cf329e24702083c4fb69e5', 'chapter': '', 'clinic_user': '66c87c07fcfb9f487029eddd', 'created': '2024-08-28 14:22:22', 'delivery_value': 0, 'notes': 'Testing prescription', 'patient': '66cf31a824702083c4fb69e3', 'patient_delivery_value': 0, 'patient_total_value': 0, 'prescribing_user': '66bc91fdfcfb9f487029edce', 'prescription_items': [], 'ref': 'PSLLKWSK', 'status': 'pending', 'total_value': 0}
+
+
+Roseway LABS sandbox account credentials :-
+Clinic Id:  66bc91a74ffb45af3fff7080
+API key: Cs8GdIBeuMnDGOWfKk1elDlaeCniacwLC_l8hiL9W6jnzfI07uF1AwINQqJ_p_6tiRLuBhKuxIVAlxUV_xX4Wg
+API secret: a_lrpNp_WkBCZROhAWE3r1vREWkttZMjnZXQ_KJ0Em9mYN5QvYGJRDWHkqaKWGp0S57E3szZx_p1XOWHgJSRvg
+Base url : https://api.staging.eroseway.com
+username : gaurav.tyagi@brihaspatitech.com
+password : Oculus@123#

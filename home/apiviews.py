@@ -5,7 +5,142 @@ from django.http import HttpResponse
 import requests
 
 
-
+@api_view(['GET'])
+def database_apiview(request):
+    response = {'ok':False}
+    try:
+        if request.GET.get('customer_id') is not None:
+            customer = ShopifyUser.objects.get(customer_id=request.GET.get('customer_id'))
+            response['customer'] = {
+                'customer_id':customer.customer_id,
+                'uid':customer.id,
+                'email':customer.email,
+                'created_at':customer.created_at,
+                'first_name':customer.first_name,
+                'last_name':customer.last_name,
+                'verified_email':customer.verified_email,
+                'roseway_patient_id':customer.roseway_patient_id,
+                'medicheck_patient_id':customer.medicheck_patient_id,
+                'forms':[
+                    {
+                        'uid':form.id,
+                        'form_type':form.form_type,
+                        'is_opened':form.is_opened,
+                        'is_completed':form.is_completed,
+                        'checkbox':[
+                            {
+                                'label':'I am over 18',
+                                'checked':form.checkbox_1,
+                            },
+                            {
+                                'label':'I confirm that the answers I provide are factual and accurate',
+                                'checked':form.checkbox_2,
+                            },
+                            {
+                                'label':'I am aware that the online consultation has been devised by Consultant Dermatologist and Trichoderm, Dr Sharon Wong to assess my suitability for DOSE products',
+                                'checked':form.checkbox_3,
+                            },
+                            {
+                                'label':'I understand that online consultations are not as accurate as in person assessments and inherently carries some limitations',
+                                'checked':form.checkbox_4,
+                            },
+                            {
+                                'label':'I understand that DOSE products contain prescription medications that are for my personal use only. I will not share my treatment with any other individuals',
+                                'checked':form.checkbox_5,
+                            },
+                            {
+                                'label':'I must stop all DOSE products if pregnant',
+                                'checked':form.checkbox_6,
+                            },
+                            {
+                                'label':'I understand that as with any treatment, responses will vary between individuals',
+                                'checked':form.checkbox_7,
+                            },
+                            {
+                                'label':'GDPR compliance/data usage – by ticking you give consent to the collection of this data which will be used for marketing and service development',
+                                'checked':form.checkbox_8,
+                            }
+                        ],
+                        'question_answers':[
+                            {
+                                'uid':question.id,
+                                'question_no':question.question_no,
+                                'question_value':question.question_value,
+                                'is_answered':question.is_answered,
+                                'answer_tag_used':question.answer_tag_used,
+                                'answer_value':question.answer_value,
+                                'answer_json':question.raw_json,
+                                'answer_raw_json':question.answer_raw_json,
+                            } for question in Question.objects.filter(form=form)
+                        ]
+                    } for form in Form.objects.filter(user=customer)
+                ]
+            }
+        else:
+            response['customers'] = [
+                {
+                    'customer_id':customer.customer_id,
+                    'uid':customer.id,
+                    'forms':[
+                        {
+                            'uid':form.id,
+                            'form_type':form.form_type,
+                            'is_opened':form.is_opened,
+                            'is_completed':form.is_completed,
+                            'checkbox':[
+                                {
+                                    'label':'I am over 18',
+                                    'checked':form.checkbox_1,
+                                },
+                                {
+                                    'label':'I confirm that the answers I provide are factual and accurate',
+                                    'checked':form.checkbox_2,
+                                },
+                                {
+                                    'label':'I am aware that the online consultation has been devised by Consultant Dermatologist and Trichoderm, Dr Sharon Wong to assess my suitability for DOSE products',
+                                    'checked':form.checkbox_3,
+                                },
+                                {
+                                    'label':'I understand that online consultations are not as accurate as in person assessments and inherently carries some limitations',
+                                    'checked':form.checkbox_4,
+                                },
+                                {
+                                    'label':'I understand that DOSE products contain prescription medications that are for my personal use only. I will not share my treatment with any other individuals',
+                                    'checked':form.checkbox_5,
+                                },
+                                {
+                                    'label':'I must stop all DOSE products if pregnant',
+                                    'checked':form.checkbox_6,
+                                },
+                                {
+                                    'label':'I understand that as with any treatment, responses will vary between individuals',
+                                    'checked':form.checkbox_7,
+                                },
+                                {
+                                    'label':'GDPR compliance/data usage – by ticking you give consent to the collection of this data which will be used for marketing and service development',
+                                    'checked':form.checkbox_8,
+                                }
+                            ],
+                            'question_answers':[
+                                {
+                                    'uid':question.id,
+                                    'question_no':question.question_no,
+                                    'question_value':question.question_value,
+                                    'is_answered':question.is_answered,
+                                    'answer_tag_used':question.answer_tag_used,
+                                    'answer_value':question.answer_value,
+                                    'answer_json':question.raw_json,
+                                    'answer_raw_json':question.answer_raw_json,
+                                } for question in Question.objects.filter(form=form)
+                            ]
+                        } for form in Form.objects.filter(user=customer)
+                    ],
+                } for customer in ShopifyUser.objects.all()
+            ]
+        response['ok'] = True
+    except Exception as e:
+        response['details'] = str(e)
+    return Response(response)
 
 @api_view(['GET'])
 def currency_rate_update_apiview(request):

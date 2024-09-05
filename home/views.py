@@ -29,16 +29,16 @@ def custom_auth(view_func):
         return view_func(request, *args, **kwargs) if Shop.objects.filter(shopify_domain=os.getenv('SHOP')).exists() else redirect('/login')
     return wrapper
 
-# def update_customer_cart(customer_id,user=None):
-#     cart_json = get_cart_info(customer_id=customer_id) if not user else get_cart_info(customer_id=user.customer_id)
-#     if not cart_json: return
-#     if not user:user = ShopifyUser.objects.get(customer_id=customer_id)
-#     cart_obj = user.get_cart(sessionid=user.last_access_session)
-#     CartItem.objects.filter(cart=cart_obj).delete()
-#     # print(cart_json.get('line_items'))
-#     for item in cart_json['line_items']:
-#         CartItem.objects.create(cart=cart_obj,variant_id=item.get('variant_id'),quantity=item.get('quantity'))
-#     user.cart = cart_obj
+
+@custom_auth
+def retake_view(request):
+    form = Form.objects.get(user=request.user,id=request.GET.get('form_id'))
+    print(form)
+    if not form.is_opened:
+        form.is_opened = True
+        form.ongoing_question = 1
+    form.save()
+    return redirect(f'/{form.form_type}?id={form.id}')
 
 
 @custom_auth
@@ -57,26 +57,8 @@ def medicheck_orders_view(request):
     context = {}
     context['orders'] = medicheck_helpers.get_orders()
     return render(request,'medicheck_orders.html',context)
-    return HttpResponse(content=json.dumps(medicheck_helpers.get_orders()),content_type="application/json")
+    # return HttpResponse(content=json.dumps(medicheck_helpers.get_orders()),content_type="application/json")
 
-# @custom_auth
-# def reorder_view(request):
-#     order_id = request.GET.get('orderid')
-#     ordermeta = OrderRelForm.objects.filter(user=request.user,order_id=order_id)
-#     if not ordermeta.exists():return redirect('/my_account')
-#     order = ordermeta.first() 
-#     form = Form.objects.create(user=request.user,form_type=order.form_type)
-#     form.checkbox_1 = True if request.POST.get('checkbox-1') == 'on' else False
-#     form.checkbox_2 = True if request.POST.get('checkbox-2') == 'on' else False
-#     form.checkbox_3 = True if request.POST.get('checkbox-3') == 'on' else False
-#     form.checkbox_4 = True if request.POST.get('checkbox-4') == 'on' else False
-#     form.checkbox_5 = True if request.POST.get('checkbox-5') == 'on' else False
-#     form.checkbox_6 = True if request.POST.get('checkbox-6') == 'on' else False
-#     form.checkbox_7 = True if request.POST.get('checkbox-7') == 'on' else False
-#     form.checkbox_8 = True if request.POST.get('checkbox-8') == 'on' else False
-#     form.is_opened = True
-#     form.save()
-#     return redirect(f"/{order.form_type}?id={form.form.id}")
 
 @custom_auth
 def email_subscribe_view(request):
@@ -134,9 +116,14 @@ def dose_directory_view(request):
     return render(request,'dose_directory.html',context)
 
 @custom_auth
-def consulation_result_view(request,id):
+def consulation_result_view(request,ref):
     cookies = dict(pair.split('=', 1) for pair in request.headers.get('cookie').split('; '))
-    print(cookies)
+    if str(ref).isnumeric():
+        id = int(ref)
+    else:
+        forms = Form.objects.filter(user=request.user,form_type=ref)
+        if not forms.exists():return redirect('/')
+        id = forms.first().id
     context = {}
     with open('store_resultpage_relation.json','r') as file:
         products = json.load(file)
@@ -269,7 +256,7 @@ def brows_step_form_view(request):
     context = {}
     user = request.user
     form = Form.objects.get(id=int(request.GET.get('id')),user=user)
-    if form.is_completed:return redirect(f'/consulation_result/{form.id}')
+    if not form.is_opened:return redirect(f'/consulation_result/{form.id}')
     if request.method == 'POST' and request.POST.get('action') == 'back':
         form.ongoing_question = form.ongoing_question - 1
         if form.ongoing_question == 0 : form.ongoing_question = 1
@@ -305,6 +292,7 @@ def brows_step_form_view(request):
         if form.ongoing_question == 9 :
             form.ongoing_question = 1
             form.is_completed = True
+            form.is_opened = False
             form.product_recommendation_message = f"""Please note that with more extensive or severe hair loss you may require stronger prescription medication. Please see our DOSE DIRECTORY for recommended Dermatologists if no improvement is seen after 6 months of use."""
             form.save()
             return render(request,'tq_brows.html',{'form':form})
@@ -320,7 +308,7 @@ def chemo_therapy_step_form_view(request):
     context = {}
     user = request.user
     form = Form.objects.get(id=int(request.GET.get('id')),user=user)
-    if form.is_completed:return redirect(f'/consulation_result/{form.id}')
+    if not form.is_opened:return redirect(f'/consulation_result/{form.id}')
     if request.method == 'POST' and request.POST.get('action') == 'back':
         form.ongoing_question = form.ongoing_question - 1
         if form.ongoing_question == 0 : form.ongoing_question = 1
@@ -356,6 +344,7 @@ def chemo_therapy_step_form_view(request):
         if form.ongoing_question == 9 :
             form.ongoing_question = 1
             form.is_completed = True
+            form.is_opened = False
             form.product_recommendation_message = f"""Please note that with more extensive or severe hair loss you may require stronger prescription medication. Please see our DOSE DIRECTORY for recommended Dermatologists if no improvement is seen after 6 months of use."""
             form.save()
             return render(request,'tq_chemo.html',{'form':form})
@@ -371,7 +360,7 @@ def female_pattern_hair_loss_view(request):
     context = {}
     user = request.user
     form = Form.objects.get(id=int(request.GET.get('id')),user=user)
-    if form.is_completed:return redirect(f'/consulation_result/{form.id}')
+    if not form.is_opened:return redirect(f'/consulation_result/{form.id}')
     if request.method == 'POST' and request.POST.get('action') == 'back':
         question_7 = form.get_question(7)   
         if form.ongoing_question == 9 and 'I am pre-menopausal and am not pregnant' in question_7.answer_value:
@@ -411,12 +400,14 @@ def female_pattern_hair_loss_view(request):
             question.answer_raw_json = raw_json
         question.is_answered = True
         question.save()
+        print(question)
         form.is_opened = True
         form.ongoing_question = form.ongoing_question + 1
         form.save()
         if form.ongoing_question == 11 :
             form.ongoing_question = 1
             form.is_completed = True
+            form.is_opened = False
             form.save()
             answer_values = ''
             for question in Question.objects.filter(form=form):
@@ -474,7 +465,7 @@ def hair_shedding_step_form_view(request):
     context = {}
     user = request.user
     form = Form.objects.get(id=int(request.GET.get('id')),user=user)
-    if form.is_completed:return redirect(f'/consulation_result/{form.id}')
+    if not form.is_opened:return redirect(f'/consulation_result/{form.id}')
     if request.method == 'POST' and request.POST.get('action') == 'back':
         form.ongoing_question = form.ongoing_question - 1
         if form.ongoing_question == 0 : form.ongoing_question = 1
@@ -510,6 +501,7 @@ def hair_shedding_step_form_view(request):
         if form.ongoing_question == 10 :
             form.ongoing_question = 1
             form.is_completed = True
+            form.is_opened = False
             form.product_recommendation_message = f"""DOSE SHEDDING will help to stabilise the hair cycle and reduce shedding, however with more extensive hair loss you may require stronger prescription medication. Please visit our DOSE DIRECTORY for recommended Dermatologists if no improvement is seen after 6 months of use.
 Most cases of telogen effluvium (increased hair shedding) are completely reversible once the trigger factor is identified and corrected. Common contributing causes include nutritional deficiencies, thyroid disease and hormone imbalances. These can be easily checked by a convenient home blood testing kit through our partner lab Medichecks """
             form.save()
@@ -531,7 +523,7 @@ def lashes_step_form_view(request):
     context = {}
     user = request.user
     form = Form.objects.get(id=int(request.GET.get('id')),user=user)
-    if form.is_completed:return redirect(f'/consulation_result/{form.id}')
+    if not form.is_opened:return redirect(f'/consulation_result/{form.id}')
     if request.method == 'POST' and request.POST.get('action') == 'back':
         form.ongoing_question = form.ongoing_question - 1
         if form.ongoing_question == 0 : form.ongoing_question = 1
@@ -568,6 +560,7 @@ def lashes_step_form_view(request):
         if form.ongoing_question == 9 :
             form.ongoing_question = 1
             form.is_completed = True
+            form.is_opened = False
             form.product_recommendation_message = f"""Please note that with more extensive or severe hair loss you may require stronger prescription medication. Please see our DOSE DIRECTORY for recommended dermatologists if no improvement is seen after 6 months of use."""
             form.save()
             return render(request,'tq_lashes.html',{'form':form})
@@ -583,7 +576,7 @@ def male_pattern_hair_loss_view(request):
     context = {}
     user = request.user
     form = Form.objects.get(id=int(request.GET.get('id')),user=user)
-    if form.is_completed:return redirect(f'/consulation_result/{form.id}')
+    if not form.is_opened:return redirect(f'/consulation_result/{form.id}')
     if request.method == 'POST' and request.POST.get('action') == 'back':
         form.ongoing_question = form.ongoing_question - 1
         if form.ongoing_question == 0 : form.ongoing_question = 1
@@ -619,6 +612,7 @@ def male_pattern_hair_loss_view(request):
         if form.ongoing_question == 9 :
             form.ongoing_question = 1
             form.is_completed = True
+            form.is_opened = False
             form.save()
             stage_question = form.get_question(4)
             common = 'common'
@@ -641,7 +635,7 @@ def men_beard_step_form_view(request):
     context = {}
     user = request.user
     form = Form.objects.get(id=int(request.GET.get('id')),user=user)
-    if form.is_completed:return redirect(f'/consulation_result/{form.id}')
+    if not form.is_opened:return redirect(f'/consulation_result/{form.id}')
     if request.method == 'POST' and request.POST.get('action') == 'back':
         form.ongoing_question = form.ongoing_question - 1
         if form.ongoing_question == 0 : form.ongoing_question = 1
@@ -677,6 +671,7 @@ def men_beard_step_form_view(request):
         if form.ongoing_question == 9 :
             form.ongoing_question = 1
             form.is_completed = True
+            form.is_opened = False
             form.product_recommendation_message = 'Please note that with more extensive or severe hair loss you may require stronger prescription medication. Please see our DOSE DIRECTORY (hyperlink) for recommended dermatologists if no improvement is seen after 6 months of use.'
             form.save()
             return render(request,'tq_beard.html',{'form':form})
@@ -692,7 +687,7 @@ def traction_rela_ted_step_form_view(request):
     context = {}
     user = request.user
     form = Form.objects.get(id=int(request.GET.get('id')),user=user)
-    if form.is_completed:return redirect(f'/consulation_result/{form.id}')
+    if not form.is_opened:return redirect(f'/consulation_result/{form.id}')
     if request.method == 'POST' and request.POST.get('action') == 'back':
         form.ongoing_question = form.ongoing_question - 1
         if form.ongoing_question == 0 : form.ongoing_question = 1
@@ -728,6 +723,7 @@ def traction_rela_ted_step_form_view(request):
         if form.ongoing_question == 11 :
             form.ongoing_question = 1
             form.is_completed = True
+            form.is_opened = False
             form.product_recommendation_message = f"""Please note that with more extensive or severe hair loss you may require stronger prescription medication. Please see our DOSE DIRECTORY for recommended Dermatologists if no improvement is seen after 6 months of use."""
             form.save()
             return render(request,'tq_traction.html',{'form':form})

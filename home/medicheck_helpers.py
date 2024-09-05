@@ -124,6 +124,17 @@ def create_patient(customer) -> str:
     return response.json()['id']
 
 
+def get_products():
+    url = "https://product.api.staging.medichecks.io/v1/products"
+    headers = {
+        'accept':'application/json',
+        'authorization':f'Bearer {get_barear_token()}'
+    }
+    response = requests.get(url,headers=headers)
+    response.raise_for_status()
+    res_json = response.json()
+    return res_json
+
 
 def get_orders():
     url = "https://service-request.api.staging.medichecks.io/ServiceRequest"

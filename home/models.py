@@ -6,9 +6,6 @@ import os
 
 
 # Create your models here.
-
-
-
 class ShopifyUser(AbstractUser):
     USERNAME_FIELD = 'customer_id'
     customer_id = models.CharField(max_length=255,blank=True,null=True,unique=True)
@@ -144,7 +141,7 @@ class Form(models.Model):
         ('hair_shedding','hair_shedding'),
     ]
     CHECKBOX_META = {
-        'checkbox_1':'I am over 18',
+        'checkbox_1':'I am over 18',        
         'checkbox_2':'I confirm that the answers I provide are factual and accurate',
         'checkbox_3':'I am aware that the online consultation has been devised by Consultant Dermatologist and Trichoderm, Dr Sharon Wong to assess my suitability for DOSE products',
         'checkbox_4':'I understand that online consultations are not as accurate as in person assessments and inherently carries some limitations',
@@ -222,12 +219,6 @@ class ApiLog(models.Model):
 
     
     
-    
-
-# class OrderRelForm(models.Model):
-#     user = models.ForeignKey(ShopifyUser,on_delete=models.CASCADE)
-#     order_id = models.CharField(max_length=255,blank=True,null=True)
-#     form_type = models.CharField(max_length=255,blank=True,null=True)
     
 
 

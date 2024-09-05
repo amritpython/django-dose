@@ -128,6 +128,19 @@
             font-weight: bold;
             margin-bottom: 48px;
         }
+        .retake-button{
+            margin-top: 4px;
+            margin-right: 10px;
+            border-radius:8px;
+            font-size: small;
+            font-weight: bold;
+            padding:4px 8px;
+            transition: 0.1s ease-in all;
+            &:hover{
+                color:white;
+                background-color: black;
+            }
+        }
     </style>
 </head>
 
@@ -169,10 +182,10 @@
                                             </td>
                                             <td>{{order.financial_status}}</td>
                                             <td>{% if order.fulfillment_status %}Fulfilled{% else %}Unfulfilled{% endif %}</td>
-                                            <td>${{order.current_subtotal_price}} {{order.currency}}</td>
-                                            <td  style="height: 45px;">{% if order.all_variants_exists and not order.only_bloodkit %}<button class="re-order-button" onclick="document.getElementById('yes-radio').setAttribute('value','{{order.id}}');document.getElementById('no-radio').setAttribute('onclick',`document.getElementById('cart-form-{{order.id}}').submit();`);">Re Order</button>{% endif %}</td>
+                                            <td>${{order.current_subtotal_price}}{{order.currency}}</td>
+                                            <td  style="height: 45px;">{% if order.all_variants_exists  %}<button class="re-order-button {% if not order.only_bloodkit %}not-bk{% endif %}" {% if order.only_bloodkit %}onclick="document.getElementById('cart-form-{{order.id}}').submit();" {% else %} onclick="document.getElementById('yes-radio').setAttribute('value','{{order.id}}');document.getElementById('no-radio').setAttribute('onclick',`document.getElementById('cart-form-{{order.id}}').submit();`);" {% endif %}>Re Order</button>{% endif %}</td>
                                         </tr>
-                                        <form id="cart-form-{{order.id}}" action="{{request.user.shop}}/cart/add">
+                                        <form id="cart-form-{{order.id}}" method="post" action="{{request.user.shop}}/cart/add">
                                             {% for item in order.line_items %}
                                             <input type="hidden" name="id[]" value="{{item.variant_id}}">
                                             {% endfor %}
@@ -212,7 +225,7 @@
                         {% endif %}
                     </div>
                     {% if form.is_completed %}
-                    <div class="col-md-4 col-sm-6 text-end">
+                    <div class="col-md-4 col-sm-6 text-end"><button class="retake-button" onclick="window.location.href='/retake?form_id={{form.id}}';">Retake</button>
                         <a href="/consulation_result/{{form.id}}" title="View result" class="btn">View result</a>
                     </div>
                     {% else %}
@@ -306,7 +319,7 @@
     <script>    
 
         $(document).ready(function () {
-                $(".re-order-button").click(function () {
+                $(".not-bk").click(function () {
                     $("#exampleModal2").modal("show");
                 });
             });

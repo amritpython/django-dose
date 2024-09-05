@@ -16,17 +16,18 @@ urlpatterns = [
     path('my_account',views.my_account_view),
     path('my_account/',views.my_account_view),
     path('dose_directory',views.dose_directory_view),
-    path('consulation_result/<int:id>',views.consulation_result_view),
+    path('consulation_result/<str:ref>',views.consulation_result_view),
     path('email/subscribe',views.email_subscribe_view),
     path('logout',views.logout_view),
-    # path('reorder',views.reorder_view),
     path('medicheck/orders',views.medicheck_orders_view),
     path('roseway/orders',views.roseway_orders_view),
     path('logs',views.logs_view),
+    path('retake',views.retake_view),
     
     # Api Routes
     path('cart',apiviews.cart_apiview),
     path('product_fit',apiviews.product_fit_apiview),
+    path('api/database',apiviews.database_apiview),
 
     # Cron Routes
     path('cron/currency_rate_update',apiviews.currency_rate_update_apiview),

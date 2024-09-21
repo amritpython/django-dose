@@ -1,5 +1,7 @@
 venv/
 backup/
+home/migrations
+shopify_app/migrations
 .env.bak
 manage.py.bak
 customer.json

@@ -68,7 +68,7 @@ def create_patient(customer) -> str:
                     {
                         "given": [customer.first_name],
                         "prefix": ['Mr'],
-                        "family": customer.last_name
+                        "family": customer.last_name if len(str(customer.last_name)) > 2 else 'NA'
                     }
                 ],
                 "gender": "male",
@@ -116,11 +116,11 @@ def create_patient(customer) -> str:
         "Authorization":f"Bearer {get_barear_token()}"
     }
     response = requests.post(url, json=payload, headers=headers)
+    print('medicheck create patient response : ',response.text)
     response.raise_for_status()
     """{"id":"2024353073","meta":{"versionId":"1","lastUpdated":"2024-08-21 08:52:01 +0000 UTC"},"extension":[{"url":"https://fhir.medichecks.com/patient-ethnicity","valueString":"WHITE_BRITISH"},{"url":"https://fhir.medichecks.com/patient-sex-at-birth","valueString":"male"}],"identifier":[{"use":"official","type":{"coding":[{"system":"https://terminology.hl7.org/CodeSystem/v2-0203","code":"MR"}]},"system":"https://fhir.medichecks.com/patient-identifier","value":"2024353073"}],"active":true,"name":[{"family":"Doe","given":["John"],"prefix":["Dr"]}],"telecom":[{"system":"email","value":"John.Doe@organization.com"},{"system":"phone","value":"07123456789"}],"gender":"male","birthDate":"2000-01-01","address":[{"use":"home","type":"both","line":["12 Example Street","2 floor, apartment 3","Block 2"],"city":"Nottingham","district":"Nottinghamshire","postalCode":"NX0 1WX","country":"United Kingdom"}],"generalPractitioner":[{"reference":"Organization/5145"}],"managingOrganization":{"reference":"Organization/0"},"resourceType":"Patient"}"""
     if 'email already exist' in response.text:
         return get_patient_id(customer.email)
-    print('medicheck create patient : ',response.text)
     return response.json()['id']
 
 
@@ -150,7 +150,6 @@ def get_orders():
         'token':get_barear_token()
     }]
     for order in orders:
-        
         order_note = ''
         if order['resource'].get('note'):
             for note in order['resource']['note']:
@@ -215,6 +214,7 @@ def create_order(customer,product_id,note):
     }
     print('medicheck payload : ',payload)
     response = requests.post(url,json=payload,headers=headers)
+    print('medicheck create order : ',response.text)
     response.raise_for_status()
     return response.json()
 

@@ -45,7 +45,7 @@ def create_patient(customer):
         'date_of_birth':'2000-01-01',
         'email':customer.email,
         'first_name':customer.first_name,
-        'last_name':customer.last_name,
+        'last_name':customer.last_name if len(str(customer.last_name)) > 2 else 'NA',
         'mobile_number':customer.address_phone,
         'postcode':customer.address_zipcode,
         'prescribers':[os.getenv('ROSEWAY_PRESCRIBING_USER')],

@@ -215,7 +215,7 @@ def get_customer_details(customer_id):
     response = requests.get(url, headers=headers, timeout=600)
     response.raise_for_status()
     response_data = response.json()
-    customers = response_data.get('customer', {})
+    customers = response_data.get('customer', None)
     return customers
 
 
@@ -333,6 +333,7 @@ def orders_create(request):
     if request.method == 'POST':
         try:
             order = json.loads(request.body)
+            print(order)
             shop_name = request.headers.get('X-Shopify-Shop-Domain')
             shopify_store = get_object_or_404(Shop, shopify_domain=shop_name)
             access_token = shopify_store.shopify_token
@@ -341,29 +342,43 @@ def orders_create(request):
             if not customer:return HttpResponse(status=204)
             customer_id = customer.get('id')
             customer_info = get_customer_details(customer_id=customer_id)
-            customer , created = ShopifyUser.objects.get_or_create(customer_id=customer_id)
-            customer.email = customer_info['email']
-            customer.created_at = customer_info['created_at']
-            customer.updated_at = customer_info['updated_at']
-            customer.first_name = customer_info['first_name']
-            customer.last_name = customer_info['last_name']
-            customer.verified_email = customer_info['verified_email']
-            customer.currency = customer_info['currency']
-            customer.address_id = customer_info['default_address']['id']
-            customer.address_firstname = customer_info['default_address']['first_name']
-            customer.address_lastname = customer_info['default_address']['last_name']
-            customer.address_company = customer_info['default_address']['company']
-            customer.address_address_one = customer_info['default_address']['address1']
-            customer.address_address_two = customer_info['default_address']['address2']
-            customer.address_city = customer_info['default_address']['city']
-            customer.address_province = customer_info['default_address']['province']
-            customer.address_country = customer_info['default_address']['country']
-            customer.address_zipcode = customer_info['default_address']['zip']
-            customer.address_phone = customer_info['default_address']['phone']
-            customer.address_provice_code = customer_info['default_address']['province_code']
-            customer.address_country_code = customer_info['default_address']['country_code']
-            customer.address_country_name = customer_info['default_address']['country_name']
-            customer.save()
+            if customer_info:
+                customer , created = ShopifyUser.objects.get_or_create(customer_id=customer_id,username=customer_id)
+                customer.email = customer_info['email']
+                customer.created_at = customer_info['created_at']
+                customer.updated_at = customer_info['updated_at']
+                customer.first_name = customer_info['first_name']
+                customer.last_name = customer_info['last_name']
+                customer.verified_email = customer_info['verified_email']
+                customer.currency = customer_info['currency']
+                customer.address_id = customer_info['default_address']['id']
+                customer.address_firstname = customer_info['default_address']['first_name']
+                customer.address_lastname = customer_info['default_address']['last_name']
+                customer.address_company = customer_info['default_address']['company']
+                customer.address_address_one = customer_info['default_address']['address1']
+                customer.address_address_two = customer_info['default_address']['address2']
+                customer.address_city = customer_info['default_address']['city']
+                customer.address_province = customer_info['default_address']['province']
+                customer.address_country = customer_info['default_address']['country']
+                customer.address_zipcode = customer_info['default_address']['zip']
+                customer.address_phone = customer_info['default_address']['phone']
+                customer.address_provice_code = customer_info['default_address']['province_code']
+                customer.address_country_code = customer_info['default_address']['country_code']
+                customer.address_country_name = customer_info['default_address']['country_name']
+                customer.save()
+            else:
+                guest = order.get('customer')
+                customer = ShopifyUser()
+                customer.first_name = guest.get('first_name')
+                customer.last_name = guest.get('last_name')
+                customer.email = guest.get('email',guest.get('phone'))
+                customer.address_phone = guest.get('default_address').get('phone')
+                customer.address_country = guest.get('default_address').get('country_name')
+                customer.address_address_one = guest.get('default_address').get('address1')
+                customer.address_address_two = guest.get('default_address').get('address2')
+                customer.address_city = guest.get('default_address').get('city')
+                customer.address_zipcode = guest.get('default_address').get('zip')
+
             with open('store_resultpage_relation.json','r') as file:
                 products = json.load(file)
             bloodkit_id = products['bloodkit']

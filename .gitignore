@@ -1,3 +1,12 @@
 venv/
+backup/
 .env.bak
 manage.py.bak
+customer.json
+orders.json
+product.json
+medicheck create order sample response.txt
+rosewaylabs_api_query.txt
+test.json
+test.PNG
+test.py

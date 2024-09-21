@@ -117,12 +117,14 @@ def dose_directory_view(request):
 
 @custom_auth
 def consulation_result_view(request,ref):
-    cookies = dict(pair.split('=', 1) for pair in request.headers.get('cookie').split('; '))
+    # cookies = dict(pair.split('=', 1) for pair in request.headers.get('cookie').split('; '))
     if str(ref).isnumeric():
         id = int(ref)
     else:
         forms = Form.objects.filter(user=request.user,form_type=ref)
         if not forms.exists():return redirect('/')
+        for form in forms:
+            if not form.is_completed:return redirect(f'/{form.form_type}?id={form.id}')
         id = forms.first().id
     context = {}
     with open('store_resultpage_relation.json','r') as file:
@@ -133,7 +135,7 @@ def consulation_result_view(request,ref):
     if form.form_type == 'male_pattern_hair_loss' and form.get_question(4).answer_value in ['Stage 6','Stage 7']:
         return redirect('/dose_directory')
     if form.form_type == 'female_pattern_hair_loss':
-        if form.get_question(8).answer_value and 'breast cancer' in form.get_question(8).answer_value:
+        if form.get_question(4).answer_value in ['Stage 2','Stage 3','Stage 4','Stage 5'] and form.get_question(7).answer_value == 'I am pre-menopausal and am not pregnant' :
             product_ids = products['female_pre_meno']
         else:product_ids = products['female_post_meno']
     else:product_ids = products[form.form_type]

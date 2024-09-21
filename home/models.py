@@ -40,7 +40,6 @@ class ShopifyUser(AbstractUser):
     
     
     def is_form_filled(self,form_type):
-        print('form type : ',form_type)
         if form_type == 'male_pattern_hair_loss':return self.is_filled_male_form
         if form_type in ['female_pattern_hair_loss','female_post_meno','female_pre_meno']:return self.is_filled_female_form
         if form_type == 'beard':return self.is_filled_beard_form
@@ -57,7 +56,6 @@ class ShopifyUser(AbstractUser):
         return True if Form.objects.filter(user=self,form_type='male_pattern_hair_loss').exists() else False
     @property
     def is_filled_female_form(self):
-        print(Form.objects.filter(user=self,form_type='female_pattern_hair_loss').exists())
         return True if Form.objects.filter(user=self,form_type='female_pattern_hair_loss').exists() else False
     @property
     def is_filled_beard_form(self):
@@ -180,7 +178,7 @@ class Form(models.Model):
             'traction_related_hair_loss':'Traction Related Hair Loss',
             'hair_shedding':'Hair Shedding',
         }
-        return format[self.form_type]
+        return format[self.form_type] if self.form_type else ''
     
     def __str__(self):
         return f'{self.id}.   {self.form_type}    {self.user.customer_id}'
@@ -210,12 +208,15 @@ class Extra(models.Model):
     field_value = models.TextField(blank=True,null=True)
     
     
+    
 class ApiLog(models.Model):
     customer_id = models.CharField(max_length=255,blank=True,null=True)
     order_id = models.CharField(max_length=255,blank=True)
     server = models.CharField(max_length=255,blank=True,null=True)
     date_time = models.DateTimeField(auto_now_add=True)
     error = models.TextField(blank=True,null=True)
+    
+    
 
     
     

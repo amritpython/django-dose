@@ -1,7 +1,10 @@
 venv/
 backup/
-home/migrations
-shopify_app/migrations
+dose/__pycache__/
+home/migrations/
+home/__pycache__/
+shopify_app/migrations/
+shopify_app/__pycache__/
 .env.bak
 manage.py.bak
 customer.json
